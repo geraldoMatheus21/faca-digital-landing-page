@@ -1,0 +1,373 @@
+/* Home.module.css - Logo e "faça" lado a lado e centralizados */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 0 auto;
+  padding-top: 6rem; /* pt-24 */
+}
+
+.content {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column; /* Seções em coluna */
+  align-items: center;
+  justify-content: center;
+  gap: 4rem; /* Espaço entre primeira e segunda seção */
+  margin: 0 auto;
+}
+
+/* PRIMEIRA SEÇÃO: Texto + Botão (fica em cima) - SUAS ALTERAÇÕES MANTIDAS */
+.textContainer {
+  display: flex;
+  margin-top: 75px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 42rem;
+  width: 100%;
+}
+
+.title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.875rem; /* text-3xl */
+  line-height: 2.25rem;
+}
+
+.titleAccent {
+  text-transform: uppercase;
+  margin-top: 30px !important;
+  font-weight: bold;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  color: var(--that-green, #c7f327);
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-top: 2rem !important;
+  max-width: 36rem;
+}
+
+.contactButton {
+  text-transform: uppercase;
+  background-color: var(--that-green, #c7f327);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: 0.75rem 2rem;
+  color: black;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  margin-top: 4rem !important;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.contactButton:hover {
+  background-color: #a8d103;
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* SEGUNDA SEÇÃO: Logo + "faça [FlipWords]" LADO A LADO E CENTRALIZADOS */
+.imageContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; /* ← SEMPRE centralizado */
+  gap: 3rem; /* ← Espaço moderado */
+  width: 100%; /* ← 100% para ocupar largura total */
+  position: relative;
+  margin-top: 0px !important;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+
+}
+
+.logoImage {
+  width: 16rem; /* w-64 */
+  height: auto;
+  flex-shrink: 0;
+}
+
+.textWithFlip {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ← CENTRALIZADO */
+  justify-content: center;
+  min-height: 12rem;
+  flex: 1;
+  min-width: 250px;
+  text-align: center; /* ← Texto centralizado */
+}
+
+.mainTitle {
+  font-weight: bold;
+  font-size: 2.5rem; /* text-4xl */
+  line-height: 2.5rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.flipWords {
+  font-weight: bold;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  text-align: center;
+  color: var(--foreground, #000);
+  width: 100%;
+}
+
+.socialContainer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0rem !important;
+}
+
+.socialLink {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.socialLink:hover {
+  color: var(--that-green, #c7f327);
+  transform: scale(1.1);
+}
+
+.socialIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* ============ MEDIA QUERIES - RESPONSIVIDADE CORRIGIDA ============ */
+
+/* Mobile pequeno - Quebra para coluna */
+@media (max-width: 640px) {
+  .imageContainer {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  
+  .textWithFlip {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .mainTitle,
+  .flipWords {
+    text-align: center;
+  }
+  
+  .logoImage {
+    width: 14rem;
+  }
+}
+
+/* Tablet (sm) */
+@media (min-width: 640px) {
+  .container {
+    padding: 1.5rem;
+    padding-top: 7rem; /* md:pt-28 */
+  }
+  
+  .content {
+    gap: 4rem;
+  }
+  
+  .title,
+  .titleAccent {
+    font-size: 2.25rem; /* text-4xl */
+    line-height: 2.5rem;
+  }
+  
+  .description {
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.75rem;
+  }
+  
+  .contactButton {
+    font-size: 1.125rem;
+    padding: 0.875rem 2.25rem;
+  }
+  
+  .logoImage {
+    width: 18rem;
+  }
+  
+  .mainTitle,
+  .flipWords {
+    font-size: 3rem; /* text-5xl */
+  }
+  
+  .socialContainer {
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+  
+  .socialIcon {
+    width: 1.875rem;
+    height: 1.875rem;
+  }
+}
+
+/* Large Tablet (md) */
+@media (min-width: 768px) {
+  .description {
+    font-size: 1.25rem; /* text-xl */
+    line-height: 1.75rem;
+  }
+  
+  .contactButton {
+    font-size: 1.25rem;
+    padding: 1rem 2.5rem;
+  }
+  
+  .logoImage {
+    width: 20rem;
+  }
+  
+  .mainTitle,
+  .flipWords {
+    font-size: 3.5rem; /* text-6xl */
+  }
+  
+  /* CORRIGIDO: Centralizado, não à direita */
+  .imageContainer {
+    justify-content: center; /* ← CENTRALIZADO */
+    padding: 0 2rem; /* ← Padding igual dos dois lados */
+    gap: 4rem; /* ← Espaço maior em tablets */
+  }
+  
+  .socialContainer {
+    gap: 2rem;
+  }
+  
+  .socialIcon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+/* Desktop (lg) */
+@media (min-width: 1024px) {
+  .container {
+    padding: 2.5rem;
+    padding-top: 8rem; /* lg:pt-32 */
+  }
+  
+  .content {
+    gap: 5rem;
+    max-width: 1200px;
+  }
+  
+  .title,
+  .titleAccent {
+    font-size: 3rem; /* text-5xl */
+  }
+  
+  .logoImage {
+    width: 24rem;
+  }
+  
+  .mainTitle,
+  .flipWords {
+    font-size: 4rem; /* text-7xl */
+  }
+  
+  .description {
+    font-size: 1.5rem; /* text-xl */
+    line-height: 2rem;
+  }
+  
+  .contactButton {
+    font-size: 1.5rem;
+    padding: 1.125rem 3rem;
+  }
+  
+  /* CORRIGIDO: Centralizado e sem margens automáticas */
+  .imageContainer {
+    gap: 5rem;
+    justify-content: center; /* ← CENTRALIZADO */
+    padding: 0 3rem; /* ← Padding igual dos dois lados */
+    /* REMOVIDO: margin-left: auto; */
+    /* REMOVIDO: margin-right: 0; */
+    width: 100%; /* ← 100% em vez de 90% */
+  }
+  
+  .textWithFlip {
+    align-items: center; /* ← CENTRALIZADO, não flex-start */
+    text-align: center; /* ← CENTRALIZADO, não left */
+    padding-left: 0; /* ← Removido padding extra */
+  }
+}
+
+/* Large Desktop (xl) */
+@media (min-width: 1280px) {
+  .content {
+    gap: 6rem;
+  }
+  
+  .title,
+  .titleAccent {
+    font-size: 3.75rem; /* text-6xl */
+  }
+  
+  .logoImage {
+    width: 28rem;
+  }
+  
+  .mainTitle,
+  .flipWords {
+    font-size: 4.5rem; /* text-8xl */
+  }
+  
+  .description {
+    font-size: 1.75rem; /* text-2xl */
+    line-height: 2.25rem;
+  }
+  
+  .contactButton {
+    font-size: 1.75rem;
+  }
+  
+  /* CORRIGIDO: Centralizado */
+  .imageContainer {
+    gap: 6rem;
+    padding: 0 4rem; /* ← Padding igual dos dois lados */
+    width: 100%; /* ← 100% em vez de 85% */
+  }
+  
+  .textWithFlip {
+    padding-left: 0;
+  }
+}
+
+/* Extra Large (2xl) */
+@media (min-width: 1536px) {
+  .logoImage {
+    width: 32rem;
+  }
+  
+  .mainTitle,
+  .flipWords {
+    font-size: 5rem;
+  }
+  
+  /* CORRIGIDO: Centralizado */
+  .imageContainer {
+    width: 100%; /* ← 100% em vez de 80% */
+    padding: 0 5rem; /* ← Padding igual dos dois lados */
+    /* REMOVIDO: padding-right: 10rem; */
+  }
+}

@@ -1,12 +1,10 @@
-// containers/works/index.jsx
+// containers/works/WorksCarousel.jsx
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import "./works-carousel.css";
-import "./index.css";
 
-// Dados dos serviços - agora são 6 cards como você pediu
 const serviceCards = [
   {
     id: 1,
@@ -58,8 +56,7 @@ const serviceCards = [
   }
 ];
 
-// Componente do Carrossel
-function WorksCarousel({ reverse = false }) {
+export default function WorksCarousel({ reverse = false }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [cardsToShow, setCardsToShow] = useState(3);
@@ -203,50 +200,5 @@ function WorksCarousel({ reverse = false }) {
         Card {Math.min(currentIndex + 1, serviceCards.length)} de {serviceCards.length}
       </div>
     </div>
-  );
-}
-
-// Componente principal da página Works
-export default function Works() {
-  return (
-    <main id="works" className="works-container">
-      <div className="works-header">
-        <h1 className="works-title">
-          nossos serviços
-        </h1>
-        <p className="works-subtitle">
-          Oferecemos uma variedade de serviços que vão ajudar a sua marca a se sobressair no meio digital.
-        </p>
-      </div>
-
-      <WorksCarousel reverse={false} />
-
-      <div className="works-content-section">
-        <h2 className="works-section-title">
-          Transformando Ideias em Realidade Digital
-        </h2>
-        <p className="works-description">
-          Cada serviço é desenvolvido com excelência e atenção aos detalhes, garantindo que sua marca 
-          tenha uma presença digital forte e impactante. Combinamos criatividade, estratégia e tecnologia 
-          para entregar resultados excepcionais.
-        </p>
-      </div>
-
-      <div className="works-carousel-spacing">
-        <WorksCarousel reverse={true} />
-      </div>
-
-      <div className="works-cta">
-        <h3 className="works-cta-title">
-          Pronto para transformar sua presença digital?
-        </h3>
-        <p className="works-cta-text">
-          Entre em contato e descubra como nossos serviços podem elevar sua marca para o próximo nível.
-        </p>
-        <button className="works-cta-button">
-          Solicitar Orçamento
-        </button>
-      </div>
-    </main>
   );
 }

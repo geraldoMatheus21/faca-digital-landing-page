@@ -1,0 +1,239 @@
+/* containers/works/works-carousel.css */
+.works-carousel-container {
+  position: relative;
+  padding: 2rem 1rem;
+  margin: 2rem 0;
+}
+
+.works-carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: stretch;
+  transition: transform 500ms ease-in-out;
+}
+
+.works-carousel-card-wrapper {
+  flex-shrink: 0;
+  width: 100%;
+  padding: 0 0.5rem;
+  transition: transform 300ms ease;
+}
+
+@media (min-width: 640px) {
+  .works-carousel-card-wrapper {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .works-carousel-card-wrapper {
+    width: 33.333%;
+  }
+}
+
+.works-carousel-card {
+  height: 100%;
+  border: 2px solid rgba(59, 130, 246, 0.1);
+  background: linear-gradient(to bottom right, #ffffff, #f9fafb);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 300ms ease;
+  overflow: hidden;
+}
+
+.works-carousel-card:hover {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  transform: translateY(-0.5rem);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.works-carousel-card-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.works-carousel-card-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.works-carousel-card-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.works-carousel-card-category {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(59, 130, 246, 0.1);
+  color: rgb(59, 130, 246);
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.works-carousel-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.works-carousel-card-subtitle {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.works-carousel-card-content {
+  padding: 1.5rem;
+}
+
+.works-carousel-card-description {
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.works-carousel-services-title {
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.works-carousel-services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.works-carousel-service-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: #4b5563;
+  padding: 0.25rem 0;
+}
+
+.works-carousel-service-icon {
+  height: 1rem;
+  width: 1rem;
+  color: rgb(59, 130, 246);
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+.works-carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1.5rem;
+}
+
+.works-carousel-nav-button {
+  padding: 0.75rem;
+  border-radius: 9999px;
+  background-color: rgb(59, 130, 246);
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 200ms ease;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.works-carousel-nav-button:hover {
+  background-color: rgba(59, 130, 246, 0.9);
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.works-carousel-nav-button:active {
+  transform: scale(0.95);
+}
+
+.works-carousel-dots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.works-carousel-dot {
+  height: 0.5rem;
+  border-radius: 9999px;
+  transition: all 300ms ease;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.works-carousel-dot-active {
+  width: 2rem;
+  background-color: rgb(59, 130, 246);
+}
+
+.works-carousel-dot-inactive {
+  width: 0.5rem;
+  background-color: #d1d5db;
+}
+
+.works-carousel-dot-inactive:hover {
+  background-color: #9ca3af;
+}
+
+.works-carousel-indicator {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Animações */
+@keyworks fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.works-carousel-card-wrapper {
+  animation: fadeIn 600ms ease-out;
+}
+
+/* Classes utilitárias */
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+/* Responsividade extra */
+@media (max-width: 480px) {
+  .works-carousel-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .works-carousel-card-header,
+  .works-carousel-card-content {
+    padding: 1rem;
+  }
+  
+  .works-carousel-card-title {
+    font-size: 1.1rem;
+  }
+}
