@@ -3,56 +3,77 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { MessageCircle, Youtube, Users, Globe, TrendingUp, Eye, Facebook, Instagram, Linkedin, BarChart2, Palette, Code, Smartphone, Briefcase, Camera } from 'lucide-react';
+import Link from "next/link";
 import "./works-carousel.css";
 
+// Dados dos serviços - Textos ajustados para caber nos cards
 const serviceCards = [
   {
     id: 1,
-    category: "Gerenciamento de Mídias Sociais",
-    title: "Presença Digital Consistente",
+    title: "Gerenciamento de Mídias Sociais",
     description: "Cuidamos da sua presença nas redes sociais em todas as principais plataformas, garantindo conteúdo consistente e atrativo.",
-    services: ["Facebook", "Instagram", "YouTube"],
-    icon: "📱"
+    icon: <MessageCircle className="h-6 w-6" />,
+    platforms: [
+      { name: "Facebook", icon: <Facebook className="h-5 w-5" /> },
+      { name: "Instagram", icon: <Instagram className="h-5 w-5" /> },
+      { name: "YouTube", icon: <Youtube className="h-5 w-5" /> },
+    ]
   },
   {
     id: 2,
-    category: "Gerenciamento de Mídias Sociais",
-    title: "Estratégias Personalizadas",
-    description: "Desenvolvemos estratégias específicas para cada plataforma, maximizando o engajamento e conversões.",
-    services: ["Twitter/X", "LinkedIn", "TikTok"],
-    icon: "🎯"
+    title: "Criação de Conteúdo",
+    description: "Nós produzimos conteúdos personalizados, de qualidade e que conversam com o seu público.",
+    icon: <Youtube className="h-6 w-6" />,
+    platforms: [
+      { name: "Imagens", icon: <Instagram className="h-5 w-5" /> },
+      { name: "Vídeos", icon: <Youtube className="h-5 w-5" /> },
+      { name: "Blogs", icon: <Linkedin className="h-5 w-5" /> },
+    ]
   },
   {
     id: 3,
-    category: "Criação de Conteúdo",
-    title: "Conteúdo de Alta Qualidade",
-    description: "Produzimos conteúdos personalizados, de qualidade e que conversam com o seu público-alvo.",
-    services: ["Imagens", "Vídeos", "Blogs"],
-    icon: "🎨"
+    title: "Marketing com Influencers",
+    description: "Conectamos a sua marca com influencers relevantes para expandir seu alcance e construir credibilidade.",
+    icon: <Users className="h-6 w-6" />,
+    platforms: [
+      { name: "Divulgação com Influencer", icon: <MessageCircle className="h-5 w-5" /> },
+      { name: "Gerenciamento de Campanha", icon: <TrendingUp className="h-5 w-5" /> },
+      { name: "Monitoramento de Performance", icon: <BarChart2 className="h-5 w-5" /> },
+    ]
   },
   {
     id: 4,
-    category: "Criação de Conteúdo",
-    title: "Produção Criativa",
-    description: "Equipe especializada em criar materiais visuais e textuais que representam a essência da sua marca.",
-    services: ["Infográficos", "Podcasts", "E-books"],
-    icon: "✨"
+    title: "Criação de Sites",
+    description: "Nós projetamos e desenvolvemos sites responsivos e de alta conversão, complementando sua presença nas redes sociais.",
+    icon: <Globe className="h-6 w-6" />,
+    platforms: [
+      { name: "Design Customizado", icon: <Palette className="h-5 w-5" /> },
+      { name: "Desenvolvimento Responsivo", icon: <Code className="h-5 w-5" /> },
+      { name: "SEO Otimizado", icon: <TrendingUp className="h-5 w-5" /> },
+    ]
   },
   {
     id: 5,
-    category: "Marketing com Influencers",
-    title: "Parcerias Estratégicas",
-    description: "Conectamos a sua marca com influencers relevantes para expandir seu alcance e construir credibilidade.",
-    services: ["Divulgação", "Campanhas", "Monitoramento"],
-    icon: "🤝"
+    title: "Consultoria Digital",
+    description: "Receba orientações e estratégias que vão ajudar a você e a sua empresa no cenário digital.",
+    icon: <TrendingUp className="h-6 w-6" />,
+    platforms: [
+      { name: "Estratégias de Crescimento", icon: <TrendingUp className="h-5 w-5" /> },
+      { name: "Integração de Tecnologias", icon: <Globe className="h-5 w-5" /> },
+      { name: "Transformação Digital", icon: <Smartphone className="h-5 w-5" /> },
+    ]
   },
   {
     id: 6,
-    category: "Marketing com Influencers",
-    title: "Gestão de Relacionamentos",
-    description: "Gerenciamos todo o processo de parcerias, desde a seleção até a análise de resultados.",
-    services: ["Seleção", "Negociação", "Relatórios"],
-    icon: "📊"
+    title: "Identidade Visual",
+    description: "Criamos uma identidade visual que se conecta com a sua marca, garantindo uma presença forte e memorável.",
+    icon: <Eye className="h-6 w-6" />,
+    platforms: [
+      { name: "Design de Logotipo", icon: <Palette className="h-5 w-5" /> },
+      { name: "Diretrizes de Marca", icon: <Briefcase className="h-5 w-5" /> },
+      { name: "Criação de Ativos Visuais", icon: <Camera className="h-5 w-5" /> },
+    ]
   }
 ];
 
@@ -78,16 +99,32 @@ export default function WorksCarousel({ reverse = false }) {
     return () => window.removeEventListener("resize", updateCardsToShow);
   }, []);
 
+  const totalPages = Math.ceil(serviceCards.length / cardsToShow);
+  const currentPage = Math.floor(currentIndex / cardsToShow) + 1;
+
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex + cardsToShow >= serviceCards.length ? 0 : prevIndex + 1
-    );
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex + cardsToShow >= serviceCards.length) {
+        return 0;
+      } else {
+        return prevIndex + cardsToShow;
+      }
+    });
   }, [cardsToShow]);
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? serviceCards.length - cardsToShow : prevIndex - 1
-    );
+    setCurrentIndex((prevIndex) => {
+      if (prevIndex === 0) {
+        return serviceCards.length - cardsToShow;
+      } else {
+        return prevIndex - cardsToShow;
+      }
+    });
+  };
+
+  const goToPage = (pageNumber) => {
+    const newIndex = (pageNumber - 1) * cardsToShow;
+    setCurrentIndex(newIndex);
   };
 
   useEffect(() => {
@@ -107,9 +144,6 @@ export default function WorksCarousel({ reverse = false }) {
     visibleCards.push(...serviceCards.slice(0, remaining));
   }
 
-  const totalDots = Math.ceil(serviceCards.length / cardsToShow);
-  const activeDot = Math.floor(currentIndex / cardsToShow);
-
   return (
     <div 
       className="works-carousel-container"
@@ -127,36 +161,38 @@ export default function WorksCarousel({ reverse = false }) {
             <div className="works-carousel-card">
               <div className="works-carousel-card-header">
                 <div className="works-carousel-card-icon-container">
-                  <span className="works-carousel-card-icon">{card.icon}</span>
-                  <span className="works-carousel-card-category">
-                    {card.category.split(' ')[0]}
-                  </span>
+                  <div className="works-carousel-card-icon">
+                    {card.icon}
+                  </div>
                 </div>
-                <h3 className="works-carousel-card-title">
+                <h3 className="works-carousel-card-title" title={card.title}>
                   {card.title}
                 </h3>
-                <p className="works-carousel-card-subtitle">
-                  {card.category}
+                <p className="works-carousel-card-description" title={card.description}>
+                  {card.description}
                 </p>
               </div>
               
               <div className="works-carousel-card-content">
-                <p className="works-carousel-card-description">
-                  {card.description}
-                </p>
-                <div className="works-carousel-services">
-                  <h4 className="works-carousel-services-title">
-                    Serviços incluídos:
-                  </h4>
-                  <ul className="works-carousel-services-list">
-                    {card.services.map((service, index) => (
-                      <li key={index} className="works-carousel-service-item">
-                        <ChevronRight className="works-carousel-service-icon" />
-                        {service}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <h4 className="works-carousel-services-title">
+                  Serviços:
+                </h4>
+                <ul className="works-carousel-services-list">
+                  {card.platforms.map((platform, index) => (
+                    <li key={index} className="works-carousel-service-item">
+                      <span className="works-carousel-service-icon">
+                        {platform.icon}
+                      </span>
+                      <span title={platform.name}>{platform.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="works-carousel-card-footer">
+                <Link href="/em-construcao" className="works-carousel-card-button">
+                  Saiba Mais
+                </Link>
               </div>
             </div>
           </div>
@@ -167,37 +203,39 @@ export default function WorksCarousel({ reverse = false }) {
         <button
           onClick={prevSlide}
           className="works-carousel-nav-button"
-          aria-label="Slide anterior"
+          aria-label="Página anterior"
         >
           <ChevronLeft size={24} />
         </button>
         
-        <div className="works-carousel-dots">
-          {Array.from({ length: totalDots }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index * cardsToShow)}
-              className={`works-carousel-dot ${
-                index === activeDot 
-                  ? 'works-carousel-dot-active' 
-                  : 'works-carousel-dot-inactive'
-              }`}
-              aria-label={`Ir para o grupo ${index + 1}`}
-            />
-          ))}
+        <div className="works-carousel-indicator">
+          <span className="works-carousel-page-current">{currentPage}</span>
+          <span className="works-carousel-page-separator">/</span>
+          <span className="works-carousel-page-total">{totalPages}</span>
         </div>
         
         <button
           onClick={nextSlide}
           className="works-carousel-nav-button"
-          aria-label="Próximo slide"
+          aria-label="Próxima página"
         >
           <ChevronRight size={24} />
         </button>
       </div>
 
-      <div className="works-carousel-indicator">
-        Card {Math.min(currentIndex + 1, serviceCards.length)} de {serviceCards.length}
+      <div className="works-carousel-dots">
+        {Array.from({ length: totalPages }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToPage(index + 1)}
+            className={`works-carousel-dot ${
+              index + 1 === currentPage 
+                ? 'works-carousel-dot-active' 
+                : 'works-carousel-dot-inactive'
+            }`}
+            aria-label={`Ir para a página ${index + 1}`}
+          />
+        ))}
       </div>
     </div>
   );

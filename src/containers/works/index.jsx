@@ -3,58 +3,78 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { MessageCircle, Youtube, Users, Globe, TrendingUp, Eye, Facebook, Instagram, Linkedin, BarChart2, Palette, Code, Smartphone, Briefcase, Camera } from 'lucide-react';
+import Link from "next/link";
 import "./works-carousel.css";
 import "./index.css";
 
-// Dados dos serviços - agora são 6 cards como você pediu
+// Dados dos serviços - EXATAMENTE como no seu arquivo services/index.jsx
 const serviceCards = [
   {
     id: 1,
-    category: "Gerenciamento de Mídias Sociais",
-    title: "Presença Digital Consistente",
+    title: "Gerenciamento de Mídias Sociais",
     description: "Cuidamos da sua presença nas redes sociais em todas as principais plataformas, garantindo conteúdo consistente e atrativo.",
-    services: ["Facebook", "Instagram", "YouTube"],
-    icon: "📱"
+    icon: <MessageCircle className="h-6 w-6" />,
+    platforms: [
+      { name: "Facebook", icon: <Facebook className="h-5 w-5" /> },
+      { name: "Instagram", icon: <Instagram className="h-5 w-5" /> },
+      { name: "YouTube", icon: <Youtube className="h-5 w-5" /> },
+    ]
   },
   {
     id: 2,
-    category: "Gerenciamento de Mídias Sociais",
-    title: "Estratégias Personalizadas",
-    description: "Desenvolvemos estratégias específicas para cada plataforma, maximizando o engajamento e conversões.",
-    services: ["Twitter/X", "LinkedIn", "TikTok"],
-    icon: "🎯"
+    title: "Criação de Conteúdo",
+    description: "Nós produzimos conteúdos personalizados, de qualidade e que conversam com o seu público.",
+    icon: <Youtube className="h-6 w-6" />,
+    platforms: [
+      { name: "Imagens", icon: <Instagram className="h-5 w-5" /> },
+      { name: "Vídeos", icon: <Youtube className="h-5 w-5" /> },
+      { name: "Blogs", icon: <Linkedin className="h-5 w-5" /> },
+    ]
   },
   {
     id: 3,
-    category: "Criação de Conteúdo",
-    title: "Conteúdo de Alta Qualidade",
-    description: "Produzimos conteúdos personalizados, de qualidade e que conversam com o seu público-alvo.",
-    services: ["Imagens", "Vídeos", "Blogs"],
-    icon: "🎨"
+    title: "Marketing com Influencers",
+    description: "Conectamos a sua marca com influencers relevantes para expandir seu alcance e construir credibilidade.",
+    icon: <Users className="h-6 w-6" />,
+    platforms: [
+      { name: "Divulgação com Influencer", icon: <MessageCircle className="h-5 w-5" /> },
+      { name: "Gerenciamento de Campanha", icon: <TrendingUp className="h-5 w-5" /> },
+      { name: "Monitoramento de Performance", icon: <BarChart2 className="h-5 w-5" /> },
+    ]
   },
   {
     id: 4,
-    category: "Criação de Conteúdo",
-    title: "Produção Criativa",
-    description: "Equipe especializada em criar materiais visuais e textuais que representam a essência da sua marca.",
-    services: ["Infográficos", "Podcasts", "E-books"],
-    icon: "✨"
+    title: "Criação de Sites",
+    description: "Nós projetamos e desenvolvemos sites responsivos e de alta conversão, complementando sua presença nas redes sociais.",
+    icon: <Globe className="h-6 w-6" />,
+    platforms: [
+      { name: "Design Customizado", icon: <Palette className="h-5 w-5" /> },
+      { name: "Desenvolvimento Responsivo", icon: <Code className="h-5 w-5" /> },
+      { name: "SEO Otimizado", icon: <TrendingUp className="h-5 w-5" /> },
+    ]
   },
   {
     id: 5,
-    category: "Marketing com Influencers",
-    title: "Parcerias Estratégicas",
-    description: "Conectamos a sua marca com influencers relevantes para expandir seu alcance e construir credibilidade.",
-    services: ["Divulgação", "Campanhas", "Monitoramento"],
-    icon: "🤝"
+    title: "Consultoria Digital",
+    description: "Receba orientações e estratégias que vão ajudar a você e a sua empresa no cenário digital.",
+    icon: <TrendingUp className="h-6 w-6" />,
+    platforms: [
+      { name: "Estratégias de Crescimento", icon: <TrendingUp className="h-5 w-5" /> },
+      { name: "Integração de Tecnologias", icon: <Globe className="h-5 w-5" /> },
+      { name: "Transformação Digital", icon: <Smartphone className="h-5 w-5" /> },
+    ]
   },
   {
     id: 6,
-    category: "Marketing com Influencers",
-    title: "Gestão de Relacionamentos",
-    description: "Gerenciamos todo o processo de parcerias, desde a seleção até a análise de resultados.",
-    services: ["Seleção", "Negociação", "Relatórios"],
-    icon: "📊"
+    title: "Identidade Visual",
+    description: "Criamos uma identidade visual que se conecta com a sua marca, garantindo uma presença forte e memorável.",
+    icon: <Eye className="h-6 w-6" />,
+    platforms: [
+      { name: "Design de Logotipo", icon: <Palette className="h-5 w-5" /> },
+      { name: "Diretrizes de Marca", icon: <Briefcase className="h-5 w-5" /> },
+      { name: "Criação de Ativos Visuais", icon: <Camera className="h-5 w-5" /> },
+    ]
   }
 ];
 
@@ -130,36 +150,38 @@ function WorksCarousel({ reverse = false }) {
             <div className="works-carousel-card">
               <div className="works-carousel-card-header">
                 <div className="works-carousel-card-icon-container">
-                  <span className="works-carousel-card-icon">{card.icon}</span>
-                  <span className="works-carousel-card-category">
-                    {card.category.split(' ')[0]}
-                  </span>
+                  <div className="works-carousel-card-icon">
+                    {card.icon}
+                  </div>
                 </div>
                 <h3 className="works-carousel-card-title">
                   {card.title}
                 </h3>
-                <p className="works-carousel-card-subtitle">
-                  {card.category}
+                <p className="works-carousel-card-description">
+                  {card.description}
                 </p>
               </div>
               
               <div className="works-carousel-card-content">
-                <p className="works-carousel-card-description">
-                  {card.description}
-                </p>
-                <div className="works-carousel-services">
-                  <h4 className="works-carousel-services-title">
-                    Serviços incluídos:
-                  </h4>
-                  <ul className="works-carousel-services-list">
-                    {card.services.map((service, index) => (
-                      <li key={index} className="works-carousel-service-item">
-                        <ChevronRight className="works-carousel-service-icon" />
-                        {service}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <h4 className="works-carousel-services-title">
+                  Serviços:
+                </h4>
+                <ul className="works-carousel-services-list">
+                  {card.platforms.map((platform, index) => (
+                    <li key={index} className="works-carousel-service-item">
+                      <span className="works-carousel-service-icon">
+                        {platform.icon}
+                      </span>
+                      <span>{platform.name}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="works-carousel-card-footer">
+                <Link href="/em-construcao" className="works-carousel-card-button">
+                  Saiba Mais
+                </Link>
               </div>
             </div>
           </div>
@@ -206,7 +228,7 @@ function WorksCarousel({ reverse = false }) {
   );
 }
 
-// Componente principal da página Works
+// Componente principal da página Works - APENAS COM O CARROSSEL
 export default function Works() {
   return (
     <main id="works" className="works-container">
@@ -219,34 +241,8 @@ export default function Works() {
         </p>
       </div>
 
+      {/* APENAS O CARROSSEL - não tem cards estáticos duplicados */}
       <WorksCarousel reverse={false} />
-
-      <div className="works-content-section">
-        <h2 className="works-section-title">
-          Transformando Ideias em Realidade Digital
-        </h2>
-        <p className="works-description">
-          Cada serviço é desenvolvido com excelência e atenção aos detalhes, garantindo que sua marca 
-          tenha uma presença digital forte e impactante. Combinamos criatividade, estratégia e tecnologia 
-          para entregar resultados excepcionais.
-        </p>
-      </div>
-
-      <div className="works-carousel-spacing">
-        <WorksCarousel reverse={true} />
-      </div>
-
-      <div className="works-cta">
-        <h3 className="works-cta-title">
-          Pronto para transformar sua presença digital?
-        </h3>
-        <p className="works-cta-text">
-          Entre em contato e descubra como nossos serviços podem elevar sua marca para o próximo nível.
-        </p>
-        <button className="works-cta-button">
-          Solicitar Orçamento
-        </button>
-      </div>
     </main>
   );
 }

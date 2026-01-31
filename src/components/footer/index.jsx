@@ -26,7 +26,7 @@ export default function Footer() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <button className="hover:text-that-green transition duration-100 uppercase text-center" onClick={() => scrollToSection('services')}>nossos<br />serviços</button>
+        <button className="hover:text-that-green transition duration-100 uppercase text-center" onClick={() => scrollToSection('works')}>nossos<br />serviços</button>
         <button className="hover:text-that-green transition duration-100 uppercase text-center" onClick={() => scrollToSection('works')}>trabalhos<br />realizados</button>
         <button className="hover:text-that-green transition duration-100 uppercase text-center" onClick={() => scrollToSection('about')}>sobre<br />nós</button>
         <button className="hover:text-that-green transition duration-100 uppercase text-center" onClick={() => scrollToSection('contact')}>entre em<br />contato</button>

@@ -22,7 +22,7 @@
   text-transform: uppercase;
   font-size: 2.5rem;
   font-weight: 800;
-  color: #111827;
+  color: #ffffff;
   margin-bottom: 1rem;
   letter-spacing: -0.025em;
 }
@@ -35,10 +35,11 @@
 
 .works-subtitle {
   font-size: 1.25rem;
-  color: #4b5563;
+  color: #6b7280;
   max-width: 48rem;
   margin: 0 auto;
   line-height: 1.6;
+  font-weight: 400;
 }
 
 .works-content-section {
@@ -61,19 +62,20 @@
 
 .works-description {
   font-size: 1.125rem;
-  color: #4b5563;
+  color: #6b7280;
   max-width: 64rem;
   margin: 0 auto;
   line-height: 1.75;
+  font-weight: 400;
 }
 
 .works-cta {
   margin-top: 5rem;
   padding: 3rem 2rem;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(59, 130, 246, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(168, 209, 3, 0.05) 0%, rgba(168, 209, 3, 0.1) 100%);
   border-radius: 1.5rem;
   text-align: center;
-  border: 1px solid rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(168, 209, 3, 0.1);
 }
 
 .works-cta-title {
@@ -84,7 +86,7 @@
 }
 
 .works-cta-text {
-  color: #4b5563;
+  color: #6b7280;
   margin-bottom: 2rem;
   max-width: 42rem;
   margin-left: auto;
@@ -95,22 +97,23 @@
 
 .works-cta-button {
   padding: 1rem 3rem;
-  background-color: rgb(59, 130, 246);
-  color: white;
+  background-color: #a8d103;
+  color: #1a1a1a;
   font-weight: 600;
   font-size: 1.125rem;
   border-radius: 0.75rem;
-  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 10px 15px -3px rgba(168, 209, 3, 0.3);
   transition: all 300ms ease;
   border: none;
   cursor: pointer;
   display: inline-block;
+  text-decoration: none;
 }
 
 .works-cta-button:hover {
-  background-color: rgba(59, 130, 246, 0.9);
+  background-color: #97c000;
   transform: translateY(-2px);
-  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 20px 25px -5px rgba(168, 209, 3, 0.4);
 }
 
 .works-cta-button:active {

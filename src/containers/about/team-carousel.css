@@ -1,0 +1,264 @@
+/* containers/about/team-carousel.css */
+.team-carousel-container {
+  position: relative;
+  padding: 2rem 1rem;
+  margin: 2rem 0;
+}
+
+.team-carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: stretch;
+  transition: transform 500ms ease-in-out;
+}
+
+.team-carousel-card-wrapper {
+  flex-shrink: 0;
+  width: 100%;
+  padding: 0 0.5rem;
+  transition: transform 300ms ease;
+  height: 500px; /* ALTURA FIXA IGUAL AO ANTERIOR */
+}
+
+@media (min-width: 640px) {
+  .team-carousel-card-wrapper {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .team-carousel-card-wrapper {
+    width: 33.333%;
+  }
+}
+
+/* CARD DA EQUIPE - ESTILO IGUAL AO ANTERIOR */
+.team-carousel-card {
+  height: 100%;
+  border-radius: 0.75rem;
+  background: white;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 300ms ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e7eb;
+}
+
+.team-carousel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* IMAGEM DO CARD */
+.team-carousel-image-container {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.team-carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 300ms ease;
+}
+
+.team-carousel-card:hover .team-carousel-image {
+  transform: scale(1.05);
+}
+
+/* CONTEÚDO DO CARD */
+.team-carousel-content {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+.team-carousel-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.team-carousel-designation {
+  font-size: 0.875rem;
+  color: #a8d103;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.team-carousel-quote {
+  color: #6b7280;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  font-style: italic;
+  border-left: 3px solid #a8d103;
+  padding-left: 1rem;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+/* CONTROLES DO CARROSSEL - IGUAL AO ANTERIOR */
+.team-carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1.5rem;
+}
+
+.team-carousel-nav-button {
+  padding: 0.75rem;
+  border-radius: 9999px;
+  background-color: #a8d103;
+  color: #1a1a1a;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 200ms ease;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-carousel-nav-button:hover {
+  background-color: #97c000;
+  transform: scale(1.05);
+}
+
+.team-carousel-indicator {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.team-carousel-page-current {
+  font-weight: 700;
+  color: #a8d103;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.team-carousel-page-separator {
+  color: #d1d5db;
+}
+
+.team-carousel-page-total {
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.team-carousel-dots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.team-carousel-dot {
+  height: 0.5rem;
+  border-radius: 9999px;
+  transition: all 300ms ease;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.team-carousel-dot-active {
+  width: 2rem;
+  background-color: #a8d103;
+}
+
+.team-carousel-dot-inactive {
+  width: 0.5rem;
+  background-color: #d1d5db;
+}
+
+/* ANIMAÇÕES - IGUAL AO ANTERIOR */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.team-carousel-card-wrapper {
+  animation: fadeIn 600ms ease-out;
+}
+
+/* Classes utilitárias */
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .team-carousel-container {
+    padding: 1rem 0.5rem;
+  }
+  
+  .team-carousel-card-wrapper {
+    height: 480px;
+  }
+  
+  .team-carousel-image-container {
+    height: 250px;
+  }
+  
+  .team-carousel-content {
+    padding: 1rem;
+    min-height: 180px;
+  }
+  
+  .team-carousel-name {
+    font-size: 1.1rem;
+  }
+  
+  .team-carousel-quote {
+    -webkit-line-clamp: 3;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 641px) {
+  .team-carousel-card-wrapper {
+    height: 500px;
+  }
+  
+  .team-carousel-quote {
+    -webkit-line-clamp: 3;
+  }
+}

@@ -61,7 +61,7 @@ export default function Navbar() {
         {/* CONTAINER DOS LINKS */}
         <div className={styles.linksContainer}>
           <button 
-            onClick={() => scrollToSection('services')}
+            onClick={() => scrollToSection('works')}
             className={styles.navButton}
           >
             NOSSOS SERVIÇOS
@@ -105,7 +105,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className={styles.mobileMenuOverlay}>
           <button 
-            onClick={() => scrollToSection('services')}
+            onClick={() => scrollToSection('works')}
             className={styles.mobileMenuButton}
           >
             NOSSOS SERVIÇOS
