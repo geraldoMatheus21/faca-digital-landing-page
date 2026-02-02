@@ -2,7 +2,7 @@ import Email from "@/components/email";
 import Link from "next/link";
 import { FaLocationDot, FaSquareWhatsapp } from "react-icons/fa6";
 import { RiInstagramFill, RiFacebookBoxFill } from "react-icons/ri";
-
+import './index.css';
 
 export default function Contact() {
   return (
@@ -15,14 +15,14 @@ export default function Contact() {
       </div>
 
       <div className="contact-content">
-        {/* Seção do formulário */}
+        {/* Seção do formulário - ESQUERDA */}
         <div className="contact-form-section">
           <Email />
         </div>
-
-        {/* Seção de contatos */}
+        
+        {/* Seção de contatos - DIREITA */}
         <div className="contact-info-section">
-          <div>
+          <div className="contact-channels">
             <h2 className="contact-channels-title">
               Ou entre em contato pelos <span>canais</span> abaixo
             </h2>
@@ -69,16 +69,17 @@ export default function Contact() {
                 R. Dona Maria Emiliana - Várzea Alegre, Guapimirim - RJ
               </p>
             </div>
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6191.702085892772!2d-43.02401478751684!3d-22.66839635693847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x99a3dfdee10e6f%3A0x1913bbf062ec3be0!2sFa%C3%A7a%20Digital!5e0!3m2!1spt-BR!2sbr!4v1736817899003!5m2!1spt-BR!2sbr"
-              className="contact-map"
-              style={{ border: "0" }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Localização da Faça Digital"
-            >
-            </iframe>
+            <div className="contact-map-container">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6191.702085892772!2d-43.02401478751684!3d-22.66839635693847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x99a3dfdee10e6f%3A0x1913bbf062ec3be0!2sFa%C3%A7a%20Digital!5e0!3m2!1spt-BR!2sbr!4v1736817899003!5m2!1spt-BR!2sbr"
+                className="contact-map"
+                style={{ border: "0" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Localização da Faça Digital"
+              />
+            </div>
           </div>
         </div>
       </div>
