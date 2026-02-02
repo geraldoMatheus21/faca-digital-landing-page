@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import styles from "./Navbar.module.css"; 
+import Image from 'next/image';
 
 export default function Navbar() {
   const [show, setShow] = useState(true);
@@ -55,8 +56,14 @@ export default function Navbar() {
         {/* LOGO */
         }
         <div className={styles.logo}>
-          <img src="" alt="logo" />
-        </div>
+      <Image 
+        src="/logo.png" // ← Coloque o caminho correto da sua logo
+        alt="logo"
+        width={120}     // ← Defina a largura
+        height={40}     // ← Defina a altura
+        priority={true} // ← Se for logo acima da dobra, use true
+      />
+</div>
         
         {/* CONTAINER DOS LINKS */}
         <div className={styles.linksContainer}>

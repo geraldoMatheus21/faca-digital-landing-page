@@ -3,7 +3,7 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react"; // ← useCallback adicionado
 
 export const AboutCard = ({
   testimonials,
@@ -11,13 +11,13 @@ export const AboutCard = ({
 }) => {
   const [active, setActive] = useState(0);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => { // ← useCallback adicionado
     setActive((prev) => (prev + 1) % testimonials.length);
-  };
+  }, [testimonials.length]); // ← dependência adicionada
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => { // ← useCallback adicionado
     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  }, [testimonials.length]); // ← dependência adicionada
 
   const isActive = (index) => {
     return index === active;
@@ -28,15 +28,15 @@ export const AboutCard = ({
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
     }
-  }, [autoplay]);
+  }, [autoplay, handleNext]); // ← handleNext adicionado como dependência
 
   const randomRotateY = () => {
     return Math.floor(Math.random() * 21) - 10;
   };
+
   return (
-    (<div
-      className="max-w-sm md:max-w-4xl mx-auto antialiased font-sans px-4 md:px-8 lg:px-12 py-20">
-      <div className="relative grid grid-cols-1 md:grid-cols-2  gap-20">
+    <div className="max-w-sm md:max-w-4xl mx-auto antialiased font-sans px-4 md:px-8 lg:px-12 py-20">
+      <div className="relative grid grid-cols-1 md:grid-cols-2 gap-20">
         <div>
           <div className="relative h-80 w-full">
             <AnimatePresence>
@@ -69,14 +69,16 @@ export const AboutCard = ({
                     duration: 0.4,
                     ease: "easeInOut",
                   }}
-                  className="absolute inset-0 origin-bottom">
+                  className="absolute inset-0 origin-bottom"
+                >
                   <Image
                     src={testimonial.src}
                     alt={testimonial.name}
                     width={500}
                     height={500}
                     draggable={false}
-                    className="h-full w-full rounded-3xl object-cover object-center" />
+                    className="h-full w-full rounded-3xl object-cover object-center"
+                  />
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -100,7 +102,8 @@ export const AboutCard = ({
             transition={{
               duration: 0.2,
               ease: "easeInOut",
-            }}>
+            }}
+          >
             <h3 className="text-2xl font-bold">
               {testimonials[active].name}
             </h3>
@@ -126,7 +129,8 @@ export const AboutCard = ({
                     ease: "easeInOut",
                     delay: 0.02 * index,
                   }}
-                  className="inline-block">
+                  className="inline-block"
+                >
                   {word}&nbsp;
                 </motion.span>
               ))}
@@ -135,19 +139,19 @@ export const AboutCard = ({
           <div className="flex gap-4 pt-12 md:pt-0">
             <button
               onClick={handlePrev}
-              className="h-7 w-7 rounded-full bg-that-green dark:bg-neutral-800 flex items-center justify-center group/button">
-              <IconArrowLeft
-                className="h-5 w-5 text-black dark:text-neutral-400 group-hover/button:rotate-12 transition-transform duration-300" />
+              className="h-7 w-7 rounded-full bg-that-green dark:bg-neutral-800 flex items-center justify-center group/button"
+            >
+              <IconArrowLeft className="h-5 w-5 text-black dark:text-neutral-400 group-hover/button:rotate-12 transition-transform duration-300" />
             </button>
             <button
               onClick={handleNext}
-              className="h-7 w-7 rounded-full bg-that-green dark:bg-neutral-800 flex items-center justify-center group/button">
-              <IconArrowRight
-                className="h-5 w-5 text-black dark:text-neutral-400 group-hover/button:-rotate-12 transition-transform duration-300" />
+              className="h-7 w-7 rounded-full bg-that-green dark:bg-neutral-800 flex items-center justify-center group/button"
+            >
+              <IconArrowRight className="h-5 w-5 text-black dark:text-neutral-400 group-hover/button:-rotate-12 transition-transform duration-300" />
             </button>
           </div>
         </div>
       </div>
-    </div>)
+    </div>
   );
 };

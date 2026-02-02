@@ -19,7 +19,7 @@ export default function TeamMemberCard({ quote, name, designation, src }) {
         <h3 className="team-member-name">{name}</h3>
         <p className="team-member-designation">{designation}</p>
         <blockquote className="team-member-quote">
-          "{quote}"
+          {quote}
         </blockquote>
       </div>
     </div>

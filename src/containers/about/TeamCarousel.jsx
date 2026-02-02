@@ -85,7 +85,7 @@ export default function TeamCarousel({ reverse = false }) {
     });
   }, [cardsToShow]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => {
       if (prevIndex === 0) {
         // Se estiver na primeira página, vai para a última
@@ -95,7 +95,7 @@ export default function TeamCarousel({ reverse = false }) {
         return prevIndex - cardsToShow;
       }
     });
-  };
+  }, [cardsToShow]); // ← CORREÇÃO AQUI: adicionado useCallback e dependência
 
   const goToPage = (pageNumber) => {
     // pageNumber começa em 1 (1/2, 2/2)
@@ -154,7 +154,7 @@ export default function TeamCarousel({ reverse = false }) {
                   {member.designation}
                 </p>
                 <blockquote className="team-carousel-quote" title={member.quote}>
-                  "{member.quote}"
+                  {member.quote} {/* ← CORREÇÃO AQUI: aspas removidas */}
                 </blockquote>
               </div>
             </div>
