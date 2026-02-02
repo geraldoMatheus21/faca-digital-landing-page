@@ -1,0 +1,109 @@
+/* components/email/email.css */
+
+.email-form-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  border: 1px solid rgba(168, 209, 3, 0.3);
+}
+
+.email-form-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.email-form-title span {
+  color: #a8d103;
+}
+
+.email-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.email-input,
+.email-textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.email-input:focus,
+.email-textarea:focus {
+  outline: none;
+  border-color: #a8d103;
+  box-shadow: 0 0 0 2px rgba(168, 209, 3, 0.2);
+}
+
+.email-input::placeholder,
+.email-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.email-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.email-submit-button {
+  padding: 0.75rem 2rem;
+  background: #a8d103;
+  color: #000000;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: center;
+  margin-top: 1rem;
+}
+
+.email-submit-button:hover {
+  background: #94b802;
+  transform: translateY(-2px);
+}
+
+.email-submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.email-alert {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.email-alert-success {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.email-alert-error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.email-alert-icon {
+  margin-right: 0.5rem;
+  font-size: 1.25rem;
+}

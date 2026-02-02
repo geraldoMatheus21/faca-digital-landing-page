@@ -1,29 +1,57 @@
+// components/email/index.jsx
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
 import { IoCheckmarkCircleOutline, IoCloseCircleOutline } from "react-icons/io5";
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser'; // ← IMPORTAR EMAILJS
+import './email.css'; // Se tiver CSS próprio
 
 export default function Email() {
   const form = useRef();
   const [alert, setAlert] = useState({ visible: false, message: '', type: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Pegar as credenciais do environment
   const service_id = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
   const template_id = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
   const public_key = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
   const sendEmail = (e) => {
     e.preventDefault();
+    
+    // Validação básica
+    if (!form.current.user_email.value || !form.current.message.value) {
+      setAlert({ visible: true, message: 'Preencha todos os campos', type: 'error' });
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
     emailjs.sendForm(service_id, template_id, form.current, public_key)
       .then((result) => {
+        setIsSubmitting(false);
+        console.log('Resultado:', result.text);
+        
         if (result.text === 'OK') {
-          setAlert({ visible: true, message: 'E-mail enviado com sucesso', type: 'success' });
+          setAlert({ visible: true, message: 'E-mail enviado com sucesso!', type: 'success' });
+          form.current.reset(); // Limpa o formulário
         } else {
           setAlert({ visible: true, message: 'Erro ao enviar e-mail', type: 'error' });
         }
       }, (error) => {
+        setIsSubmitting(false);
+        console.error('Erro EmailJS:', error);
         setAlert({ visible: true, message: 'Erro ao enviar e-mail', type: 'error' });
       });
   };
+
+  useEffect(() => {
+    // Inicializar EmailJS com a public key
+    if (public_key) {
+      emailjs.init(public_key);
+    }
+  }, [public_key]);
 
   useEffect(() => {
     if (alert.visible) {
@@ -36,45 +64,57 @@ export default function Email() {
   }, [alert]);
 
   return (
-    <section className='w-full max-w-xl'>
+    <div className="email-form-container">
       {alert.visible && (
-        <button onClick={() => setAlert({ visible: false, message: '', type: '' })} className={`fixed top-4 right-4 p-4 rounded-lg shadow-lg flex items-center ${alert.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-          {alert.type === 'success' ? <IoCheckmarkCircleOutline className='mr-2 lg:text-2xl' /> : <IoCloseCircleOutline className='mr-2 lg:text-2xl' />}
-          {alert.message}
-        </button>
+        <div className={`email-alert ${alert.type === 'success' ? 'email-alert-success' : 'email-alert-error'}`}>
+          {alert.type === 'success' ? 
+            <IoCheckmarkCircleOutline className="email-alert-icon" /> : 
+            <IoCloseCircleOutline className="email-alert-icon" />
+          }
+          <span>{alert.message}</span>
+        </div>
       )}
+      
+      <h2 className="email-form-title">
+        Nos mande um <span>e-mail</span>
+      </h2>
+      
       <motion.form
         ref={form}
         onSubmit={sendEmail}
-        className="flex flex-col gap-4"
-      // initial={{ opacity: 0, y: 100 }}
-      // whileInView={{ opacity: 1, y: 0 }}
-      // viewport={{ once: true }}
-      // transition={{ duration: 0.3, delay: 0.4 }}
+        className="email-form"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
       >
-
-        <h2 className="text-2xl">Nos mande um <span className='text-that-green'>e-mail</span></h2>
-        <input
-          type="email"
-          name='user_email'
-          placeholder="E-mail"
-          className="form-input rounded p-2 placeholder:text-background"
-          required
-        />
-        <textarea
-          name="message"
-          placeholder="Deixe sua mensagem"
-          className="h-24 form-input rounded p-2 text-background placeholder:text-background"
-          required
-        />
+        <div className="form-group">
+          <input
+            type="email"
+            name="user_email"
+            placeholder="seu@email.com"
+            className="email-input"
+            required
+          />
+        </div>
+        
+        <div className="form-group">
+          <textarea
+            name="message"
+            placeholder="Como podemos ajudar sua marca?"
+            className="email-textarea"
+            rows={5}
+            required
+          />
+        </div>
+        
         <button
-          className="w-fit bg-that-green text-background rounded-xl mt-2 p-3 text-lg hover:bg-custom-beige hover:bg-[#a8d103]"
-          type='submit'
-          value='Send'
+          type="submit"
+          className="email-submit-button"
+          disabled={isSubmitting}
         >
-          Enviar
+          {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
         </button>
       </motion.form>
-    </section>
+    </div>
   );
 }
