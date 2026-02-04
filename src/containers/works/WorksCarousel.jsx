@@ -1,78 +1,78 @@
 // containers/works/WorksCarousel.jsx
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { MessageCircle, Youtube, Users, Globe, TrendingUp, Eye, Facebook, Instagram, Linkedin, BarChart2, Palette, Code, Smartphone, Briefcase, Camera } from 'lucide-react';
 import Link from "next/link";
 import "./works-carousel.css";
 
-// Dados dos serviços - Textos ajustados para caber nos cards
+// Dados dos serviços - Ícones com tamanho reduzido
 const serviceCards = [
   {
     id: 1,
     title: "Gerenciamento de Mídias Sociais",
     description: "Cuidamos da sua presença nas redes sociais em todas as principais plataformas, garantindo conteúdo consistente e atrativo.",
-    icon: <MessageCircle className="h-6 w-6" />,
+    icon: <MessageCircle className="h-5 w-5" />,
     platforms: [
-      { name: "Facebook", icon: <Facebook className="h-5 w-5" /> },
-      { name: "Instagram", icon: <Instagram className="h-5 w-5" /> },
-      { name: "YouTube", icon: <Youtube className="h-5 w-5" /> },
+      { name: "Facebook", icon: <Facebook className="h-4 w-4" /> },
+      { name: "Instagram", icon: <Instagram className="h-4 w-4" /> },
+      { name: "YouTube", icon: <Youtube className="h-4 w-4" /> },
     ]
   },
   {
     id: 2,
     title: "Criação de Conteúdo",
     description: "Nós produzimos conteúdos personalizados, de qualidade e que conversam com o seu público.",
-    icon: <Youtube className="h-6 w-6" />,
+    icon: <Youtube className="h-5 w-5" />,
     platforms: [
-      { name: "Imagens", icon: <Instagram className="h-5 w-5" /> },
-      { name: "Vídeos", icon: <Youtube className="h-5 w-5" /> },
-      { name: "Blogs", icon: <Linkedin className="h-5 w-5" /> },
+      { name: "Imagens", icon: <Instagram className="h-4 w-4" /> },
+      { name: "Vídeos", icon: <Youtube className="h-4 w-4" /> },
+      { name: "Blogs", icon: <Linkedin className="h-4 w-4" /> },
     ]
   },
   {
     id: 3,
     title: "Marketing com Influencers",
     description: "Conectamos a sua marca com influencers relevantes para expandir seu alcance e construir credibilidade.",
-    icon: <Users className="h-6 w-6" />,
+    icon: <Users className="h-5 w-5" />,
     platforms: [
-      { name: "Divulgação com Influencer", icon: <MessageCircle className="h-5 w-5" /> },
-      { name: "Gerenciamento de Campanha", icon: <TrendingUp className="h-5 w-5" /> },
-      { name: "Monitoramento de Performance", icon: <BarChart2 className="h-5 w-5" /> },
+      { name: "Divulgação com Influencer", icon: <MessageCircle className="h-4 w-4" /> },
+      { name: "Gerenciamento de Campanha", icon: <TrendingUp className="h-4 w-4" /> },
+      { name: "Monitoramento de Performance", icon: <BarChart2 className="h-4 w-4" /> },
     ]
   },
   {
     id: 4,
     title: "Criação de Sites",
     description: "Nós projetamos e desenvolvemos sites responsivos e de alta conversão, complementando sua presença nas redes sociais.",
-    icon: <Globe className="h-6 w-6" />,
+    icon: <Globe className="h-5 w-5" />,
     platforms: [
-      { name: "Design Customizado", icon: <Palette className="h-5 w-5" /> },
-      { name: "Desenvolvimento Responsivo", icon: <Code className="h-5 w-5" /> },
-      { name: "SEO Otimizado", icon: <TrendingUp className="h-5 w-5" /> },
+      { name: "Design Customizado", icon: <Palette className="h-4 w-4" /> },
+      { name: "Desenvolvimento Responsivo", icon: <Code className="h-4 w-4" /> },
+      { name: "SEO Otimizado", icon: <TrendingUp className="h-4 w-4" /> },
     ]
   },
   {
     id: 5,
     title: "Consultoria Digital",
     description: "Receba orientações e estratégias que vão ajudar a você e a sua empresa no cenário digital.",
-    icon: <TrendingUp className="h-6 w-6" />,
+    icon: <TrendingUp className="h-5 w-5" />,
     platforms: [
-      { name: "Estratégias de Crescimento", icon: <TrendingUp className="h-5 w-5" /> },
-      { name: "Integração de Tecnologias", icon: <Globe className="h-5 w-5" /> },
-      { name: "Transformação Digital", icon: <Smartphone className="h-5 w-5" /> },
+      { name: "Estratégias de Crescimento", icon: <TrendingUp className="h-4 w-4" /> },
+      { name: "Integração de Tecnologias", icon: <Globe className="h-4 w-4" /> },
+      { name: "Transformação Digital", icon: <Smartphone className="h-4 w-4" /> },
     ]
   },
   {
     id: 6,
     title: "Identidade Visual",
     description: "Criamos uma identidade visual que se conecta com a sua marca, garantindo uma presença forte e memorável.",
-    icon: <Eye className="h-6 w-6" />,
+    icon: <Eye className="h-5 w-5" />,
     platforms: [
-      { name: "Design de Logotipo", icon: <Palette className="h-5 w-5" /> },
-      { name: "Diretrizes de Marca", icon: <Briefcase className="h-5 w-5" /> },
-      { name: "Criação de Ativos Visuais", icon: <Camera className="h-5 w-5" /> },
+      { name: "Design de Logotipo", icon: <Palette className="h-4 w-4" /> },
+      { name: "Diretrizes de Marca", icon: <Briefcase className="h-4 w-4" /> },
+      { name: "Criação de Ativos Visuais", icon: <Camera className="h-4 w-4" /> },
     ]
   }
 ];
@@ -81,6 +81,11 @@ export default function WorksCarousel({ reverse = false }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [cardsToShow, setCardsToShow] = useState(3);
+  
+  // Estados para touch/swipe
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const trackRef = useRef(null);
 
   useEffect(() => {
     const updateCardsToShow = () => {
@@ -112,7 +117,7 @@ export default function WorksCarousel({ reverse = false }) {
     });
   }, [cardsToShow]);
 
-  const prevSlide = () => {
+  const prevSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => {
       if (prevIndex === 0) {
         return serviceCards.length - cardsToShow;
@@ -120,11 +125,42 @@ export default function WorksCarousel({ reverse = false }) {
         return prevIndex - cardsToShow;
       }
     });
-  };
+  }, [cardsToShow]);
 
   const goToPage = (pageNumber) => {
     const newIndex = (pageNumber - 1) * cardsToShow;
     setCurrentIndex(newIndex);
+  };
+
+  // Handlers de touch para swipe
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+    setIsAutoPlaying(false);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const minSwipeDistance = 50; // Distância mínima para considerar um swipe
+    
+    if (distance > minSwipeDistance) {
+      // Swipe para esquerda - próximo slide
+      nextSlide();
+    }
+    
+    if (distance < -minSwipeDistance) {
+      // Swipe para direita - slide anterior
+      prevSlide();
+    }
+    
+    // Reset
+    setTouchStart(0);
+    setTouchEnd(0);
   };
 
   useEffect(() => {
@@ -151,7 +187,11 @@ export default function WorksCarousel({ reverse = false }) {
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
       <div 
+        ref={trackRef}
         className={`works-carousel-track ${reverse ? 'flex-row-reverse' : 'flex-row'}`}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         {visibleCards.map((card) => (
           <div 

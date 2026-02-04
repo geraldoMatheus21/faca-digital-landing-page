@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Home } from "lucide-react";
 
 export default function FloatingButton() {
   const [showButton, setShowButton] = useState(false);
@@ -10,11 +11,7 @@ export default function FloatingButton() {
       const homeSection = document.getElementById("home");
       if (homeSection) {
         const homeSectionBottom = homeSection.offsetTop + homeSection.offsetHeight;
-        if (window.scrollY > homeSectionBottom) {
-          setShowButton(true);
-        } else {
-          setShowButton(false);
-        }
+        setShowButton(window.scrollY > homeSectionBottom);
       }
     };
 
@@ -34,9 +31,12 @@ export default function FloatingButton() {
   return (
     <button
       onClick={scrollToTop}
-      className={`${setShowButton ? 'opacity-100 animate-fade-up' : ''} uppercase z-50 fixed bottom-10 right-10 bg-background border border-that-green text-that-green rounded-lg p-2`}
+      className="fixed bottom-8 right-6 z-50 w-14 h-14 rounded-full bg-[#a8d103] text-black flex items-center justify-center shadow-lg hover:bg-[#97c000] transition-all duration-300 hover:scale-110 active:scale-95"
+      aria-label="Voltar ao início"
+      title="Voltar ao início"
     >
-      voltar ao início
+      <Home size={24} />
+      <span className="sr-only">Voltar ao início</span>
     </button>
   );
 }

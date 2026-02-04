@@ -1,0 +1,189 @@
+/* services.css */
+
+.service-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 0.75rem !important;
+  background: white !important;
+  overflow: hidden !important;
+}
+
+.service-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.service-card-header {
+  padding: 1.5rem !important;
+}
+
+.service-icon-wrapper {
+  width: 3rem !important;
+  height: 3rem !important;
+  border-radius: 50% !important;
+  background-color: #a8d103 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 1rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.service-card:hover .service-icon-wrapper {
+  transform: scale(1.15) rotate(8deg) !important;
+  box-shadow: 0 8px 16px rgba(168, 209, 3, 0.3) !important;
+}
+
+.service-card-title {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
+  color: #1a1a1a !important;
+}
+
+.service-card-description {
+  text-align: justify !important;
+  color: #6b7280 !important;
+  line-height: 1.6 !important;
+  font-size: 0.95rem !important;
+}
+
+.service-card-content {
+  flex-grow: 1 !important;
+  padding: 0 1.5rem 1.5rem 1.5rem !important;
+}
+
+.service-list-title {
+  font-weight: 600 !important;
+  margin-bottom: 0.75rem !important;
+  font-size: 0.875rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: #4a5568 !important;
+}
+
+.service-list {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.service-list-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  margin-bottom: 0.75rem !important;
+  font-size: 0.9rem !important;
+  color: #374151 !important;
+  transition: all 0.2s ease !important;
+  padding: 0.25rem 0 !important;
+}
+
+.service-list-item:hover {
+  transform: translateX(8px) !important;
+  color: #1a1a1a !important;
+}
+
+.service-list-item-icon {
+  color: #a8d103 !important;
+  flex-shrink: 0 !important;
+  transition: all 0.2s ease !important;
+}
+
+.service-list-item:hover .service-list-item-icon {
+  transform: scale(1.2) !important;
+}
+
+.service-card-footer {
+  padding: 1.5rem !important;
+  padding-top: 0 !important;
+}
+
+.service-button {
+  width: 100% !important;
+  background-color: #a8d103 !important;
+  color: #1a1a1a !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 0.5rem !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+}
+
+.service-button:hover {
+  background-color: #97c000 !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 10px 25px rgba(168, 209, 3, 0.4) !important;
+}
+
+.service-button:active {
+  transform: scale(0.98) !important;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .service-card-header {
+    padding: 1.25rem !important;
+  }
+
+  .service-icon-wrapper {
+    width: 2.75rem !important;
+    height: 2.75rem !important;
+  }
+
+  .service-card-title {
+    font-size: 1.125rem !important;
+  }
+
+  .service-card-description {
+    font-size: 0.9rem !important;
+  }
+
+  .service-card-content {
+    padding: 0 1.25rem 1.25rem 1.25rem !important;
+  }
+
+  .service-list-item {
+    font-size: 0.875rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-card-header {
+    padding: 1rem !important;
+  }
+
+  .service-icon-wrapper {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+  }
+
+  .service-card-title {
+    font-size: 1rem !important;
+  }
+
+  .service-card-description {
+    font-size: 0.85rem !important;
+  }
+
+  .service-card-content {
+    padding: 0 1rem 1rem 1rem !important;
+  }
+
+  .service-card-footer {
+    padding: 1rem !important;
+    padding-top: 0 !important;
+  }
+
+  .service-button {
+    padding: 0.625rem 1.25rem !important;
+    font-size: 0.9rem !important;
+  }
+}

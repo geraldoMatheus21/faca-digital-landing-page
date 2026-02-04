@@ -48,59 +48,27 @@ const teamMembers = [
 export default function TeamCarousel({ reverse = false }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [cardsToShow, setCardsToShow] = useState(3);
+  const [direction, setDirection] = useState('next');
 
-  useEffect(() => {
-    const updateCardsToShow = () => {
-      if (window.innerWidth < 640) {
-        setCardsToShow(1);
-      } else if (window.innerWidth < 1024) {
-        setCardsToShow(2);
-      } else {
-        setCardsToShow(3);
-      }
-    };
-
-    updateCardsToShow();
-    window.addEventListener("resize", updateCardsToShow);
-    
-    return () => window.removeEventListener("resize", updateCardsToShow);
-  }, []);
-
-  // Calcula o total de páginas
-  const totalPages = Math.ceil(teamMembers.length / cardsToShow);
-  
-  // Calcula a página atual (1/2, 2/2)
-  const currentPage = Math.floor(currentIndex / cardsToShow) + 1;
+  const totalCards = teamMembers.length;
 
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => {
-      if (prevIndex + cardsToShow >= teamMembers.length) {
-        // Se estiver na última página, volta para a primeira
-        return 0;
-      } else {
-        // Vai para a próxima página
-        return prevIndex + cardsToShow;
-      }
-    });
-  }, [cardsToShow]);
+    setDirection('next');
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % totalCards);
+  }, [totalCards]);
 
   const prevSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => {
-      if (prevIndex === 0) {
-        // Se estiver na primeira página, vai para a última
-        return teamMembers.length - cardsToShow;
-      } else {
-        // Volta para a página anterior
-        return prevIndex - cardsToShow;
-      }
-    });
-  }, [cardsToShow]); // ← CORREÇÃO AQUI: adicionado useCallback e dependência
+    setDirection('prev');
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + totalCards) % totalCards);
+  }, [totalCards]);
 
-  const goToPage = (pageNumber) => {
-    // pageNumber começa em 1 (1/2, 2/2)
-    const newIndex = (pageNumber - 1) * cardsToShow;
-    setCurrentIndex(newIndex);
+  const goToSlide = (index) => {
+    if (index > currentIndex) {
+      setDirection('next');
+    } else {
+      setDirection('prev');
+    }
+    setCurrentIndex(index);
   };
 
   useEffect(() => {
@@ -108,97 +76,153 @@ export default function TeamCarousel({ reverse = false }) {
 
     const interval = setInterval(() => {
       nextSlide();
-    }, 5000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [isAutoPlaying, nextSlide]);
 
-  const visibleCards = teamMembers.slice(currentIndex, currentIndex + cardsToShow);
-  
-  if (visibleCards.length < cardsToShow) {
-    const remaining = cardsToShow - visibleCards.length;
-    visibleCards.push(...teamMembers.slice(0, remaining));
-  }
+  // Função para calcular a posição e estilo de cada card
+  const getCardStyle = (index) => {
+    const diff = index - currentIndex;
+    const totalCards = teamMembers.length;
+    
+    // Normaliza a diferença para estar entre -totalCards/2 e totalCards/2
+    let normalizedDiff = diff;
+    if (diff > totalCards / 2) {
+      normalizedDiff = diff - totalCards;
+    } else if (diff < -totalCards / 2) {
+      normalizedDiff = diff + totalCards;
+    }
+
+    const isActive = index === currentIndex;
+    const isPrev = normalizedDiff === -1;
+    const isNext = normalizedDiff === 1;
+    const isHidden = Math.abs(normalizedDiff) > 1;
+
+    // Estilos base
+    let transform = '';
+    let opacity = 0;
+    let zIndex = 0;
+    let pointerEvents = 'none';
+
+    if (isActive) {
+      transform = 'translateX(0) translateZ(0) rotateY(0deg) scale(1)';
+      opacity = 1;
+      zIndex = 3;
+      pointerEvents = 'auto';
+    } else if (isPrev) {
+      transform = direction === 'prev' 
+        ? 'translateX(-30%) translateZ(-100px) rotateY(12deg) scale(0.92)'
+        : 'translateX(-25%) translateZ(-80px) rotateY(10deg) scale(0.94)';
+      opacity = 0.4;
+      zIndex = 2;
+    } else if (isNext) {
+      transform = direction === 'next'
+        ? 'translateX(30%) translateZ(-100px) rotateY(-12deg) scale(0.92)'
+        : 'translateX(25%) translateZ(-80px) rotateY(-10deg) scale(0.94)';
+      opacity = 0.4;
+      zIndex = 2;
+    } else if (isHidden) {
+      transform = normalizedDiff > 0
+        ? 'translateX(40%) translateZ(-150px) rotateY(-20deg) scale(0.85)'
+        : 'translateX(-40%) translateZ(-150px) rotateY(20deg) scale(0.85)';
+      opacity = 0;
+      zIndex = 1;
+    }
+
+    return {
+      transform,
+      opacity,
+      zIndex,
+      pointerEvents,
+    };
+  };
 
   return (
     <div 
-      className="team-carousel-container"
+      className="team-carousel-container-single"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
-      <div 
-        className={`team-carousel-track ${reverse ? 'flex-row-reverse' : 'flex-row'}`}
-      >
-        {visibleCards.map((member) => (
-          <div 
-            key={member.id} 
-            className="team-carousel-card-wrapper"
-          >
-            <div className="team-carousel-card">
-              <div className="team-carousel-image-container">
-                <Image
-                  src={member.src}
-                  alt={member.name}
-                  className="team-carousel-image"
-                  width={400}
-                  height={300}
-                  priority={false}
-                />
-              </div>
-              
-              <div className="team-carousel-content">
-                <h3 className="team-carousel-name" title={member.name}>
-                  {member.name}
-                </h3>
-                <p className="team-carousel-designation">
-                  {member.designation}
-                </p>
-                <blockquote className="team-carousel-quote" title={member.quote}>
-                  {member.quote} {/* ← CORREÇÃO AQUI: aspas removidas */}
-                </blockquote>
+      <div className="team-carousel-stage">
+        {teamMembers.map((member, index) => {
+          const style = getCardStyle(index);
+          
+          return (
+            <div
+              key={member.id}
+              className="team-carousel-card-single"
+              style={{
+                transform: style.transform,
+                opacity: style.opacity,
+                zIndex: style.zIndex,
+                pointerEvents: style.pointerEvents,
+              }}
+            >
+              <div className="team-carousel-card">
+                <div className="team-carousel-image-container">
+                  <Image
+                    src={member.src}
+                    alt={member.name}
+                    className="team-carousel-image"
+                    width={400}
+                    height={300}
+                    priority={index === 0}
+                  />
+                </div>
+                
+                <div className="team-carousel-content">
+                  <h3 className="team-carousel-name" title={member.name}>
+                    {member.name}
+                  </h3>
+                  <p className="team-carousel-designation">
+                    {member.designation}
+                  </p>
+                  <blockquote className="team-carousel-quote" title={member.quote}>
+                    {member.quote}
+                  </blockquote>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="team-carousel-controls">
         <button
           onClick={prevSlide}
           className="team-carousel-nav-button"
-          aria-label="Página anterior"
+          aria-label="Card anterior"
         >
           <ChevronLeft size={24} />
         </button>
         
-        {/* Indicador de página 1/2 ou 2/2 */}
         <div className="team-carousel-indicator">
-          <span className="team-carousel-page-current">{currentPage}</span>
+          <span className="team-carousel-page-current">{currentIndex + 1}</span>
           <span className="team-carousel-page-separator">/</span>
-          <span className="team-carousel-page-total">{totalPages}</span>
+          <span className="team-carousel-page-total">{totalCards}</span>
         </div>
         
         <button
           onClick={nextSlide}
           className="team-carousel-nav-button"
-          aria-label="Próxima página"
+          aria-label="Próximo card"
         >
           <ChevronRight size={24} />
         </button>
       </div>
 
-      {/* Pontos de navegação */}
       <div className="team-carousel-dots">
-        {Array.from({ length: totalPages }).map((_, index) => (
+        {teamMembers.map((_, index) => (
           <button
             key={index}
-            onClick={() => goToPage(index + 1)}
+            onClick={() => goToSlide(index)}
             className={`team-carousel-dot ${
-              index + 1 === currentPage 
+              index === currentIndex 
                 ? 'team-carousel-dot-active' 
                 : 'team-carousel-dot-inactive'
             }`}
-            aria-label={`Ir para a página ${index + 1}`}
+            aria-label={`Ir para o card ${index + 1}`}
           />
         ))}
       </div>

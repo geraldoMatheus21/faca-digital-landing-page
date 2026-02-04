@@ -59,8 +59,8 @@
 }
 
 .works-carousel-card-icon-container {
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 9999px;
   background-color: #a8d103; /* that-green */
   display: flex;
@@ -74,8 +74,8 @@
 }
 
 .works-carousel-card-icon svg {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .works-carousel-card-title {
@@ -152,11 +152,16 @@
 }
 
 .works-carousel-service-icon {
-  height: 1.25rem;
-  width: 1.25rem;
+  height: 1rem;
+  width: 1rem;
   color: #a8d103; /* that-green */
   margin-right: 0.75rem;
   flex-shrink: 0;
+}
+
+.works-carousel-service-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* FOOTER DO CARD - TAMANHO FIXO */
@@ -214,6 +219,33 @@
   transform: scale(1.05);
 }
 
+.works-carousel-dots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem;
+}
+
+.works-carousel-dot {
+  height: 0.5rem;
+  border-radius: 9999px;
+  transition: all 300ms ease;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.works-carousel-dot-active {
+  width: 2rem;
+  background-color: #a8d103; /* that-green */
+}
+
+.works-carousel-dot-inactive {
+  width: 0.5rem;
+  background-color: #d1d5db;
+}
+
 .works-carousel-indicator {
   text-align: center;
   margin-top: 1rem;
@@ -240,33 +272,6 @@
 .works-carousel-page-total {
   min-width: 1.5rem;
   text-align: center;
-}
-
-.works-carousel-dots {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1rem;
-}
-
-.works-carousel-dot {
-  height: 0.5rem;
-  border-radius: 9999px;
-  transition: all 300ms ease;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.works-carousel-dot-active {
-  width: 2rem;
-  background-color: #a8d103; /* that-green */
-}
-
-.works-carousel-dot-inactive {
-  width: 0.5rem;
-  background-color: #d1d5db;
 }
 
 /* Animações */
@@ -309,6 +314,16 @@
     min-height: 160px;
   }
   
+  .works-carousel-card-icon-container {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .works-carousel-card-icon svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+  
   .works-carousel-card-content {
     padding: 0 1rem;
     min-height: 140px;
@@ -326,6 +341,29 @@
   .works-carousel-services-list {
     max-height: 100px;
   }
+
+  .works-carousel-service-icon {
+    height: 0.875rem;
+    width: 0.875rem;
+  }
+
+  .works-carousel-service-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .works-carousel-controls {
+    gap: 1rem;
+  }
+
+  .works-carousel-nav-button {
+    padding: 0.5rem;
+  }
+
+  .works-carousel-nav-button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
 }
 
 @media (max-width: 1024px) and (min-width: 641px) {
@@ -336,4 +374,102 @@
   .works-carousel-services-list {
     max-height: 110px;
   }
+}
+
+/* Estilos para o ImageCarousel (adicionado) */
+.image-carousel-container {
+  position: relative;
+  padding: 1rem 0;
+}
+
+.image-carousel-track {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: stretch;
+  transition: transform 500ms ease-in-out;
+}
+
+.image-carousel-slide {
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  height: 300px;
+  position: relative;
+}
+
+/* Responsividade do ImageCarousel */
+@media (max-width: 640px) {
+  .image-carousel-slide {
+    width: 100%;
+    height: 250px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .image-carousel-slide {
+    width: calc(50% - 0.5rem);
+    height: 280px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .image-carousel-slide {
+    width: calc(33.333% - 0.666rem);
+  }
+}
+
+/* Estilos comuns para ambos os carrosséis */
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+.carousel-nav-button {
+  padding: 0.5rem;
+  border-radius: 9999px;
+  background-color: #a8d103;
+  color: #1a1a1a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 200ms ease;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-nav-button:hover {
+  background-color: #97c000;
+  transform: scale(1.05);
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-dot {
+  height: 0.5rem;
+  border-radius: 9999px;
+  transition: all 300ms ease;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.carousel-dot-active {
+  width: 1.5rem;
+  background-color: #a8d103;
+}
+
+.carousel-dot-inactive {
+  width: 0.5rem;
+  background-color: #d1d5db;
 }

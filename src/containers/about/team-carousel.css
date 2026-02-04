@@ -1,264 +1,290 @@
 /* containers/about/team-carousel.css */
-.team-carousel-container {
-  position: relative;
-  padding: 2rem 1rem;
-  margin: 2rem 0;
-}
 
-.team-carousel-track {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  align-items: stretch;
-  transition: transform 500ms ease-in-out;
-}
-
-.team-carousel-card-wrapper {
-  flex-shrink: 0;
+/* CONTAINER PRINCIPAL DO CARROSSEL ESTILO BARALHO */
+.team-carousel-container-single {
   width: 100%;
-  padding: 0 0.5rem;
-  transition: transform 300ms ease;
-  height: 500px; /* ALTURA FIXA IGUAL AO ANTERIOR */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  position: relative;
 }
 
-@media (min-width: 640px) {
-  .team-carousel-card-wrapper {
-    width: 50%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .team-carousel-card-wrapper {
-    width: 33.333%;
-  }
-}
-
-/* CARD DA EQUIPE - ESTILO IGUAL AO ANTERIOR */
-.team-carousel-card {
-  height: 100%;
-  border-radius: 0.75rem;
-  background: white;
-  overflow: hidden;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: all 300ms ease;
+/* PALCO DO CARROSSEL 3D */
+.team-carousel-stage {
+  position: relative;
+  width: 100%;
+  height: 600px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  perspective: 1500px;
+  overflow: visible;
+}
+
+/* CARD INDIVIDUAL COM ANIMAÇÃO 3D */
+.team-carousel-card-single {
+  position: absolute;
+  width: 100%;
+  max-width: 500px;
+  transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* CARD DA EQUIPE */
+.team-carousel-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
   border: 1px solid #e5e7eb;
 }
 
 .team-carousel-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
 }
 
 /* IMAGEM DO CARD */
 .team-carousel-image-container {
+  position: relative;
   width: 100%;
   height: 300px;
   overflow: hidden;
-  position: relative;
-  flex-shrink: 0;
+  background: linear-gradient(135deg, #a8d103 0%, #7a9900 100%);
 }
 
 .team-carousel-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 300ms ease;
+  transition: transform 0.5s ease;
 }
 
 .team-carousel-card:hover .team-carousel-image {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 /* CONTEÚDO DO CARD */
 .team-carousel-content {
-  padding: 1.5rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 200px;
+  padding: 30px;
+  background: white;
 }
 
 .team-carousel-name {
-  font-size: 1.25rem;
+  font-size: 24px;
   font-weight: 700;
-  color: #111827;
-  margin-bottom: 0.25rem;
-  line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
+  color: #1a202c;
+  margin-bottom: 8px;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .team-carousel-designation {
-  font-size: 0.875rem;
+  font-size: 16px;
   color: #a8d103;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  flex-shrink: 0;
 }
 
 .team-carousel-quote {
-  color: #6b7280;
-  font-size: 0.8rem;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4a5568;
   font-style: italic;
   border-left: 3px solid #a8d103;
-  padding-left: 1rem;
-  flex-grow: 1;
+  padding-left: 16px;
+  margin: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-top: 0.5rem;
 }
 
-/* CONTROLES DO CARROSSEL - IGUAL AO ANTERIOR */
+/* CONTROLES DE NAVEGAÇÃO */
 .team-carousel-controls {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-top: 2rem;
-  gap: 1.5rem;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 40px;
 }
 
 .team-carousel-nav-button {
-  padding: 0.75rem;
-  border-radius: 9999px;
-  background-color: #a8d103;
-  color: #1a1a1a;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  transition: all 200ms ease;
-  border: none;
-  cursor: pointer;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #4a5568;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .team-carousel-nav-button:hover {
-  background-color: #97c000;
-  transform: scale(1.05);
+  background: #a8d103;
+  border-color: #a8d103;
+  color: #1a1a1a;
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(168, 209, 3, 0.4);
 }
 
+.team-carousel-nav-button:active {
+  transform: scale(0.95);
+}
+
+/* INDICADOR DE PÁGINA */
 .team-carousel-indicator {
-  text-align: center;
-  margin-top: 1rem;
-  font-size: 0.875rem;
-  color: #6b7280;
-  font-weight: 500;
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #4a5568;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .team-carousel-page-current {
-  font-weight: 700;
   color: #a8d103;
-  min-width: 1.5rem;
-  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .team-carousel-page-separator {
-  color: #d1d5db;
+  color: #cbd5e0;
 }
 
 .team-carousel-page-total {
-  min-width: 1.5rem;
-  text-align: center;
+  color: #6b7280;
 }
 
+/* DOTS DE NAVEGAÇÃO */
 .team-carousel-dots {
   display: flex;
-  gap: 0.5rem;
-  align-items: center;
   justify-content: center;
-  margin-top: 1rem;
+  gap: 12px;
+  margin-top: 30px;
 }
 
 .team-carousel-dot {
-  height: 0.5rem;
-  border-radius: 9999px;
-  transition: all 300ms ease;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
   border: none;
   cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0;
 }
 
-.team-carousel-dot-active {
-  width: 2rem;
-  background-color: #a8d103;
-}
-
 .team-carousel-dot-inactive {
-  width: 0.5rem;
-  background-color: #d1d5db;
+  background: #cbd5e0;
+  transform: scale(1);
 }
 
-/* ANIMAÇÕES - IGUAL AO ANTERIOR */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.team-carousel-dot-active {
+  background: #a8d103;
+  transform: scale(1.3);
+  box-shadow: 0 0 0 4px rgba(168, 209, 3, 0.2);
 }
 
-.team-carousel-card-wrapper {
-  animation: fadeIn 600ms ease-out;
+.team-carousel-dot:hover {
+  transform: scale(1.4);
 }
 
-/* Classes utilitárias */
-.flex-row {
-  flex-direction: row;
-}
-
-.flex-row-reverse {
-  flex-direction: row-reverse;
-}
-
-/* Responsividade */
-@media (max-width: 480px) {
-  .team-carousel-container {
-    padding: 1rem 0.5rem;
-  }
-  
-  .team-carousel-card-wrapper {
-    height: 480px;
-  }
-  
-  .team-carousel-image-container {
-    height: 250px;
-  }
-  
-  .team-carousel-content {
-    padding: 1rem;
-    min-height: 180px;
-  }
-  
-  .team-carousel-name {
-    font-size: 1.1rem;
-  }
-  
-  .team-carousel-quote {
-    -webkit-line-clamp: 3;
-  }
-}
-
-@media (max-width: 1024px) and (min-width: 641px) {
-  .team-carousel-card-wrapper {
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .team-carousel-stage {
     height: 500px;
   }
-  
+
+  .team-carousel-card-single {
+    max-width: 90%;
+  }
+
+  .team-carousel-image-container {
+    height: 200px;
+  }
+
+  .team-carousel-content {
+    padding: 20px;
+  }
+
+  .team-carousel-name {
+    font-size: 20px;
+  }
+
+  .team-carousel-designation {
+    font-size: 14px;
+  }
+
   .team-carousel-quote {
-    -webkit-line-clamp: 3;
+    font-size: 13px;
+  }
+
+  .team-carousel-nav-button {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-carousel-container-single {
+    padding: 40px 15px;
+  }
+
+  .team-carousel-stage {
+    height: 450px;
+  }
+
+  .team-carousel-image-container {
+    height: 180px;
+  }
+
+  .team-carousel-content {
+    padding: 15px;
+  }
+
+  .team-carousel-name {
+    font-size: 18px;
+  }
+
+  .team-carousel-designation {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .team-carousel-quote {
+    font-size: 12px;
+    -webkit-line-clamp: 2;
+  }
+
+  .team-carousel-controls {
+    gap: 16px;
+    margin-top: 30px;
+  }
+
+  .team-carousel-nav-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .team-carousel-indicator {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+
+  .team-carousel-page-current {
+    font-size: 18px;
   }
 }

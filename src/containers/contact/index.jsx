@@ -68,11 +68,11 @@ export default function Contact() {
             <div className="contact-address-info">
               <FaLocationDot className="contact-address-icon" />
               <p className="contact-address-text">
-                R. Dona Maria Emiliana - Várzea Alegre, Guapimirim - RJ
+                Av. Nossa Sra. da Piedade, 9 - Jardim Nossa Sra. da Piedade, Magé - RJ, 25901-094
               </p>
             </div>
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6191.702085892772!2d-43.02401478751684!3d-22.66839635693847!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x99a3dfdee10e6f%3A0x1913bbf062ec3be0!2sFa%C3%A7a%20Digital!5e0!3m2!1spt-BR!2sbr!4v1736817899003!5m2!1spt-BR!2sbr"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.0847564448886!2d-43.04426892403573!3d-22.84180353613087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9983a0a9f3f3f3f3%3A0x9999999999999999!2sAv.%20Nossa%20Sra.%20da%20Piedade%2C%209%20-%20Jardim%20Nossa%20Sra.%20da%20Piedade%2C%20Mag%C3%A9%20-%20RJ%2C%2025901-094!5e0!3m2!1spt-BR!2sbr!4v1706000000000!5m2!1spt-BR!2sbr"
               className="contact-map"
               style={{ border: "0" }}
               allowFullScreen=""
