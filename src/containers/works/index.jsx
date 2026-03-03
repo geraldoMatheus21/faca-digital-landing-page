@@ -215,6 +215,17 @@ function ServicesCarousel({ reverse = false }) {
 
 // Componente principal da página
 export default function Works() {
+  // FUNÇÃO SCROLL ADICIONADA AQUI 👇
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+  };
+
   return (
     <main id="works" className="container mx-auto px-4 py-8 md:px-6 md:py-12">
       {/* SEÇÃO SERVIÇOS */}
@@ -224,7 +235,7 @@ export default function Works() {
             nossos serviços
           </h1>
           <p className="text-lg md:text-xl max-w-3xl mx-auto">
-            Oferecemos uma variedade de serviços que vão ajudar a sua marca a se sobressair no meio digital.
+            Oferecemos uma variedade de serviços que vão ajudar a sua marca a se sobressair no digital e no físico.
           </p>
         </div>
 
@@ -232,14 +243,11 @@ export default function Works() {
       </div>
 
       {/* SEÇÃO TRABALHOS */}
-      <div className="mb-20">
+      <div id="projetos" className="mb-20">
         <div className="text-center mb-12 text-white">
           <h1 className="uppercase text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            nossos trabalhos
+            projetos em destaque
           </h1>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto">
-            Conheça nosso trabalho no <strong>GUAPI PARQUE DAS ÁGUAS</strong>
-          </p>
         </div>
         
         <ImageCarousel reverse={false} />
@@ -251,44 +259,45 @@ export default function Works() {
           Transformando Ideias em Realidade Digital
         </h2>
         <p className="text-lg md:text-xl max-w-5xl mx-auto mb-12">
-          Na Faça Digital, cada projeto é uma oportunidade de inovar e superar expectativas. Nosso portfólio diversificado reflete nossa paixão por criar soluções digitais impactantes que impulsionam o sucesso de nossos clientes.
+          Na Faça Digital, cada projeto é uma oportunidade de inovar e superar expectativas. Nosso portfólio diversificado reflete nossa paixão por criar soluções estratégicas que impulsionam o sucesso de nossos clientes.
         </p>
         </div>
+        <div className="mb-10 text-center">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
+              Quer um projeto como este?
+           </h3>
+    <p className="text-lg md:text-xl text-white max-w-2xl mx-auto mb-8">
+      Entre em contato e vamos criar a solução digital perfeita.
+    </p>
+  </div>
+
+  {/* BOTÃO FALE CONOSCO - AGORA FUNCIONA! */}
+ <div className="mb-10 text-center">
+  <button
+    onClick={() => scrollToSection('email-form')}
+    className="inline-block px-8 py-3 bg-[#a8d103] text-black font-bold text-lg rounded-full hover:bg-[#97c000] transition-colors cursor-pointer border-none"
+  >
+    Fale Conosco
+  </button>
+</div>
+
       {/* PROJETOS EM DESTAQUE */}
-      <div className="mb-20">
+      <div className="mt-32 mb-20">
         <div className="text-center mb-8 text-white">
           <h2 className="text-2xl md:text-3xl font-bold mb-2">
-            Projetos em Destaque
+            ELES CONFIAM, <span className="text-[#a8d103]">NÓS ENTREGAMOS!</span>
           </h2>
         </div>
         <ImageCarousel reverse={true} />
       </div>
 
       {/* CTA FINAL SEM FUNDO BRANCO */}
-<div className="text-center mt-20">
-  {/* TEXTO EM BRANCO CENTRALIZADO */}
-  <div className="mb-10">
-    <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
-      Quer um projeto como este?
-    </h3>
-    <p className="text-lg md:text-xl text-white max-w-2xl mx-auto mb-8">
-      Entre em contato e vamos criar a solução digital perfeita.
-    </p>
-  </div>
-
-  {/* BOTÃO FALE CONOSCO */}
-  <div className="mb-10">
-    <Link 
-      href="/contato" 
-      className="inline-block px-8 py-3 bg-[#a8d103] text-black font-bold text-lg rounded-full hover:bg-[#97c000] transition-colors"
-    >
-      Fale Conosco
-    </Link>
-  </div>
-
-  {/* REDES SOCIAIS ALINHADAS EMBAIXO DO TEXTO */}
-  <div className="mt-8">
-    <div className="flex justify-center gap-6">
+      <div className="text-center mt-20">
+      {/* TEXTO EM BRANCO CENTRALIZADO */}
+  
+      {/* REDES SOCIAIS ALINHADAS EMBAIXO DO TEXTO */}
+      <div className="mt-8">
+      <div className="flex justify-center gap-6">
       {/* Facebook */}
       <a 
         href="https://facebook.com" 

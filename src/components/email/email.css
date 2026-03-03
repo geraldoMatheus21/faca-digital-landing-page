@@ -8,6 +8,7 @@
   background: rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
   border: 1px solid rgba(168, 209, 3, 0.3);
+  text-align: center;
 }
 
 .email-form-title {

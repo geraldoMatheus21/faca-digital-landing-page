@@ -120,6 +120,11 @@
   font-weight: 500;
 }
 
+/* whatsapp smaller text */
+.contact-channel-text.whatsapp-text {
+  font-size: 0.8rem;
+}
+
 /* SEÇÃO DE ENDEREÇO */
 .contact-address-section {
   width: 100%;

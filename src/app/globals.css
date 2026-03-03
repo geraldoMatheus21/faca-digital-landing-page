@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Boldonse&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,6 +7,11 @@
 body {
   font-family: var(--font-orbitron), sans-serif;
   overflow-x: hidden;
+}
+
+/* apply Boldonse to all titles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Boldonse', sans-serif;
 }
 
 @layer base {

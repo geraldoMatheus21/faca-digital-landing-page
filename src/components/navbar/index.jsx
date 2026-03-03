@@ -74,10 +74,10 @@ export default function Navbar() {
             NOSSOS SERVIÇOS
           </button>
           <button 
-            onClick={() => scrollToSection('works')}
+            onClick={() => scrollToSection('projetos')}
             className={styles.navButton}
           >
-            TRABALHOS REALIZADOS
+            PROJETOS EM DESTAQUE
           </button>
           <button 
             onClick={() => scrollToSection('about')}

@@ -37,7 +37,7 @@
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1.875rem; 
-  line-height: 2.25rem;
+  line-height: 5rem !important;
   width: 100%;                                
   text-align: center; /* centraliza o título */
   margin: 0 auto;        /* remove margem lateral */
@@ -48,7 +48,7 @@
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1.875rem; /* text-3xl */
-  line-height: 2.25rem;
+  line-height: 5em !important;
   width: 100%;                /* ADICIONADO: ocupa toda largura */
   margin: 0;                   /* ADICIONADO: remove margens padrão */
   text-align: justify;         /* ADICIONADO: justifica o texto */
@@ -59,7 +59,7 @@
   text-transform: uppercase;
   font-weight: bold;
   font-size: 3rem; /* tamanho máximo para impacto */
-  line-height: 3.5rem;
+  line-height: 4.5rem; /* mais espaçamento entre linhas */
   text-align: center; /* centraliza o título principal */
   width: 100%;
   margin: 2rem 0 0 0; /* desce o título para dar mais espaço em cima */
@@ -73,7 +73,7 @@
 .description {
   text-align: center;          /* Mantém centralizado */
   font-size: 2rem;         /* text-lg */
-  max-width: 36rem;
+  max-width: 36rerm;
   margin-top: 2.5rem;  
   margin-bottom: 1.5rem;       /* espaço extra antes do botão */  line-height: 1.2;
   color: #ffffff;              /* Slate-700 */
@@ -109,13 +109,17 @@
   justify-content: center;
   width: 100%;
   max-width: 800px;              /* permitir mais largura agora */
-  margin-top: 10rem;              /* distancia do botão acima */
+  margin-top: 10rem;
+  min-height: 150px;              /* distancia do botão acima */
 }
 
 .logoWrapper {          
-  left: 0;
-  flex-shrink: 0;                 
-  margin-right: 1rem;            
+  position: absolute;
+  left: -100;                      /* Fixa na esquerda */
+  top: 50%;
+  transform: translateY(-50%);  /* Centraliza verticalmente */
+  width: 400px;                 /* Largura fixa para o logo */
+  z-index: 2;            
 }
 
 @media (max-width: 600px) {
@@ -156,18 +160,19 @@
 
 .staticWord {
   position: absolute;
-  top: -1.5rem; /* acima das palavras animadas */
-  font-size: 2rem;
+  top: -3.8rem; /* acima das palavras animadas */
+  font-size: 2.5rem;
   font-weight: bold;
   text-transform: uppercase;
-  color: #000;
+  color: #ffffff;
+  right: -190;
 }
 
 .mainTitle {
   font-size: 2rem;
   font-weight: bold;
   text-transform: uppercase;
-  color: #000;
+  color: #ffffff;
   margin: 0;
 }
 
@@ -175,7 +180,14 @@
   font-size: 3rem;
   font-weight: bold;
   color: var(--that-green, #ffffff);
-  margin-left: 350px;
+  display: inline-block;
+  text-align: center;          
+  width: 14rem;               
+  min-width: 14rem;
+  margin: 0;                   
+  position: relative; 
+  line-height: 1;
+  left: 250;         
 }
 
 /* TERCEIRA SEÇÃO: Redes Sociais */

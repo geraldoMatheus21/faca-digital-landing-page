@@ -8,11 +8,8 @@ export default function FloatingButton() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const homeSection = document.getElementById("home");
-      if (homeSection) {
-        const homeSectionBottom = homeSection.offsetTop + homeSection.offsetHeight;
-        setShowButton(window.scrollY > homeSectionBottom);
-      }
+      // appear assim que o usuário rolar para baixo
+      setShowButton(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -26,12 +23,13 @@ export default function FloatingButton() {
     });
   };
 
-  if (!showButton) return null;
-
+  // sempre renderiza para possibilitar animação de fade
   return (
     <button
       onClick={scrollToTop}
-      className="fixed bottom-8 right-6 z-50 w-14 h-14 rounded-full bg-[#a8d103] text-black flex items-center justify-center shadow-lg hover:bg-[#97c000] transition-all duration-300 hover:scale-110 active:scale-95"
+      className={`fixed bottom-8 right-12 z-50 w-14 h-14 rounded-full bg-[#a8d103] text-black flex items-center justify-center shadow-lg hover:bg-[#97c000] transition-opacity duration-500 transition-transform duration-300 hover:scale-110 active:scale-95 ${
+        showButton ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}
       aria-label="Voltar ao início"
       title="Voltar ao início"
     >

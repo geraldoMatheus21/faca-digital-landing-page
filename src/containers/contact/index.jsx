@@ -1,12 +1,18 @@
+"use client";  // ← TEM QUE SER A PRIMEIRA LINHA!
+
 import Email from "@/components/email";
 import Link from "next/link";
 import { FaLocationDot, FaSquareWhatsapp } from "react-icons/fa6";
-import { RiInstagramFill, RiFacebookBoxFill } from "react-icons/ri";
+import { RiInstagramFill } from "react-icons/ri";
 import './index.css';
 
 export default function Contact() {
   return (
-    <main id="contact" className="contact-container">
+    <main 
+      id="contact" 
+      className="contact-container" 
+      suppressHydrationWarning={true}
+    >
       <div className="contact-header">
         <h1 className="contact-title">Entre em Contato</h1>
         <p className="contact-subtitle">
@@ -38,26 +44,17 @@ export default function Contact() {
             </Link>
 
             <Link 
-              href={'https://www.facebook.com/facadigital/'} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="contact-channel-link"
-            >
-              <RiFacebookBoxFill className="contact-channel-icon" />
-              <p className="contact-channel-text">Facebook</p>
-            </Link>
-
-            <Link 
               href={'https://wa.me/+5521987691234'} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="contact-channel-link"
+              className="contact-channel-link whatsapp"
             >
               <FaSquareWhatsapp className="contact-channel-icon" />
-              <p className="contact-channel-text">(21) 98769-1234</p>
+              <p className="contact-channel-text whatsapp-text">(21) 98769-1234</p>
             </Link>
           </div>
         </div>
+        
         <div className="contact-contacts-section">
           <h2 className="contact-channels-title">
           </h2>

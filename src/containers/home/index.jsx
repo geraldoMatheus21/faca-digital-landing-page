@@ -46,7 +46,7 @@ export default function Home() {
           </p>
           <button
             className={styles.contactButton}
-            onClick={scrollToSection}
+            onClick={() => scrollToSection('email-form')}
           >
             Clique e saiba mais 
           </button>

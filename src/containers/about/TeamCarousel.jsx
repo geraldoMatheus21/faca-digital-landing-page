@@ -25,16 +25,16 @@ const teamMembers = [
   {
     id: 3,
     quote: "Construir sites é como criar pontes: conectamos ideias ao mundo digital com funcionalidade e inovação.",
-    name: "Frederico Bettecher",
+    name: "Geraldo Matheus Garcia",
     designation: "Desenvolvedor Web",
-    src: "/about-images/person03.jpg",
+    src: "/about-images/person00.jpg",
   },
   {
     id: 4,
     quote: "A ilustração não é apenas desenhar; é dar vida a conceitos e emoções por meio de traços e cores.",
-    name: "Byanca Ribeiro",
-    designation: "Designer Ilustradora",
-    src: "/about-images/person04.png",
+    name: "Lumara Silva",
+    designation: "Designer de Produtos",
+    src: "/about-images/person00.png",
   },
   {
     id: 5,
@@ -42,8 +42,13 @@ const teamMembers = [
     name: "Fernando Zani",
     designation: "Designer de Marcas",
     src: "/about-images/person05.png",
-  },
-];
+  },  {
+    id: 6,
+    quote: "Estratégia digital é sobre conectar sua marca com a audiência certa no tempo certo, com a mensagem certa.",
+    name: "Amanda",
+    designation: "Fotografia",
+    src: "/about-images/person06.png",
+  },];
 
 export default function TeamCarousel({ reverse = false }) {
   const [currentIndex, setCurrentIndex] = useState(0);

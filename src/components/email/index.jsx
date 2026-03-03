@@ -4,15 +4,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { IoCheckmarkCircleOutline, IoCloseCircleOutline } from "react-icons/io5";
 import { motion } from 'framer-motion';
-import emailjs from '@emailjs/browser'; // ← IMPORTAR EMAILJS
-import './email.css'; // Se tiver CSS próprio
+import emailjs from '@emailjs/browser';
+import './email.css';
 
 export default function Email() {
   const form = useRef();
   const [alert, setAlert] = useState({ visible: false, message: '', type: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  // Pegar as credenciais do environment
   const service_id = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
   const template_id = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
   const public_key = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
@@ -20,7 +19,6 @@ export default function Email() {
   const sendEmail = (e) => {
     e.preventDefault();
     
-    // Validação básica
     if (!form.current.user_email.value || !form.current.message.value) {
       setAlert({ visible: true, message: 'Preencha todos os campos', type: 'error' });
       return;
@@ -35,7 +33,7 @@ export default function Email() {
         
         if (result.text === 'OK') {
           setAlert({ visible: true, message: 'E-mail enviado com sucesso!', type: 'success' });
-          form.current.reset(); // Limpa o formulário
+          form.current.reset();
         } else {
           setAlert({ visible: true, message: 'Erro ao enviar e-mail', type: 'error' });
         }
@@ -47,7 +45,6 @@ export default function Email() {
   };
 
   useEffect(() => {
-    // Inicializar EmailJS com a public key
     if (public_key) {
       emailjs.init(public_key);
     }
@@ -64,7 +61,10 @@ export default function Email() {
   }, [alert]);
 
   return (
-    <div className="email-form-container">
+    <div 
+      id="email-form"  // ← ID ADICIONADO AQUI
+      className="email-form-container"
+    >
       {alert.visible && (
         <div className={`email-alert ${alert.type === 'success' ? 'email-alert-success' : 'email-alert-error'}`}>
           {alert.type === 'success' ? 

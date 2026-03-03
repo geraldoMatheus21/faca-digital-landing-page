@@ -14,7 +14,7 @@ export default function Services() {
     <main className="container mx-auto p-4 md:p-6" id="services">
       <h1 className="text-4xl font-bold text-center mb-8 uppercase text-white">Nossos Serviços</h1>
       <p className="text-xl text-center text-muted-foreground mb-12 max-w-5xl mx-auto">
-        Oferecemos uma variedade de serviços que vão ajudar a sua marca a se sobresair no meio digital.
+        Oferecemos uma variedade de serviços que vão ajudar a sua marca a se sobresair no digital e no físico.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
