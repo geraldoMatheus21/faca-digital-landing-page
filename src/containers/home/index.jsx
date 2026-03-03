@@ -37,38 +37,38 @@ export default function Home() {
       <div className={styles.content}>
         {/* PRIMEIRA SEÇÃO: Texto + Botão */}
         <div className={styles.textContainer}>
-          <h2 className={styles.title}>Mais que</h2> <h2 className={styles.titleAccent}>Presença</h2>
-          <h2 className={styles.title}>
-            no digital, Gere 
-          </h2>
-          <h2 className={styles.titleAccent}>Impacto</h2>
+             <h2 className={styles.unifiedTitle}>
+              Mais que <span className={styles.accent}>Presença</span> no digital, Gere <span className={styles.accent}>Impacto</span>
+              </h2>
+
           <p className={styles.description}>
-            Fazemos a sua marca ou produto se sobressair, atraindo ainda mais
-            cliente para o seu negócio.
+            Marcas que se conectam de verdade não disputam atenção, conquistam espaço.
           </p>
           <button
             className={styles.contactButton}
             onClick={scrollToSection}
           >
-            entre em contato
+            Clique e saiba mais 
           </button>
         </div>
 
         {/* SEGUNDA SEÇÃO: Logo + "Faça [Flip Words]" */}
         <div className={styles.imageContainer}>
-          <Image
-            src={Logo}
-            alt="Faça Digital"
-            className={styles.logoImage}
-          />
-          <div className={styles.textWithFlip}>
-            <h1 className={styles.mainTitle}>
-              faça
-            </h1>
-            <FlipWords
-              words={words}
-              className={styles.flipWords}
+          <div className={styles.logoWrapper}>
+            <Image
+              src={Logo}
+              alt="Faça Digital"
+              className={styles.logoImage}
             />
+          </div>
+          <div className={styles.textWithFlip}>
+            <div className={styles.flipWrapper}>
+              <span className={styles.staticWord}>faça</span>
+              <FlipWords
+                words={words}
+                className={styles.flipWords}
+              />
+            </div>
           </div>
         </div>
       </div>
