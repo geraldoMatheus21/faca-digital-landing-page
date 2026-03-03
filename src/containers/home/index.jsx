@@ -37,12 +37,11 @@ export default function Home() {
       <div className={styles.content}>
         {/* PRIMEIRA SEÇÃO: Texto + Botão */}
         <div className={styles.textContainer}>
+          <h2 className={styles.title}>Mais que</h2> <h2 className={styles.titleAccent}>Presença</h2>
           <h2 className={styles.title}>
-            voce destacado
+            no digital, Gere 
           </h2>
-          <h2 className={styles.titleAccent}>
-            no mundo digital
-          </h2>
+          <h2 className={styles.titleAccent}>Impacto</h2>
           <p className={styles.description}>
             Fazemos a sua marca ou produto se sobressair, atraindo ainda mais
             cliente para o seu negócio.
