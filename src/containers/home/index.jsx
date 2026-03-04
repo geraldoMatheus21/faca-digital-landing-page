@@ -22,14 +22,15 @@ export default function Home() {
     "sites",
   ];
 
-  const scrollToSection = () => {
-    let element = document.getElementById("contact");
-    if (!element) return;
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
+  // FUNÇÃO CORRIGIDA - AGORA RECEBE PARÂMETRO
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   };
 
   return (
@@ -37,22 +38,24 @@ export default function Home() {
       <div className={styles.content}>
         {/* PRIMEIRA SEÇÃO: Texto + Botão */}
         <div className={styles.textContainer}>
-             <h2 className={styles.unifiedTitle}>
-              Mais que <span className={styles.accent}>Presença</span> no digital, Gere <span className={styles.accent}>Impacto</span>
-              </h2>
+          <h2 className={styles.unifiedTitle}>
+            Mais que <span className={styles.accent}>Presença</span> no digital, Gere <span className={styles.accent}>Impacto</span>
+          </h2>
 
           <p className={styles.description}>
             Marcas que se conectam de verdade não disputam atenção, conquistam espaço.
           </p>
+          
+          {/* BOTÃO CORRIGIDO - AGORA FUNCIONA! */}
           <button
             className={styles.contactButton}
-            onClick={() => scrollToSection('email-form')}
+            onClick={() => scrollToSection('servicos')}
           >
             Clique e saiba mais 
           </button>
         </div>
 
-        {/* SEGUNDA SEÇÃO: Logo + "Faça [Flip Words]" */}
+        {/* RESTO DO CÓDIGO (igual) */}
         <div className={styles.imageContainer}>
           <div className={styles.logoWrapper}>
             <Image
@@ -73,30 +76,12 @@ export default function Home() {
         </div>
       </div>
 
-      {/* TERCEIRA SEÇÃO: Redes Sociais */}
+      {/* REDES SOCIAIS */}
       <div className={styles.socialContainer}>
-        <Link
-          href={"#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.socialLink}
-        >
+        <Link href={"https://www.instagram.com/facadigital/"} target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
           <FaSquareInstagram className={styles.socialIcon} />
         </Link>
-        <Link
-          href={"#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.socialLink}
-        >
-          <FaSquareFacebook className={styles.socialIcon} />
-        </Link>
-        <Link
-          href={"#"}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.socialLink}
-        >
+        <Link href={"https://wa.me/5521987691234"} target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
           <FaSquareWhatsapp className={styles.socialIcon} />
         </Link>
       </div>
