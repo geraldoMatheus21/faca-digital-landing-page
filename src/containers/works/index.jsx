@@ -174,11 +174,20 @@ function ServicesCarousel({ reverse = false }) {
                 </ul>
               </div>
               
+              // Dentro de ServicesCarousel, no .works-carousel-card-footer
               <div className="works-carousel-card-footer">
-                <Link href="/em-construcao" className="works-carousel-card-button">
+                <button
+                  className="works-carousel-card-button"
+                  onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                 }
+            }}
+                >
                   Saiba Mais
-                </Link>
-              </div>
+                </button>
+            </div>
             </div>
           </div>
         ))}

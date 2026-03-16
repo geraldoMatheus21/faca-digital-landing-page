@@ -4,12 +4,9 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Facebook, Instagram, Youtube, Linkedin, TrendingUp, BarChart2, Users, MessageCircle, Palette, Code, Globe, Eye, Briefcase, Camera, Smartphone } from 'lucide-react';
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Services() {
-  const router = useRouter();
-
   return (
     <main className="container mx-auto p-4 md:p-6" id="services">
       <h1 className="text-4xl font-bold text-center mb-8 uppercase text-white">Nossos Serviços</h1>
@@ -93,6 +90,11 @@ function ServiceCard({ title, description, icon, platforms }) {
   const [hoveredIcon, setHoveredIcon] = useState(false);
   const [hoveredButton, setHoveredButton] = useState(false);
   const [hoveredItems, setHoveredItems] = useState({});
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push('/contato');
+  };
 
   return (
     <Card 
@@ -169,24 +171,31 @@ function ServiceCard({ title, description, icon, platforms }) {
           ))}
         </ul>
       </CardContent>
-      <CardFooter>
-        <Button 
-          className="w-full text-background"
-          style={{
-            backgroundColor: '#a8d103',
-            transform: hoveredButton ? 'scale(1.05)' : 'scale(1)',
-            boxShadow: hoveredButton 
-              ? '0 10px 25px rgba(168, 209, 3, 0.4)' 
-              : 'none',
-            transition: 'all 0.3s ease',
+          <CardFooter>
+            <button
+              className="w-full text-background"
+              style={{
+              backgroundColor: '#a8d103',
+              transform: hoveredButton ? 'scale(1.05)' : 'scale(1)',
+              boxShadow: hoveredButton ? '0 10px 25px rgba(168, 209, 3, 0.4)' : 'none',
+              transition: 'all 0.3s ease',
+              padding: '0.5rem 1rem',
+              borderRadius: '0.375rem',
+              fontWeight: '600',
+              border: 'none',
+              cursor: 'pointer'
+              }}
+            onMouseEnter={() => setHoveredButton(true)}
+            onMouseLeave={() => setHoveredButton(false)}
+            onClick={() => { const contactSection = document.getElementById('contact');
+              if(contactSection){
+                contactSection.scrollIntoView({behavior: 'smooth'})
+              }
+            
           }}
-          onMouseEnter={() => setHoveredButton(true)}
-          onMouseLeave={() => setHoveredButton(false)}
-        >
-          <Link href={"/em-construcao"}>
-            Saiba Mais
-          </Link>
-        </Button>
+         >
+          Saiba Mais
+        </button>
       </CardFooter>
     </Card>
   )

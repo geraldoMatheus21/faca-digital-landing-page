@@ -230,9 +230,14 @@ export default function WorksCarousel({ reverse = false }) {
               </div>
               
               <div className="works-carousel-card-footer">
-                <Link href="/em-construcao" className="works-carousel-card-button">
+                <button
+                  className="works-carousel-card-button"
+                  onClick={() => {
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                >
                   Saiba Mais
-                </Link>
+                  </button>
               </div>
             </div>
           </div>
