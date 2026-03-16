@@ -1,75 +1,131 @@
-// src/components/works-carousel/index.jsx
 "use client";
 
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import Image from 'next/image';
-import { useState } from 'react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Importe os estilos do Swiper
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import './image-carousel.css';
 
-// A MESMA IMAGEM para todos os slides
+// A MESMA IMAGEM para todos os slides (como estava antes)
 const GUAPI_IMAGE = '/works-images/01.jpg';
 
-// Array com a MESMA imagem repetida, mas diferentes títulos/números
+// Array com TODOS os cards (8 cards, igual ao original)
 const workItems = [
   {
     id: 1,
     title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Parque completo com infraestrutura moderna'
+    subtitle: 'Parque completo com infraestrutura moderna',
+    images: [
+      '/works-images/01.jpg',
+      '/works-images/02.jpg',
+      '/works-images/03.jpg',
+      '/works-images/04.jpg',
+    ]
   },
   {
     id: 2,
     title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Área de lazer e entretenimento familiar'
+    subtitle: 'Área de lazer e entretenimento familiar',
+    images: [
+      '/works-images/05.jpg',
+      '/works-images/06.jpg',
+      '/works-images/07.jpg',
+    ]
   },
   {
     id: 3,
     title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Piscinas e tobogãs aquáticos'
+    subtitle: 'Piscinas e tobogãs aquáticos',
+    images: [
+      '/works-images/08.jpg',
+      '/works-images/09.jpg',
+      '/works-images/10.jpg',
+    ]
   },
   {
     id: 4,
     title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Restaurante e praça de alimentação'
+    subtitle: 'Restaurante e praça de alimentação',
+    images: [
+      '/works-images/11.jpg',
+      '/works-images/12.jpg',
+    ]
   },
   {
     id: 5,
     title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Espaço para eventos corporativos'
+    subtitle: 'Espaço para eventos corporativos',
+    images: [
+      '/works-images/13.jpg',
+      '/works-images/14.jpg',
+      '/works-images/15.jpg',
+    ]
   },
   {
     id: 6,
     title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Parque infantil e área verde'
+    subtitle: 'Parque infantil e área verde',
+    images: [
+      '/works-images/16.jpg',
+      '/works-images/17.jpg',
+    ]
   },
   {
     id: 7,
     title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Estacionamento e acessibilidade'
+    subtitle: 'Estacionamento e acessibilidade',
+    images: [
+      '/works-images/18.jpg',
+      '/works-images/19.jpg',
+    ]
   },
   {
     id: 8,
     title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Iluminação especial e segurança'
+    subtitle: 'Iluminação especial e segurança',
+    images: [
+      '/works-images/20.jpg',
+      '/works-images/21.jpg',
+    ]
   }
 ];
 
 export default function ImageCarousel({ reverse }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [currentImages, setCurrentImages] = useState([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const openModal = (item) => {
-    setSelectedItem(item);
+  const openModal = (images, startIndex = 0) => {
+    setCurrentImages(images);
+    setCurrentImageIndex(startIndex);
     setModalOpen(true);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     setModalOpen(false);
-    setSelectedItem(null);
+    setCurrentImages([]);
+    setCurrentImageIndex(0);
+    document.body.style.overflow = 'auto';
+  };
+
+  const nextImage = (e) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => 
+      prev === currentImages.length - 1 ? 0 : prev + 1
+    );
+  };
+
+  const prevImage = (e) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => 
+      prev === 0 ? currentImages.length - 1 : prev - 1
+    );
   };
 
   return (
@@ -91,10 +147,13 @@ export default function ImageCarousel({ reverse }) {
         >
           {workItems.map((item) => (
             <SwiperSlide key={item.id} className="!w-auto">
-              {/* Substituímos o Link por uma div que contém o card e o botão */}
-              <div className="block group">
+              {/* Card clicável */}
+              <div 
+                className="block group cursor-pointer"
+                onClick={() => openModal(item.images, 0)}
+              >
                 <div className="relative w-72 h-72 md:w-80 md:h-80 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-                  {/* A MESMA IMAGEM em todos os slides */}
+                  {/* A MESMA IMAGEM em todos os slides (como estava antes) */}
                   <Image
                     src={GUAPI_IMAGE}
                     alt={item.title}
@@ -118,13 +177,9 @@ export default function ImageCarousel({ reverse }) {
                         <h4 className="text-xl font-semibold">PARQUE DAS ÁGUAS</h4>
                       </div>
                       <p className="text-gray-200 text-sm mb-3">{item.subtitle}</p>
-                      {/* Botão que abre o modal */}
-                      <button
-                        onClick={() => openModal(item)}
-                        className="inline-block px-4 py-2 bg-[#a8d103] text-black font-semibold rounded-lg text-sm hover:bg-[#97c000] transition-colors"
-                      >
-                        Ver Detalhes
-                      </button>
+                      <span className="inline-block px-4 py-2 bg-[#a8d103] text-black font-semibold rounded-lg text-sm hover:bg-[#97c000] transition-colors">
+                        Ver Fotos
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -134,35 +189,56 @@ export default function ImageCarousel({ reverse }) {
         </Swiper>
       </div>
 
-      {/* Modal */}
-      {modalOpen && selectedItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80" onClick={closeModal}>
-          <div className="relative max-w-4xl max-h-[90vh] bg-white rounded-lg overflow-hidden" onClick={(e) => e.stopPropagation()}>
-            {/* Botão fechar */}
+      {/* MODAL (igual ao que te enviei) */}
+      {modalOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
+          onClick={closeModal}
+        >
+          <div 
+            className="relative max-w-5xl max-h-[90vh] w-full mx-4"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 z-10 w-10 h-10 bg-black/50 text-white rounded-full flex items-center justify-center text-2xl hover:bg-black/70"
+              className="absolute -top-12 right-0 text-white hover:text-gray-300 z-10"
             >
-              &times;
+              <X size={32} />
             </button>
-            
-            {/* Conteúdo do modal - aqui você pode adaptar para mostrar uma galeria */}
-            <div className="p-6">
-              <h2 className="text-2xl font-bold mb-4">{selectedItem.title}</h2>
-              <p className="text-gray-600 mb-4">{selectedItem.subtitle}</p>
-              
-              {/* Exemplo: imagem ampliada (mesma do slide) */}
-              <div className="relative w-full h-96">
-                <Image
-                  src={GUAPI_IMAGE}
-                  alt={selectedItem.title}
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              
-              {/* Aqui você pode adicionar uma galeria de miniaturas ou setas para navegar entre as imagens */}
+
+            {currentImages.length > 1 && (
+              <>
+                <button
+                  onClick={prevImage}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition z-10"
+                >
+                  <ChevronLeft size={32} />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition z-10"
+                >
+                  <ChevronRight size={32} />
+                </button>
+              </>
+            )}
+
+            <div className="relative w-full h-full max-h-[80vh] flex items-center justify-center">
+              <Image
+                src={currentImages[currentImageIndex]}
+                alt={`Imagem ${currentImageIndex + 1}`}
+                width={1200}
+                height={800}
+                className="object-contain max-h-full max-w-full"
+                priority
+              />
             </div>
+
+            {currentImages.length > 1 && (
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white px-3 py-1 rounded-full text-sm">
+                {currentImageIndex + 1} / {currentImages.length}
+              </div>
+            )}
           </div>
         </div>
       )}

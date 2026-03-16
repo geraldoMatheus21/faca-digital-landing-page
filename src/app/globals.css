@@ -91,3 +91,8 @@ h1, h2, h3, h4, h5, h6 {
 .slick-list {
   margin: 0 -8px;
 }
+
+/* Estilos específicos para o modal - sem afetar o .fixed do Tailwind */
+.modal-open {
+  overflow: hidden;
+}

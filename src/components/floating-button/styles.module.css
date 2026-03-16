@@ -1,0 +1,35 @@
+/* src/components/FloatingButton/styles.module.css */
+.floatingButton {
+  position: fixed;
+  bottom: 2rem;   /* 8 no Tailwind */
+  right: 3rem;    /* 12 no Tailwind */
+  z-index: 50;
+  width: 3.5rem;  /* 14 */
+  height: 3.5rem; /* 14 */
+  border-radius: 9999px;
+  background-color: #a8d103;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s, transform 0.3s;
+}
+
+.floatingButton:hover {
+  background-color: #97c000;
+  transform: scale(1.1);
+}
+
+.floatingButton:active {
+  transform: scale(0.95);
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
