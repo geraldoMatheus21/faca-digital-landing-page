@@ -16,20 +16,24 @@ export default function Email() {
   const template_id = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
   const public_key = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
+  // Logs para depuração (opcional, pode remover depois)
+  console.log('🔑 Public Key carregada:', public_key);
+
   const sendEmail = (e) => {
     e.preventDefault();
     
-    if (!form.current.user_email.value || !form.current.message.value) {
+    // Valida apenas os campos existentes: email e message
+    if (!form.current.email.value || !form.current.message.value) {
       setAlert({ visible: true, message: 'Preencha todos os campos', type: 'error' });
       return;
     }
     
     setIsSubmitting(true);
     
-    emailjs.sendForm(service_id, template_id, form.current, public_key)
+    emailjs.sendForm(service_id, template_id, form.current)
       .then((result) => {
         setIsSubmitting(false);
-        console.log('Resultado:', result.text);
+        console.log('✅ Resultado:', result.text);
         
         if (result.text === 'OK') {
           setAlert({ visible: true, message: 'E-mail enviado com sucesso!', type: 'success' });
@@ -39,7 +43,7 @@ export default function Email() {
         }
       }, (error) => {
         setIsSubmitting(false);
-        console.error('Erro EmailJS:', error);
+        console.error('❌ Erro EmailJS:', error);
         setAlert({ visible: true, message: 'Erro ao enviar e-mail', type: 'error' });
       });
   };
@@ -55,21 +59,17 @@ export default function Email() {
       const timer = setTimeout(() => {
         setAlert({ visible: false, message: '', type: '' });
       }, 4000);
-
       return () => clearTimeout(timer);
     }
   }, [alert]);
 
   return (
-    <div 
-      id="email-form"  // ← ID ADICIONADO AQUI
-      className="email-form-container"
-    >
+    <div id="email-form" className="email-form-container">
       {alert.visible && (
         <div className={`email-alert ${alert.type === 'success' ? 'email-alert-success' : 'email-alert-error'}`}>
-          {alert.type === 'success' ? 
-            <IoCheckmarkCircleOutline className="email-alert-icon" /> : 
-            <IoCloseCircleOutline className="email-alert-icon" />
+          {alert.type === 'success' 
+            ? <IoCheckmarkCircleOutline className="email-alert-icon" /> 
+            : <IoCloseCircleOutline className="email-alert-icon" />
           }
           <span>{alert.message}</span>
         </div>
@@ -87,16 +87,18 @@ export default function Email() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
+        {/* Campo de e-mail */}
         <div className="form-group">
           <input
             type="email"
-            name="user_email"
+            name="email"
             placeholder="seu@email.com"
             className="email-input"
             required
           />
         </div>
         
+        {/* Campo de mensagem */}
         <div className="form-group">
           <textarea
             name="message"
