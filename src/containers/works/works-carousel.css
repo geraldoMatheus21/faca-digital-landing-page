@@ -499,3 +499,23 @@
     width: calc(33.333% - 0.666rem);
   }
 }
+
+.works-carousel-card-wrapper {
+  min-height: 500px; /* ajuste conforme necessário */
+  height: auto;
+}
+
+.works-carousel-card {
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.works-carousel-card-header {
+  min-height: 180px;
+}
+
+.works-carousel-card-content {
+  min-height: 150px;
+  flex: 1;
+}

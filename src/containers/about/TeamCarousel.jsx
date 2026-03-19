@@ -1,12 +1,11 @@
 // containers/about/TeamCarousel.jsx
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import "./team-carousel.css";
 
-// Dados da equipe
 const teamMembers = [
   {
     id: 1,
@@ -42,117 +41,110 @@ const teamMembers = [
     name: "Fernando Zani",
     designation: "Designer de Marcas",
     src: "/about-images/person05.png",
-  },  {
+  },
+  {
     id: 6,
     quote: "Estratégia digital é sobre conectar sua marca com a audiência certa no tempo certo, com a mensagem certa.",
     name: "Amanda",
     designation: "Fotografia",
     src: "/about-images/person06.png",
-  },];
+  },
+];
 
-export default function TeamCarousel({ reverse = false }) {
+export default function TeamCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [direction, setDirection] = useState('next');
+  const [direction, setDirection] = useState("next");
 
   const totalCards = teamMembers.length;
 
   const nextSlide = useCallback(() => {
-    setDirection('next');
+    setDirection("next");
     setCurrentIndex((prevIndex) => (prevIndex + 1) % totalCards);
   }, [totalCards]);
 
   const prevSlide = useCallback(() => {
-    setDirection('prev');
+    setDirection("prev");
     setCurrentIndex((prevIndex) => (prevIndex - 1 + totalCards) % totalCards);
   }, [totalCards]);
 
-  const goToSlide = (index) => {
+  const goToSlide = useCallback((index) => {
     if (index > currentIndex) {
-      setDirection('next');
+      setDirection("next");
     } else {
-      setDirection('prev');
+      setDirection("prev");
     }
     setCurrentIndex(index);
-  };
+  }, [currentIndex]);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
-
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 4000);
-
+    const interval = setInterval(nextSlide, 4000);
     return () => clearInterval(interval);
   }, [isAutoPlaying, nextSlide]);
 
-  // Função para calcular a posição e estilo de cada card
-  const getCardStyle = (index) => {
+  // Memoized style calculation for performance
+  const getCardStyle = useCallback((index) => {
     const diff = index - currentIndex;
-    const totalCards = teamMembers.length;
-    
-    // Normaliza a diferença para estar entre -totalCards/2 e totalCards/2
+    const total = teamMembers.length;
     let normalizedDiff = diff;
-    if (diff > totalCards / 2) {
-      normalizedDiff = diff - totalCards;
-    } else if (diff < -totalCards / 2) {
-      normalizedDiff = diff + totalCards;
-    }
+    if (diff > total / 2) normalizedDiff = diff - total;
+    else if (diff < -total / 2) normalizedDiff = diff + total;
 
     const isActive = index === currentIndex;
     const isPrev = normalizedDiff === -1;
     const isNext = normalizedDiff === 1;
     const isHidden = Math.abs(normalizedDiff) > 1;
 
-    // Estilos base
-    let transform = '';
+    let transform = "";
     let opacity = 0;
     let zIndex = 0;
-    let pointerEvents = 'none';
+    let pointerEvents = "none";
 
     if (isActive) {
-      transform = 'translateX(0) translateZ(0) rotateY(0deg) scale(1)';
+      transform = "translateX(0) translateZ(0) rotateY(0deg) scale(1)";
       opacity = 1;
       zIndex = 3;
-      pointerEvents = 'auto';
+      pointerEvents = "auto";
     } else if (isPrev) {
-      transform = direction === 'prev' 
-        ? 'translateX(-30%) translateZ(-100px) rotateY(12deg) scale(0.92)'
-        : 'translateX(-25%) translateZ(-80px) rotateY(10deg) scale(0.94)';
+      transform =
+        direction === "prev"
+          ? "translateX(-30%) translateZ(-100px) rotateY(12deg) scale(0.92)"
+          : "translateX(-25%) translateZ(-80px) rotateY(10deg) scale(0.94)";
       opacity = 0.4;
       zIndex = 2;
     } else if (isNext) {
-      transform = direction === 'next'
-        ? 'translateX(30%) translateZ(-100px) rotateY(-12deg) scale(0.92)'
-        : 'translateX(25%) translateZ(-80px) rotateY(-10deg) scale(0.94)';
+      transform =
+        direction === "next"
+          ? "translateX(30%) translateZ(-100px) rotateY(-12deg) scale(0.92)"
+          : "translateX(25%) translateZ(-80px) rotateY(-10deg) scale(0.94)";
       opacity = 0.4;
       zIndex = 2;
     } else if (isHidden) {
-      transform = normalizedDiff > 0
-        ? 'translateX(40%) translateZ(-150px) rotateY(-20deg) scale(0.85)'
-        : 'translateX(-40%) translateZ(-150px) rotateY(20deg) scale(0.85)';
+      transform =
+        normalizedDiff > 0
+          ? "translateX(40%) translateZ(-150px) rotateY(-20deg) scale(0.85)"
+          : "translateX(-40%) translateZ(-150px) rotateY(20deg) scale(0.85)";
       opacity = 0;
       zIndex = 1;
     }
+    return { transform, opacity, zIndex, pointerEvents };
+  }, [currentIndex, direction]);
 
-    return {
-      transform,
-      opacity,
-      zIndex,
-      pointerEvents,
-    };
-  };
+  // UseMemo para evitar recalcular estilos a cada render
+  const cardStyles = useMemo(() => {
+    return teamMembers.map((_, index) => getCardStyle(index));
+  }, [getCardStyle]);
 
   return (
-    <div 
+    <div
       className="team-carousel-container-single"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
       <div className="team-carousel-stage">
         {teamMembers.map((member, index) => {
-          const style = getCardStyle(index);
-          
+          const style = cardStyles[index];
           return (
             <div
               key={member.id}
@@ -172,10 +164,9 @@ export default function TeamCarousel({ reverse = false }) {
                     className="team-carousel-image"
                     width={400}
                     height={300}
-                    priority={index === 0}
+                    priority={index === 0} // só a primeira imagem tem prioridade
                   />
                 </div>
-                
                 <div className="team-carousel-content">
                   <h3 className="team-carousel-name" title={member.name}>
                     {member.name}
@@ -201,13 +192,11 @@ export default function TeamCarousel({ reverse = false }) {
         >
           <ChevronLeft size={24} />
         </button>
-        
         <div className="team-carousel-indicator">
           <span className="team-carousel-page-current">{currentIndex + 1}</span>
           <span className="team-carousel-page-separator">/</span>
           <span className="team-carousel-page-total">{totalCards}</span>
         </div>
-        
         <button
           onClick={nextSlide}
           className="team-carousel-nav-button"
@@ -223,9 +212,9 @@ export default function TeamCarousel({ reverse = false }) {
             key={index}
             onClick={() => goToSlide(index)}
             className={`team-carousel-dot ${
-              index === currentIndex 
-                ? 'team-carousel-dot-active' 
-                : 'team-carousel-dot-inactive'
+              index === currentIndex
+                ? "team-carousel-dot-active"
+                : "team-carousel-dot-inactive"
             }`}
             aria-label={`Ir para o card ${index + 1}`}
           />
