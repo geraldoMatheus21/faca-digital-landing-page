@@ -1,18 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Menu, X } from "lucide-react";
-import styles from "./Navbar.module.css"; 
-import Image from 'next/image';
+import styles from "./Navbar.module.css";
+import Image from "next/image";
 
 export default function Navbar() {
   const [show, setShow] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  
+  const navbarRef = useRef(null);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  // Controla a rolagem do body quando o menu mobile está aberto
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.classList.add(styles.noScroll);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
+  }, [menuOpen]);
 
   useEffect(() => {
     const controlNavbar = () => {
@@ -23,7 +33,7 @@ export default function Navbar() {
       }
       setLastScrollY(window.scrollY);
     };
-    
+
     window.addEventListener("scroll", controlNavbar);
     return () => {
       window.removeEventListener("scroll", controlNavbar);
@@ -33,104 +43,106 @@ export default function Navbar() {
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (!element) return;
-    
+
     if (menuOpen) toggleMenu();
-    
-    const navbarHeight = 80; // Ajuste conforme necessário
+
+    const navbarHeight = navbarRef.current?.offsetHeight || 80;
     const elementPosition = element.offsetTop - navbarHeight;
-    
+
     window.scrollTo({
       top: elementPosition,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   };
 
-  // Combinação de classes condicionais
   const navClass = `${styles.navDesktop} ${show ? styles.navVisible : styles.navHidden}`;
 
   return (
     <nav>
       {/* NAVBAR DESKTOP */}
-      <div className={navClass}>
-        
-        {/* LOGO */
-        }
+      <div ref={navbarRef} className={navClass}>
+        {/* LOGO */}
         <div className={styles.logo}>
-      <Image 
-        src="/logo.png" // ← Coloque o caminho correto da sua logo
-        alt="logo"
-        width={120}     // ← Defina a largura
-        height={40}     // ← Defina a altura
-        priority={true} // ← Se for logo acima da dobra, use true
-      />
-</div>
-        
-        {/* CONTAINER DOS LINKS */}
+          <Image
+            src="/logo.png"
+            alt="Faça Digital"
+            width={120}
+            height={40}
+            className={styles.logoImage}
+            priority
+            onError={(e) => {
+              // Se a imagem falhar, exibe o fallback
+              e.currentTarget.style.display = "none";
+              e.currentTarget.nextElementSibling.style.display = "block";
+            }}
+          />
+          <span className={styles.logoFallback}>Faça Digital</span>
+        </div>
+
+        {/* LINKS (DESKTOP) */}
         <div className={styles.linksContainer}>
-          <button 
-            onClick={() => scrollToSection('works')}
+          <button
+            onClick={() => scrollToSection("works")}
             className={styles.navButton}
           >
             NOSSOS SERVIÇOS
           </button>
-          <button 
-            onClick={() => scrollToSection('projetos')}
+          <button
+            onClick={() => scrollToSection("projetos")}
             className={styles.navButton}
           >
             PROJETOS EM DESTAQUE
           </button>
-          <button 
-            onClick={() => scrollToSection('about')}
+          <button
+            onClick={() => scrollToSection("about")}
             className={styles.navButton}
           >
             SOBRE NÓS
           </button>
         </div>
-        
-        {/* BOTÃO CONTATO */}
-        <button 
-          onClick={() => scrollToSection('contact')}
+
+        {/* BOTÃO CONTATO (DESKTOP) */}
+        <button
+          onClick={() => scrollToSection("contact")}
           className={styles.contactButton}
         >
           ENTRE EM CONTATO
         </button>
-        
+
         {/* BOTÃO MENU MOBILE */}
-        <button 
+        <button
           onClick={toggleMenu}
           className={styles.menuToggle}
+          aria-label="Menu"
+          aria-expanded={menuOpen}
         >
-          {menuOpen ? (
-            <X className="w-6 h-6" />
-          ) : (
-            <Menu className="w-6 h-6" />
-          )}
+          {menuOpen ? <X className={styles.closeIcon} /> : <Menu className={styles.menuIcon} />}
         </button>
       </div>
 
-      {/* MENU MOBILE */}
+      {/* MENU MOBILE OVERLAY */}
       {menuOpen && (
         <div className={styles.mobileMenuOverlay}>
-          <button 
-            onClick={() => scrollToSection('works')}
+          <button
+            onClick={() => scrollToSection("works")}
             className={styles.mobileMenuButton}
           >
             NOSSOS SERVIÇOS
           </button>
-          <button 
-            onClick={() => scrollToSection('works')}
+          <button
+            onClick={() => scrollToSection("projetos")}
             className={styles.mobileMenuButton}
           >
-            TRABALHOS REALIZADOS
+            PROJETOS EM DESTAQUE
           </button>
-          <button 
-            onClick={() => scrollToSection('about')}
+          <button
+            onClick={() => scrollToSection("about")}
             className={styles.mobileMenuButton}
           >
             SOBRE NÓS
           </button>
-          <button 
-            onClick={() => scrollToSection('contact')}
+          <button
+            onClick={() => scrollToSection("contact")}
             className={styles.mobileMenuButton}
           >
             ENTRE EM CONTATO

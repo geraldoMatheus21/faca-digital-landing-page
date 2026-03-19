@@ -1,33 +1,37 @@
 /* ============================================
    NAVBAR MODULE CSS - AGÊNCIA DE DESIGN
-   Versão corrigida com margens consistentes e logo
+   Versão final com todas as melhorias
    ============================================ */
 
-/* NAVBAR CONTAINER - Estilo moderno com bordas arredondadas */
+:root {
+  --brand-green: #c7f327; /* Cor principal da marca */
+}
+
+/* NAVBAR CONTAINER */
 .navDesktop {
   position: fixed;
-  top: 0.75rem; /* Margem consistente do topo */
+  top: 0.75rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 50;
-  width: calc(100% - 2rem); /* Margens laterais de 1rem cada */
-  max-width: 1280px; /* Largura máxima */
+  width: calc(100% - 2rem);
+  max-width: 1280px;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.875rem 2rem; /* py-3.5 px-8 */
+  padding: 0.875rem 2rem;
   backdrop-filter: blur(12px);
-  background-color: rgba(255, 255, 255, 0.92); /* Branco levemente transparente */
-  border: 1px solid rgba(229, 231, 235, 0.6); /* Borda sutil cinza */
-  border-radius: 20px; /* Bordas arredondadas */
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Transição suave */
-  box-shadow: 
-    0 4px 20px rgba(0, 0, 0, 0.08), /* Sombra principal */
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset; /* Borda interna sutil */
+  background-color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(229, 231, 235, 0.6);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
 }
 
-/* Estados da navbar - Animação de esconder/mostrar */
+/* Estados da navbar */
 .navHidden {
   transform: translateX(-50%) translateY(-150%);
   opacity: 0;
@@ -40,48 +44,48 @@
   visibility: visible;
 }
 
-/* LOGO - ATUALIZADO PARA SUPORTAR IMAGEM */
+/* LOGO */
 .logo {
   display: flex;
   align-items: center;
-  height: 2.5rem; /* Altura fixa do container */
-  min-width: 100px; /* Largura mínima para evitar colapso */
+  height: 2.5rem;
+  min-width: 100px;
+  position: relative;
 }
 
-/* Estilo da imagem dentro da logo */
 .logoImage {
-  height: 100%; /* Ocupa 100% da altura do container */
-  width: auto; /* Largura automática mantendo proporção */
-  max-height: 2.5rem; /* Limite máximo de altura */
-  object-fit: contain; /* Mantém proporção sem cortar */
+  height: 100%;
+  width: auto;
+  max-height: 2.5rem;
+  object-fit: contain;
   transition: all 0.3s ease;
 }
 
-/* Efeito hover na logo */
 .logo:hover .logoImage {
   transform: scale(1.05);
   filter: brightness(1.1);
 }
 
-/* Fallback para texto (se imagem falhar) */
-.logoText {
+/* Fallback para imagem (texto) */
+.logoFallback {
+  display: none;
   font-size: 1.5rem;
   font-weight: 900;
   letter-spacing: -0.025em;
-  color: #111827; /* gray-900 */
+  color: #111827;
   transition: color 0.2s ease;
 }
 
-.logo:hover .logoText {
-  color: var(--that-green, #c7f327);
+.logo:hover .logoFallback {
+  color: var(--brand-green);
 }
 
-/* CONTAINER DE LINKS */
+/* CONTAINER DE LINKS (DESKTOP) */
 .linksContainer {
-  display: none; /* Escondido em mobile */
+  display: none;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem; /* Espaçamento entre links */
+  gap: 2.5rem;
 }
 
 /* BOTÕES DE NAVEGAÇÃO */
@@ -90,29 +94,29 @@
   border: none;
   cursor: pointer;
   text-transform: uppercase;
-  font-size: 0.875rem; /* text-sm */
+  font-size: 0.875rem;
   letter-spacing: 0.05em;
   font-weight: 500;
   transition: all 0.2s ease;
-  color: #374151; /* gray-700 */
+  color: #374151;
   position: relative;
   padding: 0.5rem 0;
-  white-space: nowrap; /* Evita quebra de linha */
+  white-space: nowrap;
 }
 
 .navButton:hover {
-  color: var(--that-green, #c7f327);
+  color: var(--brand-green);
 }
 
-/* Efeito de sublinhado animado */
+/* Efeito de sublinhado */
 .navButton::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 0;
   height: 2px;
-  background-color: var(--that-green, #c7f327);
+  background-color: var(--brand-green);
   transition: width 0.3s ease;
   border-radius: 1px;
 }
@@ -121,13 +125,13 @@
   width: 100%;
 }
 
-/* BOTÃO DE CONTATO */
+/* BOTÃO DE CONTATO (DESKTOP) */
 .contactButton {
   display: none;
-  background: linear-gradient(135deg, #111827, #374151); /* Gradiente cinza */
+  background: linear-gradient(135deg, #111827, #374151);
   color: white;
-  padding: 0.625rem 2rem; /* py-2.5 px-8 */
-  border-radius: 9999px; /* Completamente arredondado */
+  padding: 0.625rem 2rem;
+  border-radius: 9999px;
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.025em;
@@ -139,9 +143,10 @@
 }
 
 .contactButton:hover {
-  background: #c7f327;
+  background: var(--brand-green);
+  color: #111827;
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 16px rgba(199, 243, 39, 0.3);
 }
 
 .contactButton:active {
@@ -160,37 +165,38 @@
   height: 2.5rem;
   border-radius: 12px;
   transition: all 0.2s ease;
-  background-color: rgba(243, 244, 246, 0.5); /* gray-100 com transparência */
+  background-color: rgba(243, 244, 246, 0.5);
 }
 
 .menuToggle:hover {
-  background-color: rgba(229, 231, 235, 0.8); /* gray-200 */
+  background-color: rgba(229, 231, 235, 0.8);
 }
 
 .menuToggle:active {
   transform: scale(0.95);
 }
 
-/* ÍCONES DO MENU MOBILE */
-.menuIcon, .closeIcon {
+/* Ícones do menu */
+.menuIcon,
+.closeIcon {
   width: 1.5rem;
   height: 1.5rem;
-  color: #374151; /* gray-700 */
+  color: #374151;
   transition: color 0.2s ease;
 }
 
 .menuToggle:hover .menuIcon,
 .menuToggle:hover .closeIcon {
-  color: var(--that-green, #10b981);
+  color: var(--brand-green);
 }
 
 /* MENU MOBILE OVERLAY */
 .mobileMenuOverlay {
   position: fixed;
-  top: 0.75rem; /* Alinhado com a navbar */
+  top: 0.75rem;
   left: 1rem;
   right: 1rem;
-  height: calc(100vh - 1.5rem); /* Ajustado para o novo top */
+  height: calc(100vh - 1.5rem);
   backdrop-filter: blur(20px);
   background-color: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(229, 231, 235, 0.7);
@@ -207,7 +213,6 @@
   animation: slideIn 0.3s ease-out;
 }
 
-/* Animações */
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -225,10 +230,10 @@
   border: none;
   cursor: pointer;
   text-transform: uppercase;
-  font-size: 1.125rem; /* text-lg */
+  font-size: 1.125rem;
   font-weight: 500;
   padding: 0.75rem 1.5rem;
-  color: #374151; /* gray-700 */
+  color: #374151;
   transition: all 0.2s ease;
   width: 100%;
   max-width: 280px;
@@ -238,228 +243,174 @@
 }
 
 .mobileMenuButton:hover {
-  color: var(--that-green, #10b981);
-  background-color: rgba(243, 244, 246, 0.5); /* gray-100 */
+  color: var(--brand-green);
+  background-color: rgba(243, 244, 246, 0.5);
 }
 
 .mobileMenuButton:active {
   transform: scale(0.98);
 }
 
-/* Efeito de fundo animado nos botões mobile */
+/* Efeito de brilho no hover */
 .mobileMenuButton::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(199, 243, 39, 0.1), transparent);
   transition: left 0.6s ease;
+  pointer-events: none;
 }
 
 .mobileMenuButton:hover::before {
   left: 100%;
 }
 
+/* Classe para travar rolagem do body */
+.noScroll {
+  overflow: hidden;
+}
+
 /* ============================================
-   RESPONSIVE ADJUSTMENTS - CONSISTENTES
+   RESPONSIVIDADE
    ============================================ */
 
-/* Tablet (768px+) */
 @media (min-width: 768px) {
   .navDesktop {
-    top: 0.75rem; /* Mantém mesma margem */
-    width: calc(100% - 3rem); /* 1.5rem de cada lado */
-    padding: 1rem 2.5rem; /* py-4 px-10 */
+    top: 0.75rem;
+    width: calc(100% - 3rem);
+    padding: 1rem 2.5rem;
     border-radius: 24px;
   }
-  
+
   .logo {
-    height: 3rem; /* Logo maior em tablet */
+    height: 3rem;
   }
-  
+
   .logoImage {
     max-height: 3rem;
   }
-  
+
   .mobileMenuOverlay {
-    top: 0.75rem; /* Mantém alinhado */
+    top: 0.75rem;
     left: 1.5rem;
     right: 1.5rem;
-    height: calc(100vh - 1.5rem); /* Mantém cálculo consistente */
+    height: calc(100vh - 1.5rem);
     border-radius: 28px;
   }
-  
+
   .mobileMenuButton {
-    font-size: 1.25rem; /* text-xl */
+    font-size: 1.25rem;
     padding: 1rem 2rem;
   }
 }
 
-/* Desktop (1024px+) */
 @media (min-width: 1024px) {
   .navDesktop {
-    top: 0.75rem; /* Mantém mesma margem */
-    width: calc(100% - 4rem); /* 2rem de cada lado */
-    padding: 1.125rem 3rem; /* py-4.5 px-12 */
+    top: 0.75rem;
+    width: calc(100% - 4rem);
+    padding: 1.125rem 3rem;
     border-radius: 28px;
   }
-  
+
   .logo {
-    height: 3.5rem; /* Logo maior em desktop */
+    height: 3.5rem;
   }
-  
+
   .logoImage {
     max-height: 3.5rem;
   }
-  
+
   .linksContainer {
-    display: flex; /* Mostra links em desktop */
+    display: flex;
   }
-  
+
   .contactButton {
-    display: block; /* Mostra botão contato em desktop */
+    display: block;
   }
-  
+
   .menuToggle {
-    display: none; /* Esconde menu hamburger em desktop */
-  }
-  
-  .navVisible {
-    transform: translateX(-50%) translateY(0);
-  }
-  
-  .navHidden {
-    transform: translateX(-50%) translateY(-150%);
+    display: none;
   }
 }
 
-/* Large Desktop (1280px+) */
 @media (min-width: 1280px) {
   .navDesktop {
-    top: 0.75rem; /* Mantém mesma margem */
-    width: calc(100% - 6rem); /* 3rem de cada lado */
+    top: 0.75rem;
+    width: calc(100% - 6rem);
     max-width: 1400px;
-    padding: 1.25rem 3.5rem; /* py-5 px-14 */
+    padding: 1.25rem 3.5rem;
   }
-  
+
   .logo {
-    height: 4rem; /* Logo ainda maior em telas grandes */
+    height: 4rem;
   }
-  
+
   .logoImage {
     max-height: 4rem;
   }
-  
+
   .linksContainer {
-    gap: 3.5rem; /* Mais espaçamento em telas grandes */
+    gap: 3.5rem;
   }
-  
+
   .navButton {
-    font-size: 0.9375rem; /* text-sm com pouca diferença */
+    font-size: 0.9375rem;
   }
 }
 
-/* Extra Large (1536px+) */
 @media (min-width: 1536px) {
   .navDesktop {
-    top: 0.75rem; /* Mantém mesma margem */
-    width: calc(100% - 8rem); /* 4rem de cada lado */
+    width: calc(100% - 8rem);
     max-width: 1600px;
   }
 }
 
 /* ============================================
-   DARK MODE SUPPORT (opcional)
+   DARK MODE (opcional)
    ============================================ */
 @media (prefers-color-scheme: dark) {
   .navDesktop {
-    background-color: rgba(17, 24, 39, 0.92); /* gray-900 */
-    border-color: rgba(55, 65, 81, 0.6); /* gray-700 */
-    box-shadow: 
+    background-color: rgba(17, 24, 39, 0.92);
+    border-color: rgba(55, 65, 81, 0.6);
+    box-shadow:
       0 4px 20px rgba(0, 0, 0, 0.3),
       0 0 0 1px rgba(255, 255, 255, 0.05) inset;
   }
-  
-  .logoText {
-    color: #f9fafb; /* gray-50 */
+
+  .logoFallback {
+    color: #f9fafb;
   }
-  
+
   .navButton {
-    color: #d1d5db; /* gray-300 */
+    color: #d1d5db;
   }
-  
+
   .mobileMenuOverlay {
     background-color: rgba(17, 24, 39, 0.96);
     border-color: rgba(55, 65, 81, 0.7);
   }
-  
+
   .mobileMenuButton {
-    color: #d1d5db; /* gray-300 */
+    color: #d1d5db;
   }
-  
+
   .mobileMenuButton:hover {
-    background-color: rgba(31, 41, 55, 0.5); /* gray-800 */
+    background-color: rgba(31, 41, 55, 0.5);
   }
-  
+
   .menuToggle {
-    background-color: rgba(31, 41, 55, 0.5); /* gray-800 */
+    background-color: rgba(31, 41, 55, 0.5);
   }
-  
+
   .menuToggle:hover {
-    background-color: rgba(55, 65, 81, 0.8); /* gray-700 */
+    background-color: rgba(55, 65, 81, 0.8);
   }
-}
 
-/* ============================================
-   UTILITY CLASSES (para JavaScript/condicionais)
-   ============================================ */
-.noScroll {
-  overflow: hidden;
-}
-
-.highlight {
-  color: var(--that-green, #10b981) !important;
-}
-
-.highlight::after {
-  width: 100% !important;
-}
-
-/* Estilo para imagem com fallback */
-.logoWithFallback {
-  position: relative;
-}
-
-.logoFallback {
-  display: none;
-}
-
-.logoImage[src=""] + .logoFallback {
-  display: block;
-}
-
-/* ============================================
-   PRINT STYLES (opcional)
-   ============================================ */
-@media print {
-  .navDesktop {
-    position: static;
-    background: white;
-    border: 1px solid #ddd;
-    box-shadow: none;
-    border-radius: 0;
-    width: 100%;
-    max-width: none;
-  }
-  
-  .menuToggle,
-  .contactButton {
-    display: none;
-  }
-  
-  .logoImage {
-    filter: grayscale(100%) contrast(200%);
+  .menuIcon,
+  .closeIcon {
+    color: #d1d5db;
   }
 }
