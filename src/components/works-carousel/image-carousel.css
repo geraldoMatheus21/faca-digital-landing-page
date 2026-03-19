@@ -7,6 +7,7 @@
   overflow: hidden;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   border-radius: 24px;
+  width: 100%;
 }
 
 .image-carousel-track {
@@ -17,6 +18,7 @@
   padding: 1rem;
 }
 
+/* SLIDE COM DIMENSÕES FIXAS E ASPECT-RATIO DE SEGURANÇA */
 .image-carousel-slide {
   flex: 0 0 auto;
   border-radius: 20px;
@@ -25,6 +27,10 @@
   transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
   background: white;
   border: 1px solid #e2e8f0;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
 }
 
 .image-carousel-slide:hover {
@@ -32,48 +38,70 @@
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* CONTAINER DA IMAGEM PARA NEXT/IMAGE COM FILL */
+.image-carousel-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  background-color: #f3f4f6; /* cor de fallback (gray-200) */
+}
+
 .image-carousel-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease;
+}
+
+.image-carousel-slide:hover .image-carousel-image {
+  transform: scale(1.1);
+}
+
+/* CONTEÚDO DO SLIDE (se houver texto) */
+.image-carousel-content {
+  padding: 1rem;
+  min-height: 80px;
 }
 
 /* Tamanhos responsivos */
 @media (max-width: 640px) {
   .image-carousel-slide {
     width: 280px;
-    height: 280px;
   }
-  
   .image-carousel-container {
     padding: 2rem 0;
     margin: 1rem 0;
+  }
+  .image-carousel-content {
+    min-height: 70px;
+    padding: 0.75rem;
   }
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
   .image-carousel-slide {
     width: 320px;
-    height: 320px;
+  }
+  .image-carousel-content {
+    min-height: 80px;
   }
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   .image-carousel-slide {
     width: 360px;
-    height: 360px;
   }
 }
 
 @media (min-width: 1281px) {
   .image-carousel-slide {
     width: 400px;
-    height: 400px;
   }
 }
 
-/* Controles modernizados */
+/* Controles */
 .image-carousel-controls {
   display: flex;
   justify-content: center;
@@ -108,7 +136,7 @@
   cursor: not-allowed;
 }
 
-/* Indicadores em forma de barras */
+/* Dots */
 .image-carousel-dots {
   display: flex;
   gap: 0.75rem;
@@ -134,7 +162,7 @@
   transform: scaleY(1.5);
 }
 
-/* Contador de slides */
+/* Contador */
 .image-carousel-counter {
   position: absolute;
   bottom: 2rem;
@@ -170,7 +198,7 @@
 .image-carousel-slide:nth-child(5) { animation-delay: 400ms; }
 .image-carousel-slide:nth-child(6) { animation-delay: 500ms; }
 
-/* Título do carrossel */
+/* Título */
 .image-carousel-title {
   text-align: center;
   font-size: 2.5rem;
@@ -182,7 +210,18 @@
   background-clip: text;
 }
 
-/* Modal overlay */
+/* Garantias extras para o componente */
+.image-carousel-card-container {
+  position: relative;
+  background-color: #f3f4f6; /* gray-200 fallback */
+  overflow: hidden;
+}
+
+.swiper-slide {
+  height: auto !important;
+}
+
+/* Modal (mantido do original) */
 .fixed {
   position: fixed;
   top: 0;
@@ -206,7 +245,23 @@
   background-color: rgba(0, 0, 0, 0.9);
 }
 
-/* Para garantir que o modal fique acima de tudo */
 .modal-open {
   overflow: hidden;
+}
+
+/* GARANTIAS DE PERFORMANCE (SEM MEXER NO LAYOUT) */
+.image-carousel-card-container {
+  position: relative;
+  background-color: #f3f4f6; /* fallback enquanto a imagem carrega */
+  overflow: hidden;
+}
+
+.swiper-slide {
+  height: auto !important;
+}
+
+/* Remove qualquer conflito de largura */
+.image-carousel-slide {
+  width: auto !important; /* volta a ser controlado pelo Swiper */
+  aspect-ratio: unset !important; /* remove aspect-ratio que pode estar cortando */
 }

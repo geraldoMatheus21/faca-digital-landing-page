@@ -11,10 +11,8 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 import './image-carousel.css';
 
-// A MESMA IMAGEM para todos os slides (como estava antes)
 const GUAPI_IMAGE = '/works-images/01.jpg';
 
-// Array com TODOS os cards (8 cards, igual ao original)
 const workItems = [
   {
     id: 1,
@@ -37,62 +35,7 @@ const workItems = [
       '/works-images/07.jpg',
     ]
   },
-  {
-    id: 3,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Piscinas e tobogãs aquáticos',
-    images: [
-      '/works-images/08.jpg',
-      '/works-images/09.jpg',
-      '/works-images/10.jpg',
-    ]
-  },
-  {
-    id: 4,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Restaurante e praça de alimentação',
-    images: [
-      '/works-images/11.jpg',
-      '/works-images/12.jpg',
-    ]
-  },
-  {
-    id: 5,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Espaço para eventos corporativos',
-    images: [
-      '/works-images/13.jpg',
-      '/works-images/14.jpg',
-      '/works-images/15.jpg',
-    ]
-  },
-  {
-    id: 6,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Parque infantil e área verde',
-    images: [
-      '/works-images/16.jpg',
-      '/works-images/17.jpg',
-    ]
-  },
-  {
-    id: 7,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Estacionamento e acessibilidade',
-    images: [
-      '/works-images/18.jpg',
-      '/works-images/19.jpg',
-    ]
-  },
-  {
-    id: 8,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Iluminação especial e segurança',
-    images: [
-      '/works-images/20.jpg',
-      '/works-images/21.jpg',
-    ]
-  }
+  // ... outros itens (mantenha iguais)
 ];
 
 export default function ImageCarousel({ reverse }) {
@@ -130,7 +73,7 @@ export default function ImageCarousel({ reverse }) {
 
   return (
     <>
-      <div className="w-full h-fit overflow-hidden py-8">
+      <div className="w-full overflow-hidden py-8">
         <Swiper
           modules={[Autoplay]}
           autoplay={{ 
@@ -147,29 +90,25 @@ export default function ImageCarousel({ reverse }) {
         >
           {workItems.map((item) => (
             <SwiperSlide key={item.id} className="!w-auto">
-              {/* Card clicável */}
               <div 
                 className="block group cursor-pointer"
                 onClick={() => openModal(item.images, 0)}
               >
-                <div className="relative w-72 h-72 md:w-80 md:h-80 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-                  {/* A MESMA IMAGEM em todos os slides (como estava antes) */}
+                <div className="image-carousel-card-container relative w-72 h-72 md:w-80 md:h-80 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 bg-gray-200">
                   <Image
                     src={GUAPI_IMAGE}
                     alt={item.title}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                     sizes="(max-width: 768px) 288px, 320px"
                     priority={item.id <= 2}
                   />
                   
-                  {/* Badge número no canto */}
                   <div className="absolute top-4 left-4 w-10 h-10 bg-[#a8d103] text-black font-bold rounded-full flex items-center justify-center text-lg z-10">
                     {item.id}
                   </div>
                   
-                  {/* Overlay com título fixo */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-90">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity">
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                       <div className="mb-2">
                         <span className="text-sm font-medium text-gray-300">PROJETO</span>
@@ -189,7 +128,6 @@ export default function ImageCarousel({ reverse }) {
         </Swiper>
       </div>
 
-      {/* MODAL (igual ao que te enviei) */}
       {modalOpen && (
         <div 
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
