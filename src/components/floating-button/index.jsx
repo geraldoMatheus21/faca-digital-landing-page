@@ -1,4 +1,3 @@
-// src/components/FloatingButton/index.jsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -9,9 +8,18 @@ export default function FloatingButton() {
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setShowButton(window.scrollY > 0);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setShowButton(window.scrollY > 0);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
