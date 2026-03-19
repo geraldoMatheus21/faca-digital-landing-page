@@ -1,3 +1,5 @@
+/* containers/home/Home.module.css */
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -5,18 +7,20 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  margin: 0 auto;
   padding-top: 6rem; /* pt-24 */
+  width: 100%;
+  margin: 0 auto;
 }
 
 .content {
   width: 100%;
+  max-width: 1200px; /* largura máxima para centralizar */
   flex-grow: 1;
   display: flex;
-  flex-direction: column; /* Seções em coluna */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4rem; /* Espaço entre primeira e segunda seção */
+  gap: 4rem;
   margin: 0 auto;
 }
 
@@ -26,57 +30,35 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: justify;       
+  text-align: center;
   max-width: 42rem;
   width: 100%;
   margin-top: 75px;
 }
 
-/* Título normal (sem destaque) */
-.title {
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 1.875rem; 
-  line-height: 5rem !important;
-  width: 100%;                                
-  text-align: center; /* centraliza o título */
-  margin: 0 auto;        /* remove margem lateral */
-}
-
-/* Título com destaque verde */
-.titleAccent {
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 1.875rem; /* text-3xl */
-  line-height: 5em !important;
-  width: 100%;                /* ADICIONADO: ocupa toda largura */
-  margin: 0;                   /* ADICIONADO: remove margens padrão */
-  text-align: justify;         /* ADICIONADO: justifica o texto */
-  color: var(--that-green, #c7f327);
-}
-
+/* Título principal unificado */
 .unifiedTitle {
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 3rem; /* tamanho máximo para impacto */
-  line-height: 4.5rem; /* mais espaçamento entre linhas */
-  text-align: center; /* centraliza o título principal */
+  font-size: 3rem;
+  line-height: 1.2;
+  text-align: center;
   width: 100%;
-  margin: 2rem 0 0 0; /* desce o título para dar mais espaço em cima */
+  margin: 2rem 0 0 0;
 }
 
 .accent {
   color: var(--that-green, #c7f327);
 }
 
-/* Descrição abaixo do título */
+/* Descrição */
 .description {
-  text-align: center;          /* Mantém centralizado */
-  font-size: 2rem;         /* text-lg */
-  max-width: 36rerm;
-  margin-top: 2.5rem;  
-  margin-bottom: 1.5rem;       /* espaço extra antes do botão */  line-height: 1.2;
-  color: #ffffff;              /* Slate-700 */
+  text-align: center;
+  font-size: 1.25rem;
+  max-width: 36rem;
+  margin: 2.5rem 0 1.5rem;
+  line-height: 1.4;
+  color: #ffffff;
 }
 
 /* Botão de contato */
@@ -86,86 +68,67 @@
   font-weight: bold;
   text-transform: uppercase;
   padding: 0.75rem 2rem;
-  border-radius: 9999px;       /* rounded-full */
+  border-radius: 9999px;
   border: none;
   cursor: pointer;
   transition: all 0.2s;
-  margin-top: 2rem;
   font-size: 1rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .contactButton:hover {
-  background-color: #b3d92b;   /* tom mais escuro do verde */
+  background-color: #b3d92b;
   transform: scale(1.05);
 }
 
 /* SEGUNDA SEÇÃO: Logo + Flip Words */
 .imageContainer {
-  position: relative;            /* para o logoWrapper absoluto */
   display: flex;
-  flex-direction: row;            /* elementos lado a lado */
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 800px;              /* permitir mais largura agora */
+  max-width: 800px;
   margin-top: 10rem;
-  min-height: 150px;              /* distancia do botão acima */
+  gap: 2rem;
+  flex-wrap: wrap; /* permite quebra em telas pequenas */
 }
 
-.logoWrapper {          
-  position: absolute;
-  left: -100;                      /* Fixa na esquerda */
-  top: 50%;
-  transform: translateY(-50%);  /* Centraliza verticalmente */
-  width: 400px;                 /* Largura fixa para o logo */
-  z-index: 2;            
-}
-
-@media (max-width: 600px) {
-  .imageContainer {
-    flex-direction: column; /* volta a ser coluna em telas pequenas */
-    gap: 1rem;
-  }
-  .logoWrapper {
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
+.logoWrapper {
+  flex: 0 0 auto;
+  width: 300px; /* tamanho controlado, mas flexível */
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .logoImage {
   width: 100%;
   height: auto;
-  max-width: 400px;
-  margin-bottom: 1rem;
+  max-width: 300px;
 }
 
 .textWithFlip {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-  /* move um pouco para a direita */
-  padding-left: 2rem;
 }
 
 .flipWrapper {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .staticWord {
-  position: absolute;
-  top: -3.8rem; /* acima das palavras animadas */
   font-size: 2.5rem;
   font-weight: bold;
   text-transform: uppercase;
   color: #ffffff;
-  right: -190;
+  margin-bottom: 0.5rem;
 }
 
 .mainTitle {
@@ -173,21 +136,15 @@
   font-weight: bold;
   text-transform: uppercase;
   color: #ffffff;
-  margin: 0;
 }
 
 .flipWords {
   font-size: 3rem;
   font-weight: bold;
-  color: var(--that-green, #ffffff);
-  display: inline-block;
-  text-align: center;          
-  width: 14rem;               
+  color: var(--that-green, #c7f327);
+  text-align: center;
   min-width: 14rem;
-  margin: 0;                   
-  position: relative; 
-  line-height: 1;
-  left: 250;         
+  line-height: 1.2;
 }
 
 /* TERCEIRA SEÇÃO: Redes Sociais */
@@ -199,7 +156,7 @@
 }
 
 .socialLink {
-  color: #4a5568;              /* Slate-700 */
+  color: #4a5568;
   transition: color 0.2s;
 }
 
@@ -211,7 +168,8 @@
   font-size: 2.5rem;
 }
 
-/* Media Queries para responsividade */
+/* ========== RESPONSIVIDADE ========== */
+
 @media (max-width: 768px) {
   .container {
     padding-top: 4rem;
@@ -221,25 +179,33 @@
     margin-top: 40px;
   }
   
-  .title, .titleAccent {
-    font-size: 1.5rem;         /* text-2xl */
-    line-height: 2rem;
-  }
   .unifiedTitle {
-    font-size: 2.75rem; /* mantém hierarquia em telas médias */
-    line-height: 3rem;
+    font-size: 2.5rem;
+    line-height: 1.2;
   }
   
   .description {
-    font-size: 1rem;
+    font-size: 1.1rem;
     padding: 0 1rem;
   }
   
-  .mainTitle, .flipWords {
-    font-size: 1.5rem;
+  .imageContainer {
+    flex-direction: column;
+    margin-top: 5rem;
+    gap: 1.5rem;
+  }
+  
+  .logoWrapper {
+    width: 250px;
+  }
+  
+  .flipWords {
+    font-size: 2.5rem;
+    min-width: 12rem;
   }
   
   .socialContainer {
+    margin-top: 5rem;
     gap: 1.5rem;
   }
   
@@ -249,13 +215,12 @@
 }
 
 @media (max-width: 480px) {
-  .title, .titleAccent {
-    font-size: 1.25rem;        /* text-xl */
-    line-height: 1.75rem;
-  }
   .unifiedTitle {
-    font-size: 2rem; /* tamanho confortável em celulares */
-    line-height: 2.5rem;
+    font-size: 2rem;
+  }
+  
+  .description {
+    font-size: 1rem;
   }
   
   .contactButton {
@@ -263,8 +228,20 @@
     font-size: 0.875rem;
   }
   
-  .textWithFlip {
-    flex-direction: column;
-    gap: 0.25rem;
+  .logoWrapper {
+    width: 200px;
+  }
+  
+  .flipWords {
+    font-size: 2rem;
+    min-width: 10rem;
+  }
+  
+  .staticWord {
+    font-size: 1.8rem;
+  }
+  
+  .mainTitle {
+    font-size: 1.5rem;
   }
 }

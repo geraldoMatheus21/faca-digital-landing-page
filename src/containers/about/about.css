@@ -1,14 +1,32 @@
 /* containers/about/about.css */
+
 .about-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1rem;
+  box-sizing: border-box; /* Garante que o padding não aumente a largura total */
 }
 
+/* Tablet */
 @media (min-width: 768px) {
   .about-container {
     padding: 3rem 2rem;
+  }
+}
+
+/* Desktop pequeno */
+@media (min-width: 1024px) {
+  .about-container {
+    padding: 4rem 2rem;
+  }
+}
+
+/* Telas muito grandes */
+@media (min-width: 1400px) {
+  .about-container {
+    max-width: 1400px;
+    padding: 5rem 2rem;
   }
 }
 
@@ -24,11 +42,25 @@
   color: #ffffff;
   margin-bottom: 1rem;
   letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+/* Ajustes responsivos para o título */
+@media (max-width: 640px) {
+  .about-title {
+    font-size: 2rem !important;
+  }
 }
 
 @media (min-width: 768px) {
   .about-title {
-    font-size: 3.5rem;
+    font-size: 3.5rem !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .about-title {
+    font-size: 4rem !important;
   }
 }
 
@@ -39,6 +71,15 @@
   margin: 0 auto;
   line-height: 1.6;
   font-weight: 400;
+  padding: 0 1rem; /* Garante espaçamento lateral em telas pequenas */
+}
+
+/* Ajuste para mobile */
+@media (max-width: 640px) {
+  .about-description {
+    font-size: 1.125rem;
+    padding: 0 0.5rem;
+  }
 }
 
 .about-team-title {
@@ -48,11 +89,33 @@
   text-align: center;
   margin-top: 6rem !important;
   margin-bottom: 2rem;
+  line-height: 1.2;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 640px) {
   .about-team-title {
-    font-size: 2.5rem;
+    font-size: 1.75rem !important;
+    margin-top: 3rem !important;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .about-team-title {
+    font-size: 2.5rem !important;
+    margin-top: 4rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-team-title {
+    font-size: 3rem !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .about-team-title {
+    font-size: 3.5rem !important;
   }
 }
 
@@ -62,38 +125,11 @@
   margin-top: 2rem;
 }
 
-/* Responsividade */
-@media (max-width: 640px) {
-  .about-container {
-    padding: 1.5rem 1rem;
-  }
-  
-  .about-title {
-    font-size: 2rem;
-  }
-  
-  .about-description {
-    font-size: 1.125rem;
-  }
-  
-  .about-team-title {
-    font-size: 1.75rem;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
-  }
-}
-
-/* Ajustes para telas muito grandes */
-@media (min-width: 1400px) {
-  .about-container {
-    max-width: 1400px;
-  }
-  
-  .about-title {
-    font-size: 4rem;
-  }
-  
-  .about-team-title {
-    font-size: 3rem;
-  }
+/* Para elementos que precisam de centralização com flex/grid */
+.about-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }

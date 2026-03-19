@@ -1,23 +1,27 @@
 /* containers/works/works-carousel.css */
+
 .works-carousel-container {
   position: relative;
   padding: 2rem 1rem;
-  margin: 2rem 0;
+  margin: 2rem auto; /* centraliza horizontalmente */
+  max-width: 1280px; /* largura máxima alinhada com outros containers */
+  width: 100%;
 }
 
 .works-carousel-track {
   display: flex;
   gap: 1.5rem;
-  justify-content: center;
+  justify-content: center; /* centraliza os cards visíveis */
   align-items: stretch;
   transition: transform 500ms ease-in-out;
+  flex-wrap: nowrap; /* impede quebra de linha */
 }
 
 .works-carousel-card-wrapper {
   flex-shrink: 0;
   width: 100%;
   padding: 0 0.5rem;
-  height: 500px;
+  height: 500px; /* altura fixa, ajustada no mobile */
 }
 
 @media (min-width: 640px) {
@@ -29,6 +33,14 @@
 @media (min-width: 1024px) {
   .works-carousel-card-wrapper {
     width: 33.333%;
+  }
+}
+
+/* Ajuste de altura para mobile */
+@media (max-width: 640px) {
+  .works-carousel-card-wrapper {
+    height: auto; /* altura automática para conteúdo */
+    min-height: 450px; /* altura mínima para não ficar muito pequeno */
   }
 }
 

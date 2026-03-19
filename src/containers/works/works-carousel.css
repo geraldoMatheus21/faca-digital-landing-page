@@ -1,24 +1,32 @@
 /* containers/works/works-carousel.css */
+
+/* ===== CONTAINER PRINCIPAL ===== */
 .works-carousel-container {
   position: relative;
   padding: 2rem 1rem;
-  margin: 2rem 0;
+  margin: 2rem auto; /* centraliza horizontalmente */
+  max-width: 1280px; /* largura máxima para alinhar com outros containers */
+  width: 100%;
 }
 
+/* ===== TRACK DOS CARDS ===== */
 .works-carousel-track {
   display: flex;
   gap: 1.5rem;
-  justify-content: center;
+  justify-content: center; /* centraliza os cards visíveis */
   align-items: stretch;
   transition: transform 500ms ease-in-out;
+  flex-wrap: nowrap; /* impede quebra de linha */
 }
 
+/* ===== WRAPER DE CADA CARD ===== */
 .works-carousel-card-wrapper {
   flex-shrink: 0;
   width: 100%;
   padding: 0 0.5rem;
   transition: transform 300ms ease;
   height: 500px; /* ALTURA FIXA PARA TODOS OS CARDS */
+  animation: fadeIn 600ms ease-out;
 }
 
 @media (min-width: 640px) {
@@ -33,7 +41,7 @@
   }
 }
 
-/* ESTILO DO CARD COM TAMANHO FIXO */
+/* ===== CARD ===== */
 .works-carousel-card {
   height: 100%; /* Ocupa 100% da altura do wrapper (500px) */
   border-radius: 0.5rem;
@@ -51,7 +59,7 @@
   transform: translateY(-4px);
 }
 
-/* HEADER DO CARD - TAMANHO FIXO */
+/* ===== HEADER DO CARD ===== */
 .works-carousel-card-header {
   padding: 1.5rem;
   flex-shrink: 0; /* Não encolhe */
@@ -100,7 +108,7 @@
   overflow: hidden;
 }
 
-/* CONTENT DO CARD - CRESCERÁ SE PRECISAR */
+/* ===== CORPO DO CARD ===== */
 .works-carousel-card-content {
   padding: 0 1.5rem;
   flex-grow: 1; /* Cresce para ocupar espaço disponível */
@@ -164,7 +172,7 @@
   height: 100%;
 }
 
-/* FOOTER DO CARD - TAMANHO FIXO */
+/* ===== FOOTER DO CARD ===== */
 .works-carousel-card-footer {
   padding: 1.5rem;
   border-top: 1px solid #f3f4f6;
@@ -191,7 +199,7 @@
   background-color: #97c000;
 }
 
-/* CONTROLES DO CARROSSEL */
+/* ===== CONTROLES DO CARROSSEL ===== */
 .works-carousel-controls {
   display: flex;
   justify-content: center;
@@ -274,7 +282,7 @@
   text-align: center;
 }
 
-/* Animações */
+/* ===== ANIMAÇÕES ===== */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -286,11 +294,7 @@
   }
 }
 
-.works-carousel-card-wrapper {
-  animation: fadeIn 600ms ease-out;
-}
-
-/* Classes utilitárias */
+/* ===== UTILITÁRIOS ===== */
 .flex-row {
   flex-direction: row;
 }
@@ -299,21 +303,21 @@
   flex-direction: row-reverse;
 }
 
-/* Responsividade extra */
-@media (max-width: 480px) {
+/* ===== RESPONSIVIDADE EXTRA ===== */
+@media (max-width: 640px) {
   .works-carousel-container {
-    padding: 1rem 0.5rem;
+    padding: 1.5rem 0.75rem;
   }
-  
+
   .works-carousel-card-wrapper {
-    height: 450px; /* Altura menor em mobile */
+    height: 480px; /* Altura ligeiramente menor */
   }
-  
+
   .works-carousel-card-header {
-    padding: 1rem;
-    min-height: 160px;
+    padding: 1.25rem;
+    min-height: 170px;
   }
-  
+
   .works-carousel-card-icon-container {
     width: 2.25rem;
     height: 2.25rem;
@@ -323,33 +327,28 @@
     width: 1.125rem;
     height: 1.125rem;
   }
-  
+
   .works-carousel-card-content {
-    padding: 0 1rem;
+    padding: 0 1.25rem;
     min-height: 140px;
   }
-  
+
   .works-carousel-card-footer {
-    padding: 1rem;
-    min-height: 70px;
+    padding: 1.25rem;
+    min-height: 75px;
   }
-  
+
   .works-carousel-card-title {
     font-size: 1.1rem;
   }
-  
+
   .works-carousel-services-list {
-    max-height: 100px;
+    max-height: 110px;
   }
 
   .works-carousel-service-icon {
-    height: 0.875rem;
-    width: 0.875rem;
-  }
-
-  .works-carousel-service-icon svg {
-    width: 100%;
-    height: 100%;
+    height: 0.9rem;
+    width: 0.9rem;
   }
 
   .works-carousel-controls {
@@ -357,7 +356,7 @@
   }
 
   .works-carousel-nav-button {
-    padding: 0.5rem;
+    padding: 0.6rem;
   }
 
   .works-carousel-nav-button svg {
@@ -366,20 +365,101 @@
   }
 }
 
-@media (max-width: 1024px) and (min-width: 641px) {
-  .works-carousel-card-wrapper {
-    height: 480px; /* Altura intermediária para tablet */
+@media (max-width: 480px) {
+  .works-carousel-container {
+    padding: 1rem 0.5rem;
   }
-  
+
+  .works-carousel-card-wrapper {
+    height: 450px; /* Altura menor em mobile */
+  }
+
+  .works-carousel-card-header {
+    padding: 1rem;
+    min-height: 160px;
+  }
+
+  .works-carousel-card-icon-container {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .works-carousel-card-icon svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .works-carousel-card-content {
+    padding: 0 1rem;
+    min-height: 130px;
+  }
+
+  .works-carousel-card-footer {
+    padding: 1rem;
+    min-height: 70px;
+  }
+
+  .works-carousel-card-title {
+    font-size: 1rem;
+  }
+
+  .works-carousel-card-description {
+    font-size: 0.8rem;
+  }
+
+  .works-carousel-services-title {
+    font-size: 0.85rem;
+  }
+
+  .works-carousel-service-item {
+    font-size: 0.8rem;
+  }
+
   .works-carousel-services-list {
-    max-height: 110px;
+    max-height: 100px;
+    gap: 0.3rem;
+  }
+
+  .works-carousel-service-icon {
+    height: 0.875rem;
+    width: 0.875rem;
+  }
+
+  .works-carousel-controls {
+    gap: 0.75rem;
+  }
+
+  .works-carousel-nav-button {
+    padding: 0.5rem;
+  }
+
+  .works-carousel-nav-button svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  .works-carousel-dot-active {
+    width: 1.5rem;
+  }
+
+  .works-carousel-indicator {
+    font-size: 0.8rem;
   }
 }
 
-/* Estilos para o ImageCarousel (adicionado) */
+@media (max-width: 360px) {
+  .works-carousel-card-wrapper {
+    height: 420px;
+  }
+}
+
+/* ===== ESTILOS PARA IMAGECAROUSEL (caso exista) ===== */
 .image-carousel-container {
   position: relative;
   padding: 1rem 0;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .image-carousel-track {
@@ -418,58 +498,4 @@
   .image-carousel-slide {
     width: calc(33.333% - 0.666rem);
   }
-}
-
-/* Estilos comuns para ambos os carrosséis */
-.carousel-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1.5rem;
-  gap: 1rem;
-}
-
-.carousel-nav-button {
-  padding: 0.5rem;
-  border-radius: 9999px;
-  background-color: #a8d103;
-  color: #1a1a1a;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: all 200ms ease;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.carousel-nav-button:hover {
-  background-color: #97c000;
-  transform: scale(1.05);
-}
-
-.carousel-dots {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-}
-
-.carousel-dot {
-  height: 0.5rem;
-  border-radius: 9999px;
-  transition: all 300ms ease;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.carousel-dot-active {
-  width: 1.5rem;
-  background-color: #a8d103;
-}
-
-.carousel-dot-inactive {
-  width: 0.5rem;
-  background-color: #d1d5db;
 }
