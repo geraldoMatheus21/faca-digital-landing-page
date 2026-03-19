@@ -35,7 +35,62 @@ const workItems = [
       '/works-images/07.jpg',
     ]
   },
-  // ... outros itens (mantenha iguais)
+  {
+    id: 3,
+    title: 'GUAPI PARQUE DAS ÁGUAS',
+    subtitle: 'Piscinas e tobogãs aquáticos',
+    images: [
+      '/works-images/08.jpg',
+      '/works-images/09.jpg',
+      '/works-images/10.jpg',
+    ]
+  },
+  {
+    id: 4,
+    title: 'GUAPI PARQUE DAS ÁGUAS',
+    subtitle: 'Restaurante e praça de alimentação',
+    images: [
+      '/works-images/11.jpg',
+      '/works-images/12.jpg',
+    ]
+  },
+  {
+    id: 5,
+    title: 'GUAPI PARQUE DAS ÁGUAS',
+    subtitle: 'Espaço para eventos corporativos',
+    images: [
+      '/works-images/13.jpg',
+      '/works-images/14.jpg',
+      '/works-images/15.jpg',
+    ]
+  },
+  {
+    id: 6,
+    title: 'GUAPI PARQUE DAS ÁGUAS',
+    subtitle: 'Parque infantil e área verde',
+    images: [
+      '/works-images/16.jpg',
+      '/works-images/17.jpg',
+    ]
+  },
+  {
+    id: 7,
+    title: 'GUAPI PARQUE DAS ÁGUAS',
+    subtitle: 'Estacionamento e acessibilidade',
+    images: [
+      '/works-images/18.jpg',
+      '/works-images/19.jpg',
+    ]
+  },
+  {
+    id: 8,
+    title: 'GUAPI PARQUE DAS ÁGUAS',
+    subtitle: 'Iluminação especial e segurança',
+    images: [
+      '/works-images/20.jpg',
+      '/works-images/21.jpg',
+    ]
+  }
 ];
 
 export default function ImageCarousel({ reverse }) {
@@ -94,7 +149,7 @@ export default function ImageCarousel({ reverse }) {
                 className="block group cursor-pointer"
                 onClick={() => openModal(item.images, 0)}
               >
-                <div className="image-carousel-card-container relative w-72 h-72 md:w-80 md:h-80 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 bg-gray-200">
+                <div className="image-carousel-card-container relative w-72 h-72 md:w-80 md:h-80 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
                   <Image
                     src={GUAPI_IMAGE}
                     alt={item.title}
