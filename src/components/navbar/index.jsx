@@ -10,6 +10,7 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const navbarRef = useRef(null);
+  const ticking = useRef(false); // para throttle
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -26,19 +27,27 @@ export default function Navbar() {
 
   useEffect(() => {
     const controlNavbar = () => {
-      if (window.scrollY > lastScrollY) {
-        setShow(false);
-      } else {
-        setShow(true);
+      // throttle com requestAnimationFrame
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          if (currentScrollY > lastScrollY) {
+            setShow(false);
+          } else {
+            setShow(true);
+          }
+          setLastScrollY(currentScrollY);
+          ticking.current = false;
+        });
+        ticking.current = true;
       }
-      setLastScrollY(window.scrollY);
     };
 
     window.addEventListener("scroll", controlNavbar);
     return () => {
       window.removeEventListener("scroll", controlNavbar);
     };
-  }, [lastScrollY]);
+  }, [lastScrollY]); // dependência continua sendo lastScrollY, mas agora com throttle
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
