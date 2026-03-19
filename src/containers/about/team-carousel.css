@@ -1,109 +1,290 @@
-/* containers/about/about.css */
-.about-container {
+/* containers/about/team-carousel.css */
+
+/* CONTAINER PRINCIPAL DO CARROSSEL ESTILO BARALHO */
+.team-carousel-container-single {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* centraliza todos os filhos */
+  padding: 60px 20px;
+  position: relative;
 }
 
-@media (min-width: 768px) {
-  .about-container {
-    padding: 3rem 2rem;
-  }
-}
-
-.about-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  width: 100%; /* garante que ocupe toda a largura */
-}
-
-.about-title {
-  text-transform: uppercase;
-  font-size: 3rem !important;
-  font-weight: 800;
-  color: #ffffff;
-  margin-bottom: 1rem;
-  letter-spacing: -0.025em;
-  text-align: center; /* força centralização */
-}
-
-@media (min-width: 768px) {
-  .about-title {
-    font-size: 3.5rem;
-  }
-}
-
-.about-description {
-  font-size: 1.25rem;
-  color: #6b7280;
-  max-width: 48rem;
-  margin: 0 auto;
-  line-height: 1.6;
-  font-weight: 400;
-  text-align: center; /* força centralização */
+/* PALCO DO CARROSSEL 3D */
+.team-carousel-stage {
+  position: relative;
   width: 100%;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1500px;
+  overflow: visible;
 }
 
-.about-team-title {
-  font-size: 3rem !important;
+/* CARD INDIVIDUAL COM ANIMAÇÃO 3D */
+.team-carousel-card-single {
+  position: absolute;
+  width: 100%;
+  max-width: 400px;
+  transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* CARD DA EQUIPE */
+.team-carousel-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  border: 1px solid #e5e7eb;
+}
+
+.team-carousel-card:hover {
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+}
+
+/* IMAGEM DO CARD */
+.team-carousel-image-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #a8d103 0%, #7a9900 100%);
+}
+
+.team-carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  transition: transform 0.5s ease;
+}
+
+.team-carousel-card:hover .team-carousel-image {
+  transform: scale(1.1);
+}
+
+/* CONTEÚDO DO CARD */
+.team-carousel-content {
+  padding: 30px;
+  background: white;
+}
+
+.team-carousel-name {
+  font-size: 24px;
   font-weight: 700;
-  color: #ffffff;
-  text-align: center;
-  margin-top: 6rem !important;
-  margin-bottom: 2rem;
-  width: 100%;
+  color: #1a202c;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-@media (min-width: 768px) {
-  .about-team-title {
-    font-size: 2.5rem;
-  }
+.team-carousel-designation {
+  font-size: 16px;
+  color: #a8d103;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-/* Carrossel - se houver */
-.about-carousel {
-  width: 100%;
-  margin-top: 2rem;
+.team-carousel-quote {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #4a5568;
+  font-style: italic;
+  border-left: 3px solid #a8d103;
+  padding-left: 16px;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* CONTROLES DE NAVEGAÇÃO */
+.team-carousel-controls {
   display: flex;
-  justify-content: center; /* centraliza o carrossel */
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 40px;
 }
 
-/* Responsividade */
-@media (max-width: 640px) {
-  .about-container {
-    padding: 1.5rem 1rem;
+.team-carousel-nav-button {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #4a5568;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.team-carousel-nav-button:hover {
+  background: #a8d103;
+  border-color: #a8d103;
+  color: #1a1a1a;
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(168, 209, 3, 0.4);
+}
+
+.team-carousel-nav-button:active {
+  transform: scale(0.95);
+}
+
+/* INDICADOR DE PÁGINA */
+.team-carousel-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #4a5568;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.team-carousel-page-current {
+  color: #a8d103;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.team-carousel-page-separator {
+  color: #cbd5e0;
+}
+
+.team-carousel-page-total {
+  color: #6b7280;
+}
+
+/* DOTS DE NAVEGAÇÃO */
+.team-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.team-carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0;
+}
+
+.team-carousel-dot-inactive {
+  background: #cbd5e0;
+  transform: scale(1);
+}
+
+.team-carousel-dot-active {
+  background: #a8d103;
+  transform: scale(1.3);
+  box-shadow: 0 0 0 4px rgba(168, 209, 3, 0.2);
+}
+
+.team-carousel-dot:hover {
+  transform: scale(1.4);
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .team-carousel-stage {
+    height: 500px;
   }
-  
-  .about-title {
-    font-size: 2rem;
+
+  .team-carousel-card-single {
+    max-width: 90%;
   }
-  
-  .about-description {
-    font-size: 1.125rem;
+
+  .team-carousel-image-container {
+    height: 200px;
   }
-  
-  .about-team-title {
-    font-size: 1.75rem;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
+
+  .team-carousel-content {
+    padding: 20px;
+  }
+
+  .team-carousel-name {
+    font-size: 20px;
+  }
+
+  .team-carousel-designation {
+    font-size: 14px;
+  }
+
+  .team-carousel-quote {
+    font-size: 13px;
+  }
+
+  .team-carousel-nav-button {
+    width: 44px;
+    height: 44px;
   }
 }
 
-/* Ajustes para telas muito grandes */
-@media (min-width: 1400px) {
-  .about-container {
-    max-width: 1400px;
+@media (max-width: 480px) {
+  .team-carousel-container-single {
+    padding: 40px 15px;
   }
-  
-  .about-title {
-    font-size: 4rem;
+
+  .team-carousel-stage {
+    height: 450px;
   }
-  
-  .about-team-title {
-    font-size: 3rem;
+
+  .team-carousel-image-container {
+    height: 180px;
+  }
+
+  .team-carousel-content {
+    padding: 15px;
+  }
+
+  .team-carousel-name {
+    font-size: 18px;
+  }
+
+  .team-carousel-designation {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .team-carousel-quote {
+    font-size: 12px;
+    -webkit-line-clamp: 2;
+  }
+
+  .team-carousel-controls {
+    gap: 16px;
+    margin-top: 30px;
+  }
+
+  .team-carousel-nav-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .team-carousel-indicator {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+
+  .team-carousel-page-current {
+    font-size: 18px;
   }
 }
