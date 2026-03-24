@@ -4,15 +4,41 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: var(--font-orbitron), sans-serif;
-  overflow-x: hidden;
+/* ============================================
+   FONTES LOCAIS OTIMIZADAS
+   ============================================ */
+
+/* Helvetica Neue Roman (sua fonte principal) */
+@font-face {
+  font-family: 'Helvetica Neue Roman';
+  src: url('/fontes/HelveticaNeueRoman.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* essencial para evitar layout shift */
 }
 
-/* apply Boldonse to all titles */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Boldonse', sans-serif;
+/* Fallback Boldonse (já carregada do Google, mas adicionamos display swap) */
+@font-face {
+  font-family: 'Boldonse';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/boldonse/v1/ZgNQjPxGPbbJUZemjB31jGDWNg.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
+
+@font-face {
+  font-family: 'Boldonse';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/boldonse/v1/ZgNQjPxGPbbJUZemjB37jGA.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ============================================
+   ESTILOS GLOBAIS (AGORA DENTRO DO @layer base)
+   ============================================ */
 
 @layer base {
   :root {
@@ -68,17 +94,32 @@ h1, h2, h3, h4, h5, h6 {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+    /* Fonte principal com fallback robusto */
+    font-family: 'Helvetica Neue Roman', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
+/* ============================================
+   TÍTULOS (Boldonse)
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Boldonse', sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================
+   CARROSSÉIS E SLICK
+   ============================================ */
 .slick-slider {
   margin-left: -8px;
   margin-right: -8px;
@@ -92,7 +133,37 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 -8px;
 }
 
-/* Estilos específicos para o modal - sem afetar o .fixed do Tailwind */
+/* ============================================
+   GARANTIAS DE LAYOUT SHIFT (IMAGENS)
+   ============================================ */
+.image-carousel-card-container {
+  aspect-ratio: 1 / 1;
+  background-color: #f3f4f6;
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.team-carousel-image-container {
+  aspect-ratio: 4 / 3;
+  background-color: #f3f4f6;
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+/* Fallback genérico para qualquer imagem sem container */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================
+   MODAL E UTILITÁRIOS
+   ============================================ */
 .modal-open {
   overflow: hidden;
 }

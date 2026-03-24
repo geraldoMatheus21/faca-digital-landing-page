@@ -34,6 +34,7 @@
   max-width: 42rem;
   width: 100%;
   margin-top: 75px;
+  min-height: 280px; /* reserva espaço para o texto */
 }
 
 .unifiedTitle {
@@ -87,8 +88,9 @@
   width: 100%;
   max-width: 800px;
   margin-top: 10rem;
-  gap: 4rem; /* Aumentado para dar respiro */
-  flex-wrap: nowrap; /* Impede quebra em telas grandes */
+  gap: 4rem;
+  flex-wrap: nowrap;
+  min-height: 220px; /* reserva espaço para logo + flip words */
 }
 
 .logoWrapper {
@@ -118,6 +120,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  min-height: 100px; /* reserva espaço para as palavras animadas */
 }
 
 .staticWord {
@@ -142,7 +145,7 @@
   text-align: center;
   min-width: 14rem;
   line-height: 1.2;
-  white-space: nowrap; /* Impede quebra de linha no texto animado */
+  white-space: nowrap;
 }
 
 /* TERCEIRA SEÇÃO: Redes Sociais */
@@ -151,6 +154,7 @@
   gap: 2rem;
   margin-top: 11rem;
   margin-bottom: 2rem;
+  min-height: 60px; /* reserva espaço para os ícones */
 }
 
 .socialLink {
@@ -181,6 +185,7 @@
   
   .textContainer {
     margin-top: 40px;
+    min-height: 240px;
   }
   
   .unifiedTitle {
@@ -194,10 +199,15 @@
   }
   
   .imageContainer {
-    flex-direction: column; /* Empilha em tablets */
+    flex-direction: column;
     margin-top: 5rem;
     gap: 2rem;
-    flex-wrap: wrap; /* Permite quebra quando necessário */
+    flex-wrap: wrap;
+    min-height: auto;
+  }
+  
+  .flipWrapper {
+    min-height: 80px;
   }
   
   .logoWrapper {
@@ -207,12 +217,13 @@
   .flipWords {
     font-size: 2.5rem;
     min-width: 12rem;
-    white-space: normal; /* Permite quebra natural em telas pequenas */
+    white-space: normal;
   }
   
   .socialContainer {
     margin-top: 5rem;
     gap: 1.5rem;
+    min-height: 50px;
   }
   
   .socialIcon {
@@ -228,6 +239,10 @@
 }
 
 @media (max-width: 480px) {
+  .textContainer {
+    min-height: 220px;
+  }
+  
   .unifiedTitle {
     font-size: 2rem;
     line-height: 1.8;
@@ -249,6 +264,10 @@
   .flipWords {
     font-size: 2rem;
     min-width: 10rem;
+  }
+  
+  .flipWrapper {
+    min-height: 70px;
   }
   
   .staticWord {

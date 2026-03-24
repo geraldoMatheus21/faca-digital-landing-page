@@ -7,6 +7,7 @@
   margin: 0 auto;
   padding: 60px 20px;
   position: relative;
+  min-height: 700px; /* reserva espaço para todo o carrossel */
 }
 
 /* PALCO DO CARROSSEL 3D */
@@ -19,6 +20,7 @@
   justify-content: center;
   perspective: 1500px;
   overflow: visible;
+  min-height: 600px; /* garante altura mínima */
 }
 
 /* CARD INDIVIDUAL COM ANIMAÇÃO 3D */
@@ -29,6 +31,7 @@
   transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-style: preserve-3d;
   will-change: transform, opacity;
+  min-height: 500px; /* espaço reservado para o card */
 }
 
 /* CARD DA EQUIPE */
@@ -40,6 +43,9 @@
   transition: all 0.3s ease;
   transform-style: preserve-3d;
   border: 1px solid #e5e7eb;
+  min-height: 500px; /* altura mínima consistente */
+  display: flex;
+  flex-direction: column;
 }
 
 .team-carousel-card:hover {
@@ -53,6 +59,7 @@
   height: 300px;
   overflow: hidden;
   background: linear-gradient(135deg, #a8d103 0%, #7a9900 100%);
+  flex-shrink: 0;
 }
 
 .team-carousel-image {
@@ -70,6 +77,9 @@
 .team-carousel-content {
   padding: 30px;
   background: white;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .team-carousel-name {
@@ -204,12 +214,21 @@
 
 /* RESPONSIVO */
 @media (max-width: 768px) {
+  .team-carousel-container-single {
+    min-height: 600px;
+  }
+
   .team-carousel-stage {
     height: 500px;
+    min-height: 500px;
   }
 
   .team-carousel-card-single {
-    max-width: 90%;
+    min-height: 450px;
+  }
+
+  .team-carousel-card {
+    min-height: 450px;
   }
 
   .team-carousel-image-container {
@@ -241,10 +260,20 @@
 @media (max-width: 480px) {
   .team-carousel-container-single {
     padding: 40px 15px;
+    min-height: 550px;
   }
 
   .team-carousel-stage {
     height: 450px;
+    min-height: 450px;
+  }
+
+  .team-carousel-card-single {
+    min-height: 400px;
+  }
+
+  .team-carousel-card {
+    min-height: 400px;
   }
 
   .team-carousel-image-container {
