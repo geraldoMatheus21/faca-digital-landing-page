@@ -8,7 +8,10 @@ export default function AboutUs() {
       <div className="about-header">
         <h1 className="about-title">Sobre Nós</h1>
         <p className="about-description">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat voluptatem consequuntur est eveniet ducimus repellat alias cumque optio consequatur animi voluptatibus, minus beatae quam quae temporibus blanditiis officia necessitatibus a?
+          Desde 2015, atuamos criando conteúdos que vão além da estética,  unimos estratégia, direção criativa e posicionamento para ajudar marcas a se destacarem e venderem de forma consistente.
+          Com base sólida em design e publicidade, nosso trabalho conecta imagem, mensagem e performance em cada projeto.
+          Aqui, nada é feito no achismo. Cada vídeo, foto e planejamento tem um propósito: atrair, conectar e gerar resultado.
+          Se é pra comunicar, que seja do jeito certo. Faça.
         </p>
       </div>
 
