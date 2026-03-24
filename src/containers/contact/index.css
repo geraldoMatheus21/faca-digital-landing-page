@@ -9,7 +9,8 @@
   background: #000000;
   display: flex;
   flex-direction: column;
-  align-items: center; /* centraliza todos os filhos diretos */
+  align-items: center;
+  min-height: 80vh; /* reserva espaço em telas pequenas */
 }
 
 @media (min-width: 768px) {
@@ -63,6 +64,7 @@
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
+  min-height: 400px; /* reserva espaço para o formulário */
 }
 
 /* CONTATOS - ABAIXO DO FORMULÁRIO, CENTRALIZADO */
@@ -71,6 +73,7 @@
   max-width: 500px;
   margin: 0 auto;
   text-align: center;
+  min-height: 150px; /* reserva espaço para os links de contato */
 }
 
 /* TÍTULO DOS CONTATOS */
@@ -136,6 +139,7 @@
   margin: 0 auto;
   text-align: center;
   margin-top: 2rem;
+  min-height: 400px; /* reserva espaço para o endereço e mapa */
 }
 
 .contact-address-title {
@@ -193,12 +197,15 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  /* reserva espaço com min-height */
+  min-height: 250px;
 }
 
 /* DESKTOP */
 @media (min-width: 768px) {
   .contact-address-section {
     max-width: 700px;
+    min-height: 450px;
   }
   
   .contact-address-info {
@@ -209,6 +216,7 @@
   .contact-map {
     max-width: 700px;
     height: 350px;
+    min-height: 300px;
   }
 }
 
@@ -258,5 +266,18 @@
   .contact-map {
     height: 250px;
     max-width: 100%;
+    min-height: 200px;
+  }
+
+  .contact-form-section {
+    min-height: 380px;
+  }
+
+  .contact-channels-section {
+    min-height: 140px;
+  }
+
+  .contact-address-section {
+    min-height: 380px;
   }
 }
