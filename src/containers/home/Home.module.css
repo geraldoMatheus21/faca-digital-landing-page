@@ -7,9 +7,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  padding-top: 6rem; /* pt-24 */
+  padding-top: 6rem;
   width: 100%;
   margin: 0 auto;
+  margin-top: 2rem;
 }
 
 .content {
@@ -34,7 +35,7 @@
   max-width: 42rem;
   width: 100%;
   margin-top: 75px;
-  min-height: 280px; /* reserva espaço para o texto */
+  min-height: 280px;
 }
 
 .unifiedTitle {
@@ -52,12 +53,15 @@
 }
 
 .description {
+  font-family: 'Helvetica Neue Medium', system-ui, sans-serif;
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 2rem;
   max-width: 36rem;
   margin: 2.5rem 0 1.5rem;
+  margin-top: 4rem;
   line-height: 1.4;
   color: #ffffff;
+  /* sem white-space: nowrap */
 }
 
 .contactButton {
@@ -72,6 +76,7 @@
   transition: all 0.2s;
   font-size: 1rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-top: 4rem;
 }
 
 .contactButton:hover {
@@ -87,10 +92,10 @@
   justify-content: center;
   width: 100%;
   max-width: 800px;
-  margin-top: 10rem;
+  margin-top: 1rem;
   gap: 4rem;
   flex-wrap: nowrap;
-  min-height: 220px; /* reserva espaço para logo + flip words */
+  min-height: 220px;
 }
 
 .logoWrapper {
@@ -120,7 +125,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  min-height: 100px; /* reserva espaço para as palavras animadas */
+  min-height: 100px;
 }
 
 .staticWord {
@@ -152,9 +157,9 @@
 .socialContainer {
   display: flex;
   gap: 2rem;
-  margin-top: 11rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
-  min-height: 60px; /* reserva espaço para os ícones */
+  min-height: 60px;
 }
 
 .socialLink {
@@ -170,7 +175,7 @@
   font-size: 2.5rem;
 }
 
-/* ========== RESPONSIVIDADE ========== */
+/* ========== RESPONSIVIDADE ATUALIZADA ========== */
 
 @media (max-width: 1024px) {
   .imageContainer {
@@ -181,6 +186,7 @@
 @media (max-width: 768px) {
   .container {
     padding-top: 4rem;
+    margin-top: 1rem;
   }
   
   .textContainer {
@@ -194,13 +200,20 @@
   }
   
   .description {
-    font-size: 1.1rem;
+    font-size: 1.5rem;      /* reduzido proporcionalmente */
+    margin-top: 2rem;       /* menor que os 4rem do desktop */
+    margin-bottom: 1rem;
     padding: 0 1rem;
+  }
+  
+  .contactButton {
+    margin-top: 2rem;       /* reduzido para telas menores */
+    padding: 0.6rem 1.5rem;
   }
   
   .imageContainer {
     flex-direction: column;
-    margin-top: 5rem;
+    margin-top: 2rem;       /* antes era 5rem, agora acompanha desktop (1rem) + ajuste */
     gap: 2rem;
     flex-wrap: wrap;
     min-height: auto;
@@ -221,7 +234,7 @@
   }
   
   .socialContainer {
-    margin-top: 5rem;
+    margin-top: 2rem;       /* antes era 5rem, agora reduzido */
     gap: 1.5rem;
     min-height: 50px;
   }
@@ -235,6 +248,11 @@
   .flipWords {
     font-size: 2.2rem;
     min-width: 10rem;
+  }
+  
+  .description {
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
   }
 }
 
@@ -250,9 +268,11 @@
   
   .description {
     font-size: 1rem;
+    margin-top: 1rem;
   }
   
   .contactButton {
+    margin-top: 1.5rem;
     padding: 0.5rem 1.5rem;
     font-size: 0.875rem;
   }
@@ -276,5 +296,9 @@
   
   .mainTitle {
     font-size: 1.5rem;
+  }
+  
+  .socialContainer {
+    margin-top: 1.5rem;
   }
 }

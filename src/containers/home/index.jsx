@@ -41,10 +41,10 @@ export default function Home() {
           <h2 className={styles.unifiedTitle}>
             Mais que <span className={styles.accent}>Presença</span> no digital, Gere <span className={styles.accent}>Impacto</span>
           </h2>
-
-          <p className={styles.description}>
-            Marcas que se conectam de verdade não disputam atenção, conquistam espaço.
-          </p>
+        <p className={styles.description}>
+          Marcas que se conectam de verdade não disputam atenção,<br />
+          conquistam espaço.
+        </p>
           
           {/* BOTÃO CORRIGIDO - AGORA FUNCIONA! */}
           <button
