@@ -6,94 +6,20 @@ import { Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Importe os estilos do Swiper
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import './image-carousel.css';
 
-const GUAPI_IMAGE = '/works-images/01.jpg';
-
-const workItems = [
+const defaultItems = [
   {
     id: 1,
     title: 'GUAPI PARQUE DAS ÁGUAS',
     subtitle: 'Parque completo com infraestrutura moderna',
-    images: [
-      '/works-images/01.jpg',
-      '/works-images/02.jpg',
-      '/works-images/03.jpg',
-      '/works-images/04.jpg',
-    ]
+    images: ['/works-images/GPA-1X1-_1_.webp'],
   },
-  {
-    id: 2,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Área de lazer e entretenimento familiar',
-    images: [
-      '/works-images/05.jpg',
-      '/works-images/06.jpg',
-      '/works-images/07.jpg',
-    ]
-  },
-  {
-    id: 3,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Piscinas e tobogãs aquáticos',
-    images: [
-      '/works-images/08.jpg',
-      '/works-images/09.jpg',
-      '/works-images/10.jpg',
-    ]
-  },
-  {
-    id: 4,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Restaurante e praça de alimentação',
-    images: [
-      '/works-images/11.jpg',
-      '/works-images/12.jpg',
-    ]
-  },
-  {
-    id: 5,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Espaço para eventos corporativos',
-    images: [
-      '/works-images/13.jpg',
-      '/works-images/14.jpg',
-      '/works-images/15.jpg',
-    ]
-  },
-  {
-    id: 6,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Parque infantil e área verde',
-    images: [
-      '/works-images/16.jpg',
-      '/works-images/17.jpg',
-    ]
-  },
-  {
-    id: 7,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Estacionamento e acessibilidade',
-    images: [
-      '/works-images/18.jpg',
-      '/works-images/19.jpg',
-    ]
-  },
-  {
-    id: 8,
-    title: 'GUAPI PARQUE DAS ÁGUAS',
-    subtitle: 'Iluminação especial e segurança',
-    images: [
-      '/works-images/20.jpg',
-      '/works-images/21.jpg',
-    ]
-  }
 ];
 
-export default function ImageCarousel({ reverse }) {
+export default function ImageCarousel({ reverse, items = defaultItems, variant = 'projeto' }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [currentImages, setCurrentImages] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -114,121 +40,111 @@ export default function ImageCarousel({ reverse }) {
 
   const nextImage = (e) => {
     e.stopPropagation();
-    setCurrentImageIndex((prev) => 
-      prev === currentImages.length - 1 ? 0 : prev + 1
-    );
+    setCurrentImageIndex((prev) => (prev + 1) % currentImages.length);
   };
 
   const prevImage = (e) => {
     e.stopPropagation();
-    setCurrentImageIndex((prev) => 
-      prev === 0 ? currentImages.length - 1 : prev - 1
-    );
+    setCurrentImageIndex((prev) => (prev - 1 + currentImages.length) % currentImages.length);
   };
+
+  const isEmpresa = variant === 'empresa';
 
   return (
     <>
-      <div className="w-full overflow-hidden py-8">
+      <div className="carousel-single-wrapper">
         <Swiper
           modules={[Autoplay]}
-          autoplay={{ 
-            delay: 0, 
-            disableOnInteraction: false, 
-            pauseOnMouseEnter: true, 
-            reverseDirection: reverse 
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+            reverseDirection: reverse,
           }}
           speed={3000}
-          loop={true}
-          slidesPerView="auto"
-          spaceBetween={20}
-          className="flex items-center"
+          slidesPerView={1}
+          centeredSlides={true}
+          loop={false}
+          spaceBetween={0}
+          className="carousel-single-track"
         >
-          {workItems.map((item) => (
-            <SwiperSlide key={item.id} className="!w-auto">
-              <div 
-                className="block group cursor-pointer"
-                onClick={() => openModal(item.images, 0)}
-              >
-                <div className="image-carousel-card-container relative w-72 h-72 md:w-80 md:h-80 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-                  <Image
-                    src={GUAPI_IMAGE}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    sizes="(max-width: 768px) 288px, 320px"
-                    priority={item.id <= 2}
-                  />
-                  
-                  <div className="absolute top-4 left-4 w-10 h-10 bg-[#a8d103] text-black font-bold rounded-full flex items-center justify-center text-lg z-10">
-                    {item.id}
+          {items.map((item) => (
+            <SwiperSlide key={item.id} className="carousel-single-slide">
+              {isEmpresa ? (
+                <div className="card-empresa">
+                  <div className="card-empresa-inner">
+                    {item.logo ? (
+                      <Image
+                        src={item.logo}
+                        alt={item.name}
+                        fill
+                        className="card-empresa-logo"
+                        sizes="(max-width: 768px) 90vw, 500px"
+                      />
+                    ) : (
+                      <div className="card-empresa-placeholder">Logo</div>
+                    )}
+                    <h3 className="card-empresa-nome">{item.name}</h3>
+                    <p className="card-empresa-desc">{item.description}</p>
                   </div>
-                  
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity">
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                      <div className="mb-2">
-                        <span className="text-sm font-medium text-gray-300">PROJETO</span>
-                        <h3 className="text-2xl font-bold leading-tight">GUAPI</h3>
-                        <h4 className="text-xl font-semibold">PARQUE DAS ÁGUAS</h4>
+                </div>
+              ) : (
+                <div className="card-single" onClick={() => openModal(item.images, 0)}>
+                  <div className="card-single-inner">
+                    <Image
+                      src={item.images[0]}
+                      alt={item.title}
+                      fill
+                      className="card-single-image"
+                      sizes="(max-width: 768px) 100vw, 800px"
+                      priority
+                    />
+                    <div className="card-badge">{item.id}</div>
+                    <div className="card-overlay">
+                      <div className="card-content">
+                        <span className="card-label">PROJETO</span>
+                        <h3 className="card-title">GUAPI</h3>
+                        <h4 className="card-subtitle">PARQUE DAS ÁGUAS</h4>
+                        <p className="card-description">{item.subtitle}</p>
+                        <span className="card-button">Ver Fotos</span>
                       </div>
-                      <p className="text-gray-200 text-sm mb-3">{item.subtitle}</p>
-                      <span className="inline-block px-4 py-2 bg-[#a8d103] text-black font-semibold rounded-lg text-sm hover:bg-[#97c000] transition-colors">
-                        Ver Fotos
-                      </span>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
             </SwiperSlide>
           ))}
         </Swiper>
       </div>
 
-      {modalOpen && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90"
-          onClick={closeModal}
-        >
-          <div 
-            className="relative max-w-5xl max-h-[90vh] w-full mx-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={closeModal}
-              className="absolute -top-12 right-0 text-white hover:text-gray-300 z-10"
-            >
+      {!isEmpresa && modalOpen && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeModal}>
               <X size={32} />
             </button>
-
             {currentImages.length > 1 && (
               <>
-                <button
-                  onClick={prevImage}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition z-10"
-                >
+                <button className="modal-prev" onClick={prevImage}>
                   <ChevronLeft size={32} />
                 </button>
-                <button
-                  onClick={nextImage}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition z-10"
-                >
+                <button className="modal-next" onClick={nextImage}>
                   <ChevronRight size={32} />
                 </button>
               </>
             )}
-
-            <div className="relative w-full h-full max-h-[80vh] flex items-center justify-center">
+            <div className="modal-image-wrapper">
               <Image
                 src={currentImages[currentImageIndex]}
                 alt={`Imagem ${currentImageIndex + 1}`}
                 width={1200}
                 height={800}
-                className="object-contain max-h-full max-w-full"
+                className="modal-image"
                 priority
               />
             </div>
-
             {currentImages.length > 1 && (
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white px-3 py-1 rounded-full text-sm">
+              <div className="modal-counter">
                 {currentImageIndex + 1} / {currentImages.length}
               </div>
             )}
